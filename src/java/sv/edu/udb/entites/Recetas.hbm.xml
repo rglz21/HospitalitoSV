@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-sep-2020 20:42:54 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sv.edu.udb.entites.Recetas" table="recetas" catalog="hospital" optimistic-lock="version">
+        <id name="idReceta" type="int">
+            <column name="idReceta" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="sv.edu.udb.entites.Medicos" fetch="select">
+            <column name="idMedico" length="11" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paciente" class="sv.edu.udb.entites.Paciente" fetch="select">
+            <column name="idPaciente" length="11" not-null="true" />
+        </many-to-one>
+        <set name="medicinas" table="medicina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idReceta" not-null="true" />
+            </key>
+            <one-to-many class="sv.edu.udb.entites.Medicina" />
+        </set>
+    </class>
+</hibernate-mapping>
