@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-sep-2020 19:45:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hospital" name="sv.edu.udb.entites.Paciente" optimistic-lock="version" table="paciente">
+    <id name="idPaciente" type="string">
+      <column length="11" name="idPaciente"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="100" name="nombre" not-null="true"/>
+    </property>
+    <property name="apellido" type="string">
+      <column length="100" name="apellido" not-null="true"/>
+    </property>
+    <property name="dui" type="string">
+      <column length="11" name="dui" not-null="true"/>
+    </property>
+    <property name="telefono" type="string">
+      <column length="12" name="telefono" not-null="true"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="500" name="direccion" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="recetases" table="recetas">
+      <key>
+        <column length="11" name="idPaciente" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Recetas"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="citases" table="citas">
+      <key>
+        <column length="11" name="idPaciente" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Citas"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="expedientes" table="expediente">
+      <key>
+        <column length="11" name="idPaciente" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Expediente"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -1,42 +1,41 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14-sep-2020 20:42:54 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-sep-2020 19:45:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="sv.edu.udb.entites.Medicos" table="medicos" catalog="hospital" optimistic-lock="version">
-        <id name="idMedico" type="string">
-            <column name="idMedico" length="11" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="areas" class="sv.edu.udb.entites.Areas" fetch="select">
-            <column name="idArea" not-null="true" />
-        </many-to-one>
-        <property name="jvpm" type="string">
-            <column name="JVPM" length="50" not-null="true" />
-        </property>
-        <property name="nombre" type="string">
-            <column name="nombre" length="50" not-null="true" />
-        </property>
-        <property name="apellido" type="string">
-            <column name="Apellido" length="50" not-null="true" />
-        </property>
-        <property name="horaIn" type="string">
-            <column name="horaIn" length="10" not-null="true" />
-        </property>
-        <property name="horaOut" type="string">
-            <column name="horaOut" length="10" not-null="true" />
-        </property>
-        <set name="recetases" table="recetas" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idMedico" length="11" not-null="true" />
-            </key>
-            <one-to-many class="sv.edu.udb.entites.Recetas" />
-        </set>
-        <set name="citases" table="citas" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idMedico" length="11" not-null="true" />
-            </key>
-            <one-to-many class="sv.edu.udb.entites.Citas" />
-        </set>
-    </class>
+  <class catalog="hospital" name="sv.edu.udb.entites.Medicos" optimistic-lock="version" table="medicos">
+    <id name="idMedico" type="string">
+      <column length="11" name="idMedico"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="sv.edu.udb.entites.Areas" fetch="select" name="areas">
+      <column name="idArea" not-null="true"/>
+    </many-to-one>
+    <property name="jvpm" type="string">
+      <column length="50" name="JVPM" not-null="true"/>
+    </property>
+    <property name="nombre" type="string">
+      <column length="50" name="nombre" not-null="true"/>
+    </property>
+    <property name="apellido" type="string">
+      <column length="50" name="Apellido" not-null="true"/>
+    </property>
+    <property name="horaIn" type="string">
+      <column length="10" name="horaIn" not-null="true"/>
+    </property>
+    <property name="horaOut" type="string">
+      <column length="10" name="horaOut" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="recetases" table="recetas">
+      <key>
+        <column length="11" name="idMedico" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Recetas"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="citases" table="citas">
+      <key>
+        <column length="11" name="idMedico" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Citas"/>
+    </set>
+  </class>
 </hibernate-mapping>

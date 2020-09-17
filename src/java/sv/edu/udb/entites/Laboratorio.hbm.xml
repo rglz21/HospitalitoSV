@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14-sep-2020 20:42:54 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-sep-2020 19:45:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="sv.edu.udb.entites.Laboratorio" table="laboratorio" catalog="hospital" optimistic-lock="version">
-        <id name="idLab" type="int">
-            <column name="idLab" />
-            <generator class="assigned" />
-        </id>
-        <property name="horaA" type="string">
-            <column name="horaA" length="10" not-null="true" />
-        </property>
-        <property name="horaC" type="string">
-            <column name="horaC" length="10" not-null="true" />
-        </property>
-        <set name="exameneses" table="examenes" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idLab" not-null="true" />
-            </key>
-            <one-to-many class="sv.edu.udb.entites.Examenes" />
-        </set>
-    </class>
+  <class catalog="hospital" name="sv.edu.udb.entites.Laboratorio" optimistic-lock="version" table="laboratorio">
+    <id name="idLab" type="int">
+      <column name="idLab"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="horaA" type="string">
+      <column length="10" name="horaA" not-null="true"/>
+    </property>
+    <property name="horaC" type="string">
+      <column length="10" name="horaC" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="exameneses" table="examenes">
+      <key>
+        <column name="idLab" not-null="true"/>
+      </key>
+      <one-to-many class="sv.edu.udb.entites.Examenes"/>
+    </set>
+  </class>
 </hibernate-mapping>

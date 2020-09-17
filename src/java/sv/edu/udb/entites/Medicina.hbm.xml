@@ -1,27 +1,26 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14-sep-2020 20:42:54 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-sep-2020 19:45:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="sv.edu.udb.entites.Medicina" table="medicina" catalog="hospital" optimistic-lock="version">
-        <id name="idMedicina" type="string">
-            <column name="idMedicina" length="11" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="recetas" class="sv.edu.udb.entites.Recetas" fetch="select">
-            <column name="idReceta" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="nombre" length="25" not-null="true" />
-        </property>
-        <property name="cantidad" type="int">
-            <column name="cantidad" not-null="true" />
-        </property>
-        <property name="dosis" type="string">
-            <column name="dosis" length="100" not-null="true" />
-        </property>
-        <property name="mg" type="string">
-            <column name="mg" length="25" not-null="true" />
-        </property>
-    </class>
+  <class catalog="hospital" name="sv.edu.udb.entites.Medicina" optimistic-lock="version" table="medicina">
+    <id name="idMedicina" type="string">
+      <column length="11" name="idMedicina"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="sv.edu.udb.entites.Recetas" fetch="select" name="recetas">
+      <column name="idReceta" not-null="true"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="25" name="nombre" not-null="true"/>
+    </property>
+    <property name="cantidad" type="int">
+      <column name="cantidad" not-null="true"/>
+    </property>
+    <property name="dosis" type="string">
+      <column length="100" name="dosis" not-null="true"/>
+    </property>
+    <property name="mg" type="string">
+      <column length="25" name="mg" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

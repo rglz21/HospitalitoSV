@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-sep-2020 19:45:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hospital" name="sv.edu.udb.entites.Consulta" optimistic-lock="version" table="consulta">
+    <id name="idConsulta" type="string">
+      <column length="11" name="idConsulta"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="sv.edu.udb.entites.Expediente" fetch="select" name="expediente">
+      <column length="11" name="idExpe" not-null="true"/>
+    </many-to-one>
+    <property name="descripcion" type="string">
+      <column length="1000" name="descripcion" not-null="true"/>
+    </property>
+    <property name="fecha" type="date">
+      <column length="10" name="fecha" not-null="true"/>
+    </property>
+    <property name="diagnostico" type="string">
+      <column length="65535" name="diagnostico" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

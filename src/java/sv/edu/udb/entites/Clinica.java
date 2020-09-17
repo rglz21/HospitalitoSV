@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 14-sep-2020 20:42:53 by Hibernate Tools 4.3.1
+// Generated 16-sep-2020 19:45:19 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,14 +27,17 @@ public class Clinica  implements java.io.Serializable {
         this.direccion = direccion;
         this.telefono = telefono;
     }
-    public Clinica(int idClinic, String nombre, String direccion, String telefono, Set<Areas> areases) {
+    
+    public Clinica(int idClinic, String nombre, String direccion, String telefono,Set<Areas> areases) {
        this.idClinic = idClinic;
        this.nombre = nombre;
        this.direccion = direccion;
        this.telefono = telefono;
        this.areases = areases;
-    }
+    } 
    
+
+    
     public int getIdClinic() {
         return this.idClinic;
     }

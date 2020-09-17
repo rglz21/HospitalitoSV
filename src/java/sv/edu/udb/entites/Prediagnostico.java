@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 14-sep-2020 20:42:53 by Hibernate Tools 4.3.1
+// Generated 16-sep-2020 19:45:19 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
