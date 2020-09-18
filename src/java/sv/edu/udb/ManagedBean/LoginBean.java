@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.List;
@@ -28,11 +29,17 @@ public class LoginBean {
     private String apellido;
     private String contrasena;
     private String verificar;
-
+    private LoginDAO loginDao= new LoginDAO();
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
+    }
+    
+    public void countPaciente(String dui) throws SQLException{
+        if(loginDao.findByDui(dui)>0){
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,"Usted ya posee un expediente en esta clinica","Paciente"));
+        }
     }
 
     public String sesionUser() {
@@ -103,6 +110,20 @@ public class LoginBean {
 
     public void setVerificar(String verificar) {
         this.verificar = verificar;
+    }
+
+    /**
+     * @return the loginDao
+     */
+    public LoginDAO getLoginDao() {
+        return loginDao;
+    }
+
+    /**
+     * @param loginDao the loginDao to set
+     */
+    public void setLoginDao(LoginDAO loginDao) {
+        this.loginDao = loginDao;
     }
 
 }

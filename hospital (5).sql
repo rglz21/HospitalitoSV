@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hospital`
 --
-
+create database hospital;
+use hospital;
 -- --------------------------------------------------------
 
 --
@@ -389,16 +390,29 @@ INSERT INTO `tipoexamenes` (`idTipo`, `tipo`) VALUES
 (2, 'Orina');
 
 -- --------------------------------------------------------
+-- Estructura de tabla para la tabla `tipousuario`
+create table `tipousuario` (
+`idTipo` int(11) not null,
+`Tipo` varchar(25) not null
+);
 
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `tipousuario` () VALUES
+(1, 'Paciente'),
+(2, 'Medico'),
+(3, 'Farmacia'),
+(4, 'Laboratorio');
 --
 -- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
   `usuario` varchar(25) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `apellido` varchar(40) NOT NULL,
   `Contrasena` varchar(40) NOT NULL,
+  `correo` varchar(60) not null,
+  `idTipo` int(11) not null,
   `Verificar` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -406,9 +420,11 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`usuario`, `nombre`, `apellido`, `Contrasena`, `Verificar`) VALUES
-('rglz', 'Jose', 'Gonzalez', 'hola12', '5554522211'),
-('rglz-1', 'Roberto', 'Gonzalez', 'hola', 'Verificado');
+INSERT INTO `usuario` (`usuario`, `Contrasena`, `correo`, `idTipo`, `Verificar`) VALUES
+('rglz', 'hola12','algo@gmail.com',1, '5554522211'),
+('rglz-1', 'hola','algo@gmail.com',2, 'Verificado');
+
+
 
 --
 -- Índices para tablas volcadas
@@ -536,11 +552,14 @@ ALTER TABLE `sintomas`
 ALTER TABLE `tipoexamenes`
   ADD PRIMARY KEY (`idTipo`);
 
+alter table `tipousuario`
+ add primary key(`idTipo`);
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario`);
+  ADD PRIMARY KEY (`usuario`),
+  add key `fk_usuario_tipo`(`idTipo`);
 
 --
 -- Restricciones para tablas volcadas
@@ -614,6 +633,9 @@ ALTER TABLE `recetas`
 --
 ALTER TABLE `sintomas`
   ADD CONSTRAINT `fk_idPrediag` FOREIGN KEY (`idPrediag`) REFERENCES `prediagnostico` (`idPrediag`);
+  
+alter table `usuario`
+	add constraint `fk_usuario_tip` foreign key(`idTipo`) references `tipousuario` (`idTipo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

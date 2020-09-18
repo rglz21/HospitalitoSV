@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package sv.edu.udb.DAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -18,6 +20,29 @@ import sv.edu.udb.entites.HibernateUtil;
  */
 public class LoginDAO {
     
+    public Long findByDui(String dui){
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "select count(*) from Paciente paciente where dui = :duiFind";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("duiFind", dui);
+            Long find = (Long) query.uniqueResult();
+            return find;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+            return null;
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
+    
      public void addUsuario(Usuario user) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -26,8 +51,6 @@ public class LoginDAO {
             tra = ses.beginTransaction();
         Usuario datos = new Usuario();
         datos.setUsuario(user.getUsuario());
-        datos.setNombre(user.getNombre());
-        datos.setApellido(user.getApellido());
         datos.setContrasena(user.getContrasena());
         datos.setVerificar(user.getVerificar());
             ses.save(datos);

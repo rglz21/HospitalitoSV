@@ -45,36 +45,25 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hospital?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping resource="sv/edu/udb/entites/Laboratorio.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Sintomas.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Prediagnostico.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Usuario.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Farmacia.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Tipousuario.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Expediente.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Paciente.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Clinica.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Medicina.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Consulta.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Examenes.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Citas.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Estadopre.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Laboratorio.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Recetas.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Labmedicinas.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Consulta.hbm.xml"/>
+    <mapping resource="sv/edu/udb/entites/Tipoexamenes.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Medicamentos.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Medicos.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Prediagnostico.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Paciente.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Farmacia.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Clinica.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Labmedicinas.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Recetas.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Sintomas.hbm.xml"/>
     <mapping resource="sv/edu/udb/entites/Areas.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Tipoexamenes.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Expediente.hbm.xml"/>
-    <mapping resource="sv/edu/udb/entites/Usuario.hbm.xml"/>
-   
-    
- 
-    
- 
-   
-    
-   
-   
-    
-    
-   
+    <mapping resource="sv/edu/udb/entites/Estadopre.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
