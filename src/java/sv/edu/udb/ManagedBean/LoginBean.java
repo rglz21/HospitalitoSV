@@ -45,19 +45,28 @@ public class LoginBean {
     public String sesionUser() {
         LoginDAO usuarioDao = new LoginDAO();
         Usuario user = usuarioDao.getUsuarioID(getUsuario());
-
+      int tipoUsuario = user.getTipousuario().getIdTipo();
+      String newUser = user.getUsuario();
+      String contra = user.getContrasena();
+      String veri = user.getVerificar();
+      
         if (user != null) {
 // Cuando el usuario ya esta verificado
-            if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena) && user.getVerificar().equals("Verificado")) {
-                 return "indexUser";
-            } else {
+            if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==1) {
+                 return "Paciente/indexPaciente";
+            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==2) {
+               return "Medico/crearRecetas";
+            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==3){
+               return "Farmacia/indexFarmacia";
+            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==4){
+               return "Laboratorio/indexLaboratorio";
+            }else {
 // cuando el usuario no esta verificado
                 if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {
                        return "index";
                 } else {
                     // Cuando la contraseña esta mal
-                    FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage("Contrasena Equivocada"));
+                    FacesContext.getCurrentInstance().addMessage("errorMessage",new FacesMessage("Contrasena Equivocada"));
                      return "login";
                 }
 
@@ -70,6 +79,10 @@ public class LoginBean {
              return "login";
         }
         
+    }
+    
+    public String registro(){
+    return "Registro/registro";
     }
 
     public String getUsuario() {
