@@ -5,8 +5,21 @@
         <group>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/LoginBean.java</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/login.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/hibernate.reveng.xml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Citas.hbm.xml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Paciente.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/CitasBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/hibernate.cfg.xml</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/LoginDAO.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/verCitas.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/CitasDAO.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Citas.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/AreasBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/indexUser.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/index.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Areas.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/AreasDAO.java</file>
         </group>
     </open-files>
 </project-private>

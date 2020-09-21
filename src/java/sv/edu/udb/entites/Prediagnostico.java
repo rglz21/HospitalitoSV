@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-17-2020 11:02:11 PM by Hibernate Tools 4.3.1
+// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,6 +14,7 @@ public class Prediagnostico  implements java.io.Serializable {
 
      private int idPrediag;
      private Estadopre estadopre;
+     private Paciente paciente;
      private Date fechaPre;
      private Set<Sintomas> sintomases = new HashSet<Sintomas>(0);
 
@@ -21,14 +22,16 @@ public class Prediagnostico  implements java.io.Serializable {
     }
 
 	
-    public Prediagnostico(int idPrediag, Estadopre estadopre, Date fechaPre) {
+    public Prediagnostico(int idPrediag, Estadopre estadopre, Paciente paciente, Date fechaPre) {
         this.idPrediag = idPrediag;
         this.estadopre = estadopre;
+        this.paciente = paciente;
         this.fechaPre = fechaPre;
     }
-    public Prediagnostico(int idPrediag, Estadopre estadopre, Date fechaPre, Set<Sintomas> sintomases) {
+    public Prediagnostico(int idPrediag, Estadopre estadopre, Paciente paciente, Date fechaPre, Set<Sintomas> sintomases) {
        this.idPrediag = idPrediag;
        this.estadopre = estadopre;
+       this.paciente = paciente;
        this.fechaPre = fechaPre;
        this.sintomases = sintomases;
     }
@@ -46,6 +49,13 @@ public class Prediagnostico  implements java.io.Serializable {
     
     public void setEstadopre(Estadopre estadopre) {
         this.estadopre = estadopre;
+    }
+    public Paciente getPaciente() {
+        return this.paciente;
+    }
+    
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
     public Date getFechaPre() {
         return this.fechaPre;
