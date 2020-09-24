@@ -39,4 +39,37 @@ public class PrediagBean {
         return lista;
     }
 
+    public int getIdPrediag() {
+        return idPrediag;
+    }
+
+    public void setIdPrediag(int idPrediag) {
+        this.idPrediag = idPrediag;
+    }
+
+    public Estadopre getEstadopre() {
+        return estadopre;
+    }
+
+    public void setEstadopre(Estadopre estadopre) {
+        this.estadopre = estadopre;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Date getFechaPre() {
+        return fechaPre;
+    }
+
+    public void setFechaPre(Date fechaPre) {
+        this.fechaPre = fechaPre;
+    }
+
+    
 }

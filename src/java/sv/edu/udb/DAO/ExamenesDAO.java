@@ -11,26 +11,25 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import sv.edu.udb.entites.Expediente;
+import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.HibernateUtil;
 
 /**
  *
  * @author jonat
  */
-public class ExpedienteDAO {
+public class ExamenesDAO {
     
-     //Metodo DAO para listar Diagnosticos del paciente
-    public List<Expediente> obtenerExpdiente() {
-        List<Expediente> expediente = null;
+    public List<Examenes> obtenerExamen() {
+        List<Examenes> examen = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Expediente";
+            String queryString = "from Examenes";
             Query query = ses.createQuery(queryString);
-            expediente = query.list();
+            examen = query.list();
 
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -41,6 +40,6 @@ public class ExpedienteDAO {
             ses.flush();
             ses.close();
         }
-        return expediente;
+        return examen;
     }
 }

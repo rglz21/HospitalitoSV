@@ -75,7 +75,7 @@ public class PrediagDAO {
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from prediagnostico";
+            String queryString = "from Prediagnostico";
             Query query = ses.createQuery(queryString);
             diagnosticos = query.list();
 

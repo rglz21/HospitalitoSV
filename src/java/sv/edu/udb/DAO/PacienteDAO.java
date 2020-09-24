@@ -11,26 +11,26 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import sv.edu.udb.entites.Expediente;
 import sv.edu.udb.entites.HibernateUtil;
+import sv.edu.udb.entites.Paciente;
 
 /**
  *
  * @author jonat
  */
-public class ExpedienteDAO {
-    
-     //Metodo DAO para listar Diagnosticos del paciente
-    public List<Expediente> obtenerExpdiente() {
-        List<Expediente> expediente = null;
+public class PacienteDAO {
+
+    //Metodo DAO para listar Diagnosticos del paciente
+    public List<Paciente> obtenerPaciente() {
+        List<Paciente> paciente = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Expediente";
+            String queryString = "from Paciente";
             Query query = ses.createQuery(queryString);
-            expediente = query.list();
+            paciente = query.list();
 
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -41,6 +41,6 @@ public class ExpedienteDAO {
             ses.flush();
             ses.close();
         }
-        return expediente;
+        return paciente;
     }
 }

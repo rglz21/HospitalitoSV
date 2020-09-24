@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!--<h:inputText id="idMedico" value="#{citasBean.medico}">
+                <f:ajax event="blur" render="citas"/>
+            </h:inputText>-->
+            <h:dataTable id="citas" var="list" value="#{examenesBean.examen}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID Examen"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idExam}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID Laboratorio"/>
+                    </f:facet>
+                    <h:outputText value="#{list.laboratorio.idLab}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID Tipo Laboratorio"/>
+                    </f:facet>
+                    <h:outputText value="#{list.tipoexamenes.idTipo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID Paciente"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idPaciente}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Descripcion"/>
+                    </f:facet>
+                    <h:outputText value="#{list.descripcion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Realizado"/>
+                    </f:facet>
+                    <h:outputText value="#{list.fechaRealizado}"/>
+                </h:column>
+                <!--<h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Paciente"/>
+                    </f:facet>
+                    <h:outputText value="#{list.paciente}"/>
+                </h:column>-->
+                <!--<h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Medico"/>
+                    </f:facet>
+                    <h:outputText value="#{list.medicos}"/>
+                </h:column>-->
+            </h:dataTable>
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+        </h:form>
+    </h:body>
+</html>
+

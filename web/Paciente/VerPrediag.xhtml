@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable styleClass="table table-bordered table-dark table-light table-hover " 
+                         var="list" value="#{prediagBean.diagnostico}" >
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idPrediag}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="estado"/>
+                    </f:facet>
+                    <h:outputText value="#{list.estadopre.estado}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Paciente"/>
+                    </f:facet>
+                    <h:outputText value="#{list.paciente.apellido}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Diagnostico"/>
+                    </f:facet>
+                    <h:outputText value="#{list.fechaPre}"/>
+                </h:column>
+
+            </h:dataTable>
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+        </h:form>
+    </h:body>
+</html>
+
