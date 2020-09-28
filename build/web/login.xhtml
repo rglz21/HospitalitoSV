@@ -11,7 +11,7 @@
             <h:panelGrid columns="2">
                 <h:outputLabel for="id" value="Usuario: " /> 
                 <h:inputText id="id" value="#{loginBean.usuario}">
-                    <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
+                   
                 </h:inputText>
                 <h:outputLabel for="nombres" value="Contraseña: " /> <h:inputText id="nombres" value="#{loginBean.contrasena}"/>
             </h:panelGrid>

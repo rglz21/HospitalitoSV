@@ -27,6 +27,10 @@ public class Medicamentos  implements java.io.Serializable {
        this.mg = mg;
        this.cantidadDisp = cantidadDisp;
     }
+    
+    public Medicamentos(int cantidadDisp) {
+       this.cantidadDisp = cantidadDisp;
+    }
    
     public String getIdMedicamento() {
         return this.idMedicamento;

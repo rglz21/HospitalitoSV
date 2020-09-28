@@ -21,7 +21,7 @@ import sv.edu.udb.entites.Usuario;
  * @author rgonz
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LoginBean {
 
     private String usuario;
@@ -29,60 +29,67 @@ public class LoginBean {
     private String apellido;
     private String contrasena;
     private String verificar;
-    private LoginDAO loginDao= new LoginDAO();
+    private LoginDAO loginDao = new LoginDAO();
+
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
     }
-    
-    public void countPaciente(String dui) throws SQLException{
-        if(loginDao.findByDui(dui)>0){
-            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,"Usted ya posee un expediente en esta clinica","Paciente"));
+
+    public void countPaciente(String dui) throws SQLException {
+        if (loginDao.findByDui(dui) > 0) {
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
         }
     }
 
     public String sesionUser() {
         LoginDAO usuarioDao = new LoginDAO();
-        Usuario user = usuarioDao.getUsuarioID(getUsuario());
-      int tipoUsuario = user.getTipousuario().getIdTipo();
-      String newUser = user.getUsuario();
-      String contra = user.getContrasena();
-      String veri = user.getVerificar();
-      
-        if (user != null) {
+        if (usuario.isEmpty() || contrasena.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage("Porfavor llene los campos"));
+            return "login";
+        } 
+            Usuario user = usuarioDao.getUsuarioID(getUsuario());
+            int tipoUsuario = user.getTipousuario().getIdTipo();
+            String newUser = user.getUsuario();
+            String contra = user.getContrasena();
+            String veri = user.getVerificar();
+
+            if (user != null) {
 // Cuando el usuario ya esta verificado
-            if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==1) {
-                 return "Paciente/indexPaciente";
-            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==2) {
-               return "Medico/crearRecetas";
-            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==3){
-               return "Farmacia/indexFarmacia";
-            } else if(newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado")&& tipoUsuario==4){
-               return "Laboratorio/indexLaboratorio";
-            }else {
-// cuando el usuario no esta verificado
-                if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {
-                       return "index";
+                if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 1) {
+                    return "Paciente/indexPaciente";
+                } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 2) {
+                    return "Medico/crearRecetas";
+                } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 3) {
+                    return "Farmacia/indexFarmacia";
+                } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 4) {
+                    return "Laboratorio/indexLaboratorio";
                 } else {
-                    // Cuando la contraseña esta mal
-                    FacesContext.getCurrentInstance().addMessage("errorMessage",new FacesMessage("Contrasena Equivocada"));
-                     return "login";
+// cuando el usuario no esta verificado
+                    if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {
+                        return "index";
+                    } else {
+                        // Cuando la contraseña esta mal
+                        FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage("Contrasena Equivocada"));
+                        return "login";
+                    }
+
                 }
 
+            } else {
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("Usuario NO existe, asegure de escribirlo bien"));
+                return "login";
             }
 
-        } else {
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Usuario NO existe, asegure de escribirlo bien"));
-             return "login";
-        }
+        
         
     }
-    
-    public String registro(){
-    return "Registro/registro";
+
+    public String registro() {
+        return "Registro/registro";
     }
 
     public String getUsuario() {

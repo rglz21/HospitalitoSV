@@ -14,7 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import sv.edu.udb.DAO.CitasDAO;
-import sv.edu.udb.DAO.PacienteDAO;
 import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
@@ -105,12 +104,6 @@ public class CitasBean {
     public List<Citas>getCitasByMedicos(String idMedico){
         CitasDAO citasDao=new CitasDAO();
         List<Citas> lista=citasDao.getCitasByMedico(idMedico);
-        return lista;
-    }
-    
-    public List<Citas> getCitas() {
-        CitasDAO pacienteDao = new CitasDAO();
-        List<Citas> lista = pacienteDao.obtenerCitas();
         return lista;
     }
 
