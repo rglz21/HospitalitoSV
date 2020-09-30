@@ -64,7 +64,7 @@ public class LoginBean {
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 3) {
                     return "Farmacia/indexFarmacia";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 4) {
-                    return "Laboratorio/indexLaboratorio";
+                    return "Laboratorio/Examen";
                 } else {
 // cuando el usuario no esta verificado
                     if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {
