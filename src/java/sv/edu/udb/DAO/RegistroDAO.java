@@ -5,20 +5,23 @@
  */
 package sv.edu.udb.DAO;
 
+import java.io.IOException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sv.edu.udb.entites.HibernateUtil;
 import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Usuario;
+import sv.edu.udb.util.logger;
 
 /**
  *
  * @author rgonz
  */
 public class RegistroDAO {
+     logger log = new logger();
     
-      public void addUsuario(Usuario user) {
+      public void addUsuario(Usuario user) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
@@ -34,6 +37,7 @@ public class RegistroDAO {
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
+             log.InfoLog(e+"","ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -43,7 +47,7 @@ public class RegistroDAO {
         }
     }
     
-        public void addInformacion(Paciente nuevo) {
+        public void addInformacion(Paciente nuevo) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
@@ -60,6 +64,7 @@ public class RegistroDAO {
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
+             log.InfoLog(e+"","ERROR");
             if (tra != null) {
                 tra.rollback();
             }

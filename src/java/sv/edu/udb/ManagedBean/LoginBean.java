@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -15,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.LoginDAO;
 import sv.edu.udb.entites.Usuario;
+import sv.edu.udb.util.logger;
 
 /**
  *
@@ -43,11 +45,15 @@ public class LoginBean {
         }
     }
 
-    public String sesionUser() {
+    public String sesionUser() throws IOException {
+         logger log = new logger();
+        
         LoginDAO usuarioDao = new LoginDAO();
         if (usuario.isEmpty() || contrasena.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage("Porfavor llene los campos"));
+            log.InfoLog("Campos Vacios","ERROR");
             return "login";
+            
         } 
             Usuario user = usuarioDao.getUsuarioID(getUsuario());
             int tipoUsuario = user.getTipousuario().getIdTipo();
@@ -58,13 +64,17 @@ public class LoginBean {
             if (user != null) {
 // Cuando el usuario ya esta verificado
                 if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 1) {
+                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Paciente/indexPaciente";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 2) {
+                   log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Medico/crearRecetas";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 3) {
+                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Farmacia/indexFarmacia";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 4) {
-                    return "Laboratorio/Examen";
+                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
+                    return "Laboratorio/indexLaboratorio";
                 } else {
 // cuando el usuario no esta verificado
                     if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {
