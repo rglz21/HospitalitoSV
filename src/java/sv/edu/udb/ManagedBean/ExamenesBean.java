@@ -40,7 +40,11 @@ public class ExamenesBean {
         List<Examenes> lista = examenDao.obtenerExamen();
         return lista;
     }
-
+    public List<Tipoexamenes> getTipos(){
+        ExamenesDAO examenDao= new ExamenesDAO();
+        List<Tipoexamenes> tipo=examenDao.obtenerTipos();
+        return tipo;
+    }
     public String getIdExam() {
         return idExam;
     }

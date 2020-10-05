@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.HibernateUtil;
+import sv.edu.udb.entites.Tipoexamenes;
 
 /**
  *
@@ -41,5 +42,27 @@ public class ExamenesDAO {
             ses.close();
         }
         return examen;
+    }
+    public List<Tipoexamenes> obtenerTipos(){
+        List<Tipoexamenes> tipoExamen = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Tipoexamenes";
+            Query query = ses.createQuery(queryString);
+            tipoExamen = query.list();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return tipoExamen;
     }
 }

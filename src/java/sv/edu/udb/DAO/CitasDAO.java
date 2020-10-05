@@ -6,6 +6,7 @@
 package sv.edu.udb.DAO;
 
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -111,5 +112,29 @@ public class CitasDAO {
             ses.flush();
             ses.close();
         }
+    }
+    public int contarCitas () {
+        int cont2 = 0 ;
+        Long cont;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "select count(*) from Citas";
+            Query query = ses.createQuery(queryString);
+            cont = (Long) query.uniqueResult();
+            cont2 = cont.intValue();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+
+        return cont2;
     }
 }

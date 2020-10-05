@@ -42,4 +42,26 @@ public class MedicosDAO {
         }
         return medicos;
     }
+    public Medicos getHoraMedico(String idMedico){
+        Medicos medico=new Medicos();
+        SessionFactory sesFact= HibernateUtil.getSessionFactory();
+        Session ses=sesFact.openSession();
+        Transaction tra=null;
+        try{
+            tra=ses.beginTransaction();
+            String queryString="from Medicos where idMedico=:idMedico";
+            Query query=ses.createQuery(queryString);
+            query.setParameter("idMedico", idMedico);
+            medico=(Medicos)query.uniqueResult();
+        }catch(Exception e){
+            e.printStackTrace();
+            if(tra!=null){
+                tra.rollback();
+            }
+        }finally{
+            ses.flush();
+            ses.close();
+        }
+        return medico;
+    }
 }

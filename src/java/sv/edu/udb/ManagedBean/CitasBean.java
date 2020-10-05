@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -23,10 +23,10 @@ import sv.edu.udb.entites.Paciente;
  * @author HP Probook
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CitasBean {
     private int idCita;
-    private Medicos idMedico;
+    private Medicos idMedico=new Medicos();
     private Paciente idPaciente;
     private Date fechaCita;
     private String hora;
@@ -34,6 +34,7 @@ public class CitasBean {
     private String tipoExamen;
     private String paciente;
     private String medico;
+    private int area;
     /**
      * Creates a new instance of CitasBean
      */
@@ -98,6 +99,11 @@ public class CitasBean {
         Paciente pacient= new Paciente();
         medic.setIdMedico(getMedico());
         pacient.setIdPaciente(getPaciente());
+        
+        int ccitas=citasDao.contarCitas();
+        int ncita=++ccitas;
+        setIdCita(ncita);
+        
         Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,examenes,tipoExamen);
         citasDao.addCita(cita);
     }
@@ -231,5 +237,19 @@ public class CitasBean {
      */
     public void setMedico(String medico) {
         this.medico = medico;
+    }
+
+    /**
+     * @return the area
+     */
+    public int getArea() {
+        return area;
+    }
+
+    /**
+     * @param area the area to set
+     */
+    public void setArea(int area) {
+        this.area = area;
     }
 }

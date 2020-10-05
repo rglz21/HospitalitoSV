@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Area" for="areas"/>
+                <h:selectOneMenu id="areas" value="#{citasBean.area}" styleClass="form-control">
+                    <f:selectItem itemLabel="Seleccione Area" itemValue="0" />
+                    <f:selectItems value="#{areasBean.areas}" var="a" itemLabel="#{a.nombre}" itemValue="#{a.idArea}"/>
+                    <f:ajax render="medicos" execute="@this" listener="#{medicosBean.getMedicos(citasBean.area)}" />
+                </h:selectOneMenu>
+                <h:outputLabel value="Medico" for="medicos"/>
+                <h:selectOneMenu id="medicos" value="#{citasBean.medico}" styleClass="form-control">
+                    <f:selectItem itemLabel="Seleccione Medico" itemValue="" />
+                    <f:selectItems value="#{medicosBean.medicoArea}" var="m" itemLabel="#{m.nombre}" itemValue="#{m.idMedico}"/>
+                    <f:ajax render="hora" execute="@this" listener="#{medicosBean.getHoraMedico(citasBean.medico)}"/>
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="Paciente" for="pacientes"/>
+                <h:selectOneMenu id="pacientes" value="#{citasBean.paciente}" styleClass="form-control">
+                    <f:selectItem itemLabel="Seleccione Paciente" itemValue="0" />
+                    <f:selectItems value="#{pacienteBean.paciente}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idPaciente}"/>
+                    <f:ajax disabled="true"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="Fecha" for="fecha"/>
+                <h:inputText value="#{citasBean.fechaCita}" id="fecha" styleClass="form-control">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:inputText>
+                
+                <h:outputLabel value="Hora" for="hora"/>
+                <h:selectOneMenu id="hora" value="#{citasBean.hora}" styleClass="form-control">
+                    <f:selectItems value="#{medicosBean.horario}" var="h" itemLabel="#{h}" itemValue="#{h}"/>
+                </h:selectOneMenu>
+                <h:selectOneRadio id="ifexamen" value="#{citasBean.examenes}">
+                    <f:selectItem itemLabel="No requiere examen" itemValue="No"/>
+                    <f:selectItem itemLabel="Requiere examen" itemValue="Si"/>
+                </h:selectOneRadio>
+                <h:outputLabel value="Tipo de Examen" for="tipoExamen"/>
+                <h:selectOneMenu id="tipoExamen" value="#{citasBean.tipoExamen}" styleClass="form-control" >
+                    <f:selectItem itemLabel="Seleccione" itemValue="0" />
+                    <f:selectItems value="#{examenesBean.tipos}" var="e" itemLabel="#{e.tipo}" itemValue="#{e.tipo}"/>
+                    <f:ajax disabled="true"/>
+                </h:selectOneMenu>
+                <h:commandButton value="Crear Cita" action="#{citasBean.addCita()}"/>
+            </h:panelGrid>
+            
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+        </h:form>
+    </h:body>
+</html>
+

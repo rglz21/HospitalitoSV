@@ -21,17 +21,18 @@ import sv.edu.udb.entites.HibernateUtil;
 public class ExpedienteDAO {
     
      //Metodo DAO para listar Diagnosticos del paciente
-    public List<Expediente> obtenerExpdiente() {
-        List<Expediente> expediente = null;
+    public Expediente obtenerExpdiente(String idPaciente) {
+        Expediente expediente = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Expediente";
+            String queryString = "select e from Expediente e inner join e.paciente where e.paciente.idPaciente = :idPaciente";
             Query query = ses.createQuery(queryString);
-            expediente = query.list();
-
+            query.setParameter("idPaciente", idPaciente);
+            expediente = (Expediente)query.uniqueResult();
+            ses.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
             if (tra != null) {
