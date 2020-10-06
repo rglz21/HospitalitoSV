@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/MedicosBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/ExamenesBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/RecetasBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/CitasDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/ExamenBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/crearCitas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/crearRecetas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/ExpedienteDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/CitasBean.java</file>
+            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/web/Admin/RegistrarAreas.xhtml</file>
+            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/src/java/sv/edu/udb/ManagedBean/AreasBean.java</file>
+            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/src/java/sv/edu/udb/DAO/AreasDAO.java</file>
         </group>
     </open-files>
 </project-private>
