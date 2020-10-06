@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-20-2020 11:06:06 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sv.edu.udb.entites.Estadopre" table="estadopre" catalog="hospital" optimistic-lock="version">
+        <id name="idEstado" type="int">
+            <column name="idEstado" />
+            <generator class="assigned" />
+        </id>
+        <property name="estado" type="string">
+            <column name="Estado" length="25" not-null="true" />
+        </property>
+        <set name="prediagnosticos" table="prediagnostico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEstado" not-null="true" />
+            </key>
+            <one-to-many class="sv.edu.udb.entites.Prediagnostico" />
+        </set>
+    </class>
+</hibernate-mapping>

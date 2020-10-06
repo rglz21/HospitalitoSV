@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="prediag">
+            <h:outputLabel value="#{prediagBean.idPrediag}"/>
+            <h:outputLabel value="#{prediagBean.paciente.idPaciente}"/>
+            <h:outputLabel value="#{prediagBean.fechaPre}"/>
+            <h:commandButton action="#{expedienteBean.verExpediente(prediagBean.paciente.idPaciente)}" value="Mostrar expediente"/>
+        </h:form>
+        <h:form id="tablePrediag">
+            <h:dataTable id="prediags" value="#{prediagBean.prediagActivo}" var="d">
+                <h:column>
+                    <f:facet name="header">
+                        ID Prediagnostico
+                    </f:facet>
+                    #{d.idPrediag}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha
+                    </f:facet>
+                    #{d.fechaPre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Paciente
+                    </f:facet>
+                    #{d.paciente.idPaciente}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.paciente.idPaciente)}">
+                        <f:ajax execute="@form"
+                                render="prediag :tablePrediag"
+                                resetValues="true"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

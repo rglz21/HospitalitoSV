@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-20-2020 11:06:06 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sv.edu.udb.entites.Usuario" table="usuario" catalog="hospital" optimistic-lock="version">
+        <id name="usuario" type="string">
+            <column name="usuario" length="25" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipousuario" class="sv.edu.udb.entites.Tipousuario" fetch="select">
+            <column name="idTipo" not-null="true" />
+        </many-to-one>
+        <property name="contrasena" type="string">
+            <column name="Contrasena" length="40" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="60" not-null="true" />
+        </property>
+        <property name="verificar" type="string">
+            <column name="Verificar" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
