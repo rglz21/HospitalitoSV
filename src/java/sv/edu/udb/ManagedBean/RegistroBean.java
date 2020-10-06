@@ -22,18 +22,19 @@ import sv.edu.udb.util.logger;
 @SessionScoped
 public class RegistroBean {
 
-     private String usuario;
-     private Tipousuario tipousuario;
-     private String contrasena;
-     private String correo;
-     private String verificar;
-     private int tipo;
-     private String idPaciente;
-     private String nombre;
-     private String apellido;
-     private String dui;
-     private String telefono;
-     private String direccion;
+    private String usuario;
+    private Tipousuario tipousuario;
+    private String contrasena;
+    private String correo;
+    private String verificar;
+    private int tipo;
+    private String idPaciente;
+    private String nombre;
+    private String apellido;
+    private String dui;
+    private String telefono;
+    private String direccion;
+
     /**
      * Creates a new instance of RegistroBean
      */
@@ -44,25 +45,35 @@ public class RegistroBean {
         return usuario;
     }
 
-    
     public String addUsuario() throws IOException {
         RegistroDAO productoDao = new RegistroDAO();
-         Tipousuario nuevo = new Tipousuario();
+        Tipousuario nuevo = new Tipousuario();
         nuevo.setIdTipo(1);
-        Usuario pro = new Usuario(usuario,nuevo,contrasena,correo,"Verificado");
+        Usuario pro = new Usuario(usuario, nuevo, contrasena, correo, "Verificado");
         productoDao.addUsuario(pro);
         logger log = new logger();
-        log.InfoLog("Nueva persona Registrado","INFO");
+        log.InfoLog("Nueva persona Registrado", "INFO");
         return "informacion";
     }
-    // falta aplicarlo a la vista.
-     public String addInformacion(String id) throws IOException {
+
+    public String addUsuarioMedico() throws IOException {
         RegistroDAO productoDao = new RegistroDAO();
-        Paciente pro = new Paciente(id,nombre,apellido,dui,telefono,direccion);
+        Tipousuario nuevo = new Tipousuario();
+        nuevo.setIdTipo(2);
+        Usuario pro = new Usuario(usuario, nuevo, contrasena, correo, "Verificado");
+        productoDao.addUsuario(pro);
+        logger log = new logger();
+        log.InfoLog("Nuevo usuario tipo Medico Registrado", "INFO");
+        return "registromedico";
+    }
+
+    // falta aplicarlo a la vista.
+    public String addInformacion(String id) throws IOException {
+        RegistroDAO productoDao = new RegistroDAO();
+        Paciente pro = new Paciente(id, nombre, apellido, dui, telefono, direccion);
         productoDao.addInformacion(pro);
         return "/Paciente/indexPaciente";
-        
-        
+
     }
 
     public String getIdPaciente() {
@@ -112,9 +123,7 @@ public class RegistroBean {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
-     
+
     public int getTipo() {
         return tipo;
     }
@@ -158,5 +167,5 @@ public class RegistroBean {
     public void setVerificar(String verificar) {
         this.verificar = verificar;
     }
-    
+
 }
