@@ -5,12 +5,14 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import sv.edu.udb.DAO.RecetasDAO;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Recetas;
+import sv.edu.udb.util.logger;
 
 /**
  *
@@ -29,7 +31,7 @@ public class RecetasBean {
      */
     public RecetasBean() {
     }
-    public void insertReceta(){
+    public void insertReceta() throws IOException{
         RecetasDAO recetasDao=new RecetasDAO();
         Medicos medic=new Medicos();
         Paciente pacient= new Paciente();
@@ -37,6 +39,8 @@ public class RecetasBean {
         pacient.setIdPaciente(getIdPacient());
         Recetas receta=new Recetas(idRecetas, medic, pacient);
         recetasDao.insertReceta(receta);
+         logger log = new logger();
+        log.InfoLog("Nueva Receta insertada","INFO");
     }
     /**
      * @return the idRecetas

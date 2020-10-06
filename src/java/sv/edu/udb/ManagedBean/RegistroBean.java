@@ -5,12 +5,14 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import sv.edu.udb.DAO.RegistroDAO;
 import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Tipousuario;
 import sv.edu.udb.entites.Usuario;
+import sv.edu.udb.util.logger;
 
 /**
  *
@@ -43,16 +45,18 @@ public class RegistroBean {
     }
 
     
-    public String addUsuario() {
+    public String addUsuario() throws IOException {
         RegistroDAO productoDao = new RegistroDAO();
          Tipousuario nuevo = new Tipousuario();
         nuevo.setIdTipo(1);
         Usuario pro = new Usuario(usuario,nuevo,contrasena,correo,"Verificado");
         productoDao.addUsuario(pro);
+        logger log = new logger();
+        log.InfoLog("Nueva persona Registrado","INFO");
         return "informacion";
     }
     // falta aplicarlo a la vista.
-     public String addInformacion(String id) {
+     public String addInformacion(String id) throws IOException {
         RegistroDAO productoDao = new RegistroDAO();
         Paciente pro = new Paciente(id,nombre,apellido,dui,telefono,direccion);
         productoDao.addInformacion(pro);

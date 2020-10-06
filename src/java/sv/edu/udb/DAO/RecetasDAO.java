@@ -5,20 +5,23 @@
  */
 package sv.edu.udb.DAO;
 
+import java.io.IOException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sv.edu.udb.entites.HibernateUtil;
 import sv.edu.udb.entites.Recetas;
+import sv.edu.udb.util.logger;
 
 /**
  *
  * @author HP Probook
  */
 public class RecetasDAO {
+    logger log = new logger();
     
-    public void insertReceta(Recetas receta){
+    public void insertReceta(Recetas receta) throws IOException{
         SessionFactory sesFact=HibernateUtil.getSessionFactory();
         Session ses=sesFact.openSession();
         Transaction tra=null;
@@ -32,6 +35,7 @@ public class RecetasDAO {
             ses.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();
+             log.InfoLog(e+"","ERROR");
             if(tra!=null){
                 tra.rollback();
             }
@@ -40,7 +44,7 @@ public class RecetasDAO {
             ses.close();
         }
     }
-    public Recetas obtenerReceta(int idReceta){
+    public Recetas obtenerReceta(int idReceta) throws IOException{
         Recetas receta=new Recetas();
         SessionFactory sesFact=HibernateUtil.getSessionFactory();
         Session ses=sesFact.openSession();
@@ -53,6 +57,7 @@ public class RecetasDAO {
             receta=(Recetas) query.uniqueResult();
         }catch(Exception e){
             e.printStackTrace();
+            log.InfoLog(e+"","ERROR");
             if(tra!=null){
                 tra.rollback();
             }
@@ -62,7 +67,7 @@ public class RecetasDAO {
         }
         return receta;
     }
-    public void updateReceta(int idReceta, Recetas receta){
+    public void updateReceta(int idReceta, Recetas receta) throws IOException{
         SessionFactory sesFact=HibernateUtil.getSessionFactory();
         Session ses=sesFact.openSession();
         Transaction tra=null;
@@ -77,6 +82,7 @@ public class RecetasDAO {
             ses.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();
+            log.InfoLog(e+"","ERROR");
             if(tra!=null){
                 tra.rollback();
             }
