@@ -4,60 +4,48 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Medicos</title>
     </h:head>
     <h:body>
         <h:form>
             <h:dataTable styleClass="table table-bordered table-dark table-light table-hover " 
-                         var="list" value="#{medicosBean.medico}" >
+                         var="list" value="#{registroBean.usuarios}" >
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID"/>
+                        <h:outputText value="ID Usuario"/>
                     </f:facet>
-                    <h:outputText value="#{list.idMedico}"/>
+                    <h:outputText value="#{list.usuario}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Nombre"/>
+                        <h:outputText value="ID Tipo Usuario"/>
                     </f:facet>
-                    <h:outputText value="#{list.areas.idArea}"/>
+                    <h:outputText value="#{list.tipousuario.idTipo}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Apellido"/>
+                        <h:outputText value="Contraseña"/>
                     </f:facet>
-                    <h:outputText value="#{list.jvpm}"/>
+                    <h:outputText value="#{list.contrasena}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="DUI"/>
+                        <h:outputText value="correo"/>
                     </f:facet>
-                    <h:outputText value="#{list.nombre}"/>
+                    <h:outputText value="#{list.correo}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Telefono"/>
+                        <h:outputText value="Verificado"/>
                     </f:facet>
-                    <h:outputText value="#{list.apellido}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Direccion"/>
-                    </f:facet>
-                    <h:outputText value="#{list.horaIn}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Direccion"/>
-                    </f:facet>
-                    <h:outputText value="#{list.horaOut}"/>
+                    <h:outputText value="#{list.verificar}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandButton value="editar" action="#{medicosBean.returnMedicos(list.idMedico)}"/>
-                    <h:commandButton value="eliminar" action="#{medicosBean.deleteMedicos(list.idMedico)}"/>
+                    <h:commandButton value="editar" action="#{registroBean.returnUsuarios(registroBean.usuario)}"/>
+                    <h:commandButton value="eliminar" action="#{registroBean.deleteUsuarios(registroBean.usuario)}"/>
                 </h:column>
             </h:dataTable>
             <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
@@ -65,5 +53,4 @@
         </h:form>
     </h:body>
 </html>
-
 
