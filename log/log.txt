@@ -1,1 +1,2 @@
 [4/10/2020 16:1:49][ERROR] Nueva Persona guardada
+[5/10/2020 22:16:33][INFO] Nuevo usuario tipo Medico Registrado

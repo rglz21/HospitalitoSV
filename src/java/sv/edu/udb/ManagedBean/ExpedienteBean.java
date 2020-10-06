@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -29,7 +30,7 @@ public class ExpedienteBean {
     public ExpedienteBean() {
     }
     
-    public List<Expediente> getExpediente() {
+    public List<Expediente> getExpediente() throws IOException {
         ExpedienteDAO expedienteDao = new ExpedienteDAO();
         List<Expediente> lista = expedienteDao.obtenerExpdiente();
         return lista;

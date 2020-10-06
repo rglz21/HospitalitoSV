@@ -18,7 +18,6 @@ import sv.edu.udb.DAO.ExamenDAO;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Paciente;
 
-
 /**
  *
  * @author javie
@@ -30,54 +29,53 @@ public class ExamenBean {
     /**
      * Creates a new instance of ExamenBean
      */
-    private String  idExam;
-     private Laboratorio laboratorio;
-     private int lab;
-     private Tipoexamenes tipoexamenes;
-     private int tipo;
-     private String idPaciente;
-     private String descripcion;
-     private Date fechaRealizado;
-     
-     
+    private String idExam;
+    private Laboratorio laboratorio;
+    private int lab;
+    private Tipoexamenes tipoexamenes;
+    private int tipo;
+    private String idPaciente;
+    private String descripcion;
+    private Date fechaRealizado;
+
     public ExamenBean() {
-     
+
     }
-     public List<Examenes> getExamenes() {
+
+    public List<Examenes> getExamenes() {
         ExamenDAO examen = new ExamenDAO();
         List<Examenes> lista = examen.obtener();
         return lista;
     }
-     
-     public List<Laboratorio> getLaboratorio1() {
+
+    public List<Laboratorio> getLaboratorio1() {
         ExamenDAO producto = new ExamenDAO();
         List<Laboratorio> lista = producto.obtenerLab();
         return lista;
     }
-     public List<Tipoexamenes> getExam1() {
+
+    public List<Tipoexamenes> getExam1() {
         ExamenDAO producto = new ExamenDAO();
         List<Tipoexamenes> lista = producto.obtenerExam();
         return lista;
     }
 
-
-     
-       public  String  addExamenes() {
+    public String addExamenes() {
         ExamenDAO examenesDao = new ExamenDAO();
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
-        int num = examenesDao.Contar() ;
+        int num = examenesDao.Contar();
         int num2 = ++num;
-        setIdExam("EXAM-"+num2);
-        Examenes exa = new Examenes( idExam, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);
+        setIdExam("EXAM-" + num2);
+        Examenes exa = new Examenes(idExam, nuevo, tipo1, idPaciente, descripcion, fechaRealizado);
         examenesDao.addExamenes(exa);
-        
+
         return "Examen";
-    } 
-       
-   public String  returnExamenes(String id) {
+    }
+
+    public String returnExamenes(String id) {
         ExamenDAO examenDao = new ExamenDAO();
         Examenes examen = examenDao.getExamenes1(id);
         Laboratorio nuevo = new Laboratorio();
@@ -92,10 +90,7 @@ public class ExamenBean {
             setIdPaciente(examen.getIdPaciente());
             setDescripcion(examen.getDescripcion());
             setFechaRealizado(examen.getFechaRealizado());
-            
-            
-          
-           
+
         } else {
             setIdExam("");
             setLab(0);
@@ -103,14 +98,14 @@ public class ExamenBean {
             setIdPaciente("");
             setDescripcion("");
             setFechaRealizado(null);
-            
-            
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Examen NO especificado"));
         }
-  return "EditarExamen";
+        return "EditarExamen";
     }
-   public void returnCliente(String id) {
+
+    public void returnCliente(String id) {
         ExamenDAO examenDao = new ExamenDAO();
         Examenes examen = examenDao.getExamenes1(id);
         Laboratorio nuevo = new Laboratorio();
@@ -125,10 +120,7 @@ public class ExamenBean {
             setIdPaciente(examen.getIdPaciente());
             setDescripcion(examen.getDescripcion());
             setFechaRealizado(examen.getFechaRealizado());
-            
-            
-          
-           
+
         } else {
             setIdExam("");
             setLab(0);
@@ -136,17 +128,14 @@ public class ExamenBean {
             setIdPaciente("");
             setDescripcion("");
             setFechaRealizado(null);
-            
-            
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Examen NO especificado"));
         }
-        
 
     }
-   
-  public int cont;
-  
+
+    public int cont;
 
     public int getCont() {
         return cont;
@@ -155,30 +144,25 @@ public class ExamenBean {
     public void setCont(int cont) {
         this.cont = cont;
     }
-  
-  
-          
-          
-          
-   public void returnPaciente(String id) {
-       
+
+    public void returnPaciente(String id) {
+
         ExamenDAO pacienteDao = new ExamenDAO();
         Paciente paciente = pacienteDao.getPaciente(id);
-      
+
         if (paciente != null) {
 
             setIdPaciente(paciente.getIdPaciente());
-          
-           
+
         } else {
             setIdPaciente("");
-            
-            
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Paciente NO encontrado"));
         }
-   }
-       public String deleteExamenes( String id) {
+    }
+
+    public String deleteExamenes(String id) {
         ExamenDAO examenDao = new ExamenDAO();
         Examenes examen = examenDao.getExamenes1(id);
 
@@ -198,28 +182,27 @@ public class ExamenBean {
         }
 
         return "Examen";
-        
+
     }
-        public String updateExamenes( String id) {
+
+    public String updateExamenes(String id) {
         ExamenDAO examenDao = new ExamenDAO();
         Examenes obtexamen = examenDao.getExamenes1(id);
 
-        if (obtexamen!= null) {
-        Laboratorio nuevo = new Laboratorio();
-        Tipoexamenes tipo1 = new Tipoexamenes();
-        nuevo.setIdLab(lab);
-        tipo1.setIdTipo(tipo);
-             
-        
-          Examenes exa = new Examenes( id, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);
+        if (obtexamen != null) {
+            Laboratorio nuevo = new Laboratorio();
+            Tipoexamenes tipo1 = new Tipoexamenes();
+            nuevo.setIdLab(lab);
+            tipo1.setIdTipo(tipo);
+
+            Examenes exa = new Examenes(id, nuevo, tipo1, idPaciente, descripcion, fechaRealizado);
 
             examenDao.updateExamenes(id, exa);
-     
-           
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Examen con ID " + id + " Actualizado"));
         } else {
-           
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Examen con ID " + id + " NO encontrado"));
         }
@@ -227,16 +210,13 @@ public class ExamenBean {
         return "Examen";
 
     }
-           
-           
-        public List<Examenes> getExamenes1(){
+
+    public List<Examenes> getExamenes1() {
         ExamenDAO examen = new ExamenDAO();
         List<Examenes> lista = examen.obtener();
         return lista;
     }
-           
 
-           
     public String getIdExam() {
         return idExam;
     }
@@ -300,10 +280,5 @@ public class ExamenBean {
     public void setFechaRealizado(Date fechaRealizado) {
         this.fechaRealizado = fechaRealizado;
     }
-   
-   
-    
+
 }
-
-
-

@@ -19,25 +19,26 @@ import sv.edu.udb.util.logger;
  * @author rgonz
  */
 public class RegistroDAO {
-     logger log = new logger();
-    
-      public void addUsuario(Usuario user) throws IOException {
+
+    logger log = new logger();
+
+    public void addUsuario(Usuario user) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Usuario datos = new Usuario();
-        datos.setUsuario(user.getUsuario());
-        datos.setContrasena(user.getContrasena());
-        datos.setCorreo(user.getCorreo());
-        datos.setTipousuario(user.getTipousuario());
-        datos.setVerificar(user.getVerificar());
+            Usuario datos = new Usuario();
+            datos.setUsuario(user.getUsuario());
+            datos.setContrasena(user.getContrasena());
+            datos.setCorreo(user.getCorreo());
+            datos.setTipousuario(user.getTipousuario());
+            datos.setVerificar(user.getVerificar());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-             log.InfoLog(e+"","ERROR");
+            log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -46,25 +47,25 @@ public class RegistroDAO {
             ses.close();
         }
     }
-    
-        public void addInformacion(Paciente nuevo) throws IOException {
+
+    public void addInformacion(Paciente nuevo) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Paciente datos = new Paciente();
-        datos.setIdPaciente(nuevo.getIdPaciente());
-        datos.setNombre(nuevo.getNombre());
-        datos.setApellido(nuevo.getApellido());
-        datos.setDui(nuevo.getDui());
-        datos.setTelefono(nuevo.getTelefono());
-        datos.setDireccion(nuevo.getDireccion());
+            Paciente datos = new Paciente();
+            datos.setIdPaciente(nuevo.getIdPaciente());
+            datos.setNombre(nuevo.getNombre());
+            datos.setApellido(nuevo.getApellido());
+            datos.setDui(nuevo.getDui());
+            datos.setTelefono(nuevo.getTelefono());
+            datos.setDireccion(nuevo.getDireccion());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-             log.InfoLog(e+"","ERROR");
+            log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }

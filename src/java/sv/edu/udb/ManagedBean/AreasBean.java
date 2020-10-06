@@ -8,6 +8,7 @@ package sv.edu.udb.ManagedBean;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import sv.edu.udb.DAO.AreasDAO;
 import sv.edu.udb.entites.Areas;
 
 /**
@@ -24,6 +25,12 @@ public class AreasBean {
      * Creates a new instance of AreasBean
      */
     public AreasBean() {
+    }
+    
+    public List<Areas> getAreass() {
+        AreasDAO areasDao = new AreasDAO();
+        List<Areas> lista = areasDao.getAreas();
+        return lista;
     }
       
     /**

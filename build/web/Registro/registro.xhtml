@@ -9,16 +9,18 @@
     </h:head>
     <h:body>
         <h:form>
-        <h:panelGrid columns="2">
-            <h:outputLabel for="id" value="ingrese su correo electronico: " /> <h:inputText id="correo" value="#{registroBean.correo}"/>
-            <h:outputLabel for="id" value="ingrese un usuario: " /> <h:inputText id="id" value="#{registroBean.usuario}"/>
-            <h:outputLabel for="nombres" value="Ingrese Contraseña: " /> <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
-              
-        </h:panelGrid>
-        <!--Cambiar el loginBean y crear el metodo-->
-         <h:panelGrid columns="2">
-             <h:commandButton value="Siguiente" action="#{registroBean.addUsuario()}" />
-         </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="id" value="ingrese su correo electronico: " /> 
+                <h:inputText id="correo" value="#{registroBean.correo}"/>
+                <h:outputLabel for="id" value="ingrese un usuario: " /> 
+                <h:inputText id="id" value="#{registroBean.usuario}"/>
+                <h:outputLabel for="nombres" value="Ingrese Contraseña: " /> 
+                <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
+            </h:panelGrid>
+            <!--Cambiar el loginBean y crear el metodo-->
+            <h:panelGrid columns="2">
+                <h:commandButton value="Siguiente" action="#{registroBean.addUsuario()}" />
+            </h:panelGrid>
         </h:form>
     </h:body>
 </html>
