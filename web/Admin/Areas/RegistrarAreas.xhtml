@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registrar Areas</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>Registrar la informacion para Areas</h1>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="ID Area: " for="idArea"/>
+                <h:inputText value="#{areasBean.idArea}" id="idArea" />
+                
+                 <h:outputLabel  value="Clinica: " /> 
+                 <h:selectOneMenu id="hola" value="#{areasBean.clinic}" styleClass="form-control">
+                     <f:selectItems value="#{areasBean.clinicas}"
+                                    var="l" itemLabel="#{l.nombre}" itemValue="#{l.idClinic}"/>
+                </h:selectOneMenu>
+                 
+               <h:outputLabel value="Nombre: " for="nombre"/>
+               <h:inputText value="#{areasBean.nombre}" id="nombre" />
+
+            </h:panelGrid>
+            
+            <h:panelGrid columns="4">
+                <h:commandButton value="Registrar Medico" action="#{areasBean.addAreas()}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html> 
+

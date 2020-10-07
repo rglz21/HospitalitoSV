@@ -6,10 +6,14 @@
 package sv.edu.udb.ManagedBean;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.AreasDAO;
+import sv.edu.udb.DAO.ClinicaDAO;
 import sv.edu.udb.entites.Areas;
+import sv.edu.udb.entites.Clinica;
 
 /**
  *
@@ -18,47 +22,145 @@ import sv.edu.udb.entites.Areas;
 @ManagedBean
 @RequestScoped
 public class AreasBean {
+<<<<<<< HEAD
      private int idArea;
      private String area;
+=======
+
+    private Areas areas = new Areas();
+    private int idArea;
+    private Clinica clinica;
+    private String nombre;
+    private int clinic;
+
+>>>>>>> 0f474413b38b8dc75bd801f21d45a4b4b56f2844
     /**
      * Creates a new instance of AreasBean
      */
     public AreasBean() {
     }
-     
-    public List<Areas>getAreas(){
-        AreasDAO areasDao=new AreasDAO();
-        List<Areas> lista=areasDao.getAreas();
+
+    public List<Areas> getArea() {
+        AreasDAO areasDao = new AreasDAO();
+        List<Areas> lista = areasDao.getAreas();
         return lista;
     }
     
-    /**
-     * @return the idArea
-     */
+    public List<Clinica> getClinicas() {
+        ClinicaDAO clinicaDao = new ClinicaDAO();
+        List<Clinica> lista = clinicaDao.obtenerClinica();
+        return lista;
+    }
+    
+    public String addAreas() {
+        AreasDAO areasDao = new AreasDAO();
+        Clinica clinicas = new Clinica();
+        clinicas.setIdClinic(getClinic());
+        Areas area = new Areas(idArea, clinicas, nombre);
+        areasDao.addAreas(area);
+
+        return "VerAreas";
+    }
+    
+    public String returnAreas(int id) {
+        AreasDAO areaDao = new AreasDAO();
+        Areas areass = areaDao.getAreas1(id);
+        Clinica clinicas = new Clinica();
+        clinicas.setIdClinic(getClinic());
+        if (areass != null) {
+            setIdArea(areass.getIdArea());
+            setClinic(areass.getClinica().getIdClinic());
+            setNombre(areass.getNombre());
+        } else {
+            setIdArea(0);
+            setClinic(0);
+            setNombre("");;
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Area NO especificada"));
+        }
+        return "EditarArea";
+    }
+    
+     public String updateAreas(int id) {
+        AreasDAO areaDao = new AreasDAO();
+        Areas area = areaDao.getAreas1(id);
+
+        if (area != null) {
+            Clinica clinicas = new Clinica();
+            clinicas.setIdClinic(getClinic());
+            Areas are = new Areas(idArea, clinicas, nombre);
+            areaDao.updateAreas(id, are);
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Area con ID " + id + " Actualizado"));
+        } else {
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Area con ID " + id + " NO encontrado"));
+        }
+
+        return "VerAreas";
+
+    }
+     
+     public String deleteMedicos(int id) {
+        AreasDAO areasDao = new AreasDAO();
+        Areas area = areasDao.getAreas1(id);
+
+        if (area != null) {
+            areasDao.deleteAreas(id);
+            setIdArea(0);
+            setClinic(0);
+            setNombre("");
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Area con ID " + id + " Eliminado"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Area con ID " + id + " NO encontrado"));
+        }
+
+        return "VerAreas";
+    }
+
+    public Areas getAreas() {
+        return areas;
+    }
+
+    public void setAreas(Areas areas) {
+        this.areas = areas;
+    }
+
     public int getIdArea() {
         return idArea;
     }
 
-    /**
-     * @param idArea the idArea to set
-     */
     public void setIdArea(int idArea) {
         this.idArea = idArea;
     }
 
-    /**
-     * @return the area
-     */
-    public String getArea() {
-        return area;
+    public Clinica getClinica() {
+        return clinica;
     }
 
-    /**
-     * @param area the area to set
-     */
-    public void setArea(String area) {
-        this.area = area;
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
     }
 
-    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(int clinic) {
+        this.clinic = clinic;
+    }
+   
 }

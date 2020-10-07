@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Areas</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable styleClass="table table-bordered table-dark table-light table-hover " 
+                         var="list" value="#{areasBean.area}" >
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idArea}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{list.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID clinica"/>
+                    </f:facet>
+                    <h:outputText value="#{list.clinica.idClinic}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandButton value="editar" action="#{areasBean.returnAreas(list.idArea)}"/>
+                    <h:commandButton value="eliminar" action="#{areasBean.deleteMedicos(list.idArea)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+        </h:form>
+    </h:body>
+</html>
+

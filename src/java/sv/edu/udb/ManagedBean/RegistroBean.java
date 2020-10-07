@@ -6,9 +6,14 @@
 package sv.edu.udb.ManagedBean;
 
 import java.io.IOException;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import sv.edu.udb.DAO.AreasDAO;
 import sv.edu.udb.DAO.RegistroDAO;
+import sv.edu.udb.DAO.TipoUsuDAO;
 import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Tipousuario;
 import sv.edu.udb.entites.Usuario;
@@ -28,6 +33,7 @@ public class RegistroBean {
     private String correo;
     private String verificar;
     private int tipo;
+    private String tiipo;
     private String idPaciente;
     private String nombre;
     private String apellido;
@@ -55,6 +61,17 @@ public class RegistroBean {
         log.InfoLog("Nueva persona Registrado", "INFO");
         return "informacion";
     }
+    
+     public String addUsuarioGeneral() throws IOException {
+        RegistroDAO productoDao = new RegistroDAO();
+        Tipousuario nuevo = new Tipousuario();
+        nuevo.setIdTipo(getTipo());
+        Usuario pro = new Usuario(usuario, nuevo, contrasena, correo, "Verificado");
+        productoDao.addUsuarioGeneral(pro);
+        logger log = new logger();
+        log.InfoLog("Nuevo Usuario Registrado", "INFO");
+        return "VerUsuariosGenerales";
+    }
 
     public String addUsuarioMedico() throws IOException {
         RegistroDAO productoDao = new RegistroDAO();
@@ -74,6 +91,83 @@ public class RegistroBean {
         productoDao.addInformacion(pro);
         return "/Paciente/indexPaciente";
 
+    }
+    
+    public List<Tipousuario> getTipos() {
+        TipoUsuDAO tipousuDao = new TipoUsuDAO();
+        List<Tipousuario> lista = tipousuDao.getTipoUsu();
+        return lista;
+    }
+    
+    public List<Usuario> getUsuarios() {
+        RegistroDAO usuarioDao = new RegistroDAO();
+        List<Usuario> lista = usuarioDao.getUsuario();
+        return lista;
+    }
+    
+    public String returnUsuarios(String id) {
+        RegistroDAO usuarioDao = new RegistroDAO();
+        Usuario usuarioo = usuarioDao.getUsuario1(id);
+        Tipousuario tipousu = new Tipousuario();
+        tipousu.setTipo(getTiipo());
+        if (usuarioo != null) {
+            setUsuario(usuarioo.getUsuario());
+            setTipo(usuarioo.getTipousuario().getIdTipo());
+            setCorreo(usuarioo.getCorreo());
+            setContrasena(usuarioo.getContrasena());
+        } else {
+            setUsuario("");
+            setTipo(0);
+            setCorreo("");
+            setContrasena("");
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Usuario NO especificado"));
+        }
+        return "EditarUsuariosGenerales";
+    }
+    
+    public String updateUsuarios(String id) {
+        RegistroDAO usuarioDao = new RegistroDAO();
+        Usuario usuarioo = usuarioDao.getUsuario1(id);
+
+        if (usuarioo != null) {
+            Tipousuario tipousu = new Tipousuario();
+            tipousu.setTipo(getTiipo());
+            Usuario usu = new Usuario(usuario, tipousu, contrasena, correo, "Verificado");
+            usuarioDao.updateUsuario(id, usu);
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Usuario con ID " + id + " Actualizado"));
+        } else {
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Usuario con ID " + id + " NO encontrado"));
+        }
+
+        return "VerUsuariosgenerales";
+
+    }
+
+    public String deleteUsuarios(String id) {
+        RegistroDAO usuarioDao = new RegistroDAO();
+        Usuario usu = usuarioDao.getUsuario1(id);
+
+        if (usu != null) {
+            usuarioDao.deleteUsuario(id);
+            setUsuario("");
+            setTipo(0);
+            setCorreo("");
+            setContrasena("");
+            setVerificar("");
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Usuario con ID " + id + " Eliminado"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("usuario con ID " + id + " NO encontrado"));
+        }
+
+        return "VerUsuariosGenerales";
     }
 
     public String getIdPaciente() {
@@ -168,4 +262,13 @@ public class RegistroBean {
         this.verificar = verificar;
     }
 
+    public String getTiipo() {
+        return tiipo;
+    }
+
+    public void setTiipo(String tiipo) {
+        this.tiipo = tiipo;
+    }
+    
+    
 }
