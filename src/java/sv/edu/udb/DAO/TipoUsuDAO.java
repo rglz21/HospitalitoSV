@@ -26,7 +26,7 @@ public class TipoUsuDAO {
         Transaction tra=null;
         try{
             tra=ses.beginTransaction();
-            String queryString="FROM Tipousuario WHERE idtipo IN (2, 3, 4)";
+            String queryString="FROM Tipousuario WHERE idtipo IN (3, 4)";
             Query query=ses.createQuery(queryString);
             tipoUsuario=query.list();
         }catch(Exception e){
