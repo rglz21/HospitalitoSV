@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registrar Ingresar Prediagnostico</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="idPrediag" value="ID Prediag: " />
+                <h:inputText id="idPrediag" value="#{prediagBean.idPrediag}"/>
+                
+                <h:outputLabel for="estadopre" value="Estado Pre: " />
+                <h:inputText id="estadopre" value="#{prediagBean.estadopre}"/>
+
+                <h:outputLabel for="fechaPre" value="Fecha Realizado: " />
+                <h:inputText id="fechaPre" size="40" maxlength="60"
+                             value="#{prediagBean.fechaPre}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:inputText><br/>
+            </h:panelGrid>
+            <!--Cambiar el loginBean y crear el metodo-->
+            <h:panelGrid columns="2">
+                <h:commandButton value="Ingresar prediagnostico" action="#{prediagBean.addPrediagnostico()}" />
+            </h:panelGrid>
+        </h:form>
+        <br></br>
+        <br></br>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="idSintoma" value="ID Sintoma: " />
+                <h:inputText id="idSintoma" value="#{prediagBean.idSintoma}"/>
+                
+                <h:outputLabel for="idPredia" value="ID Prediag: " />
+                <h:inputText id="idPredia" value="#{prediagBean.prediagnostico.idPrediag}"/>
+
+                <h:outputLabel for="sintoma" value="Sintoma: " />
+                <h:inputText id="sintoma" value="#{prediagBean.sintoma}"/>
+                
+                <h:outputLabel for="descripcion" value="Descripcion: " />
+                <h:inputText id="descripcion" value="#{prediagBean.descripcion}"/>
+                
+                <h:outputLabel for="duracion" value="Duracion: " />
+                <h:inputText id="duracion" value="#{prediagBean.duracion}"/>
+            </h:panelGrid>
+            <!--Cambiar el loginBean y crear el metodo-->
+            <h:panelGrid columns="2">
+                <h:commandButton value="Ingresar sintomas" action="#{prediagBean.addSintomas()}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

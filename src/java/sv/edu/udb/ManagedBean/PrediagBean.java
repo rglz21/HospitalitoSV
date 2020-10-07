@@ -29,46 +29,81 @@ public class PrediagBean {
     private Estadopre estadopre;
     private Paciente paciente;
     private Date fechaPre;
-    private Sintomas sintomas=new Sintomas();
+    private String pacient;
+    private Sintomas sintomas = new Sintomas();
+
+    //tabla simtomas
+    private int idSintoma;
+    private Prediagnostico prediagnostico;
+    private String sintoma;
+    private String descripcion;
+    private String duracion;
+    private int prediag;
+
     /**
      * Creates a new instance of PrediagBean
      */
     public PrediagBean() {
     }
-    
-     public List<Prediagnostico> getDiagnostico() {
+
+    public List<Prediagnostico> getDiagnostico() {
         PrediagDAO prediagnDao = new PrediagDAO();
         List<Prediagnostico> lista = prediagnDao.obtenerDiagnostico();
         return lista;
     }
-    public List<Sintomas> getSintomasByPrediag(int idPrediag){
-        SintomasDAO sintomasDao=new SintomasDAO();
-        List<Sintomas> lista=sintomasDao.getSintomasByPrediag(idPrediag);
+
+    public List<Sintomas> getSintomasByPrediag(int idPrediag) {
+        SintomasDAO sintomasDao = new SintomasDAO();
+        List<Sintomas> lista = sintomasDao.getSintomasByPrediag(idPrediag);
         return lista;
     }
-    public List<Prediagnostico> getPrediagActivo(){
-        PrediagDAO prediagDao=new PrediagDAO();
-        List<Prediagnostico> lista= prediagDao.getPrediagByEstado(1);
+
+    public List<Prediagnostico> getPrediagActivo() {
+        PrediagDAO prediagDao = new PrediagDAO();
+        List<Prediagnostico> lista = prediagDao.getPrediagByEstado(1);
         return lista;
     }
-    public void getPrediagPaciente(int idPrediag){
-        PrediagDAO prediagDao=new PrediagDAO();
-        PacienteDAO pacienteDao=new PacienteDAO();
-        Prediagnostico prediag= prediagDao.getPrediagPaciente(idPrediag);
-        this.idPrediag=prediag.getIdPrediag();
-        paciente=prediag.getPaciente();
-        fechaPre=prediag.getFechaPre();
-        paciente=pacienteDao.obtenerPacienteById(paciente.getIdPaciente());
-        
+
+    public void getPrediagPaciente(int idPrediag) {
+        PrediagDAO prediagDao = new PrediagDAO();
+        PacienteDAO pacienteDao = new PacienteDAO();
+        Prediagnostico prediag = prediagDao.getPrediagPaciente(idPrediag);
+        this.idPrediag = prediag.getIdPrediag();
+        paciente = prediag.getPaciente();
+        fechaPre = prediag.getFechaPre();
+        paciente = pacienteDao.obtenerPacienteById(paciente.getIdPaciente());
+
     }
-    public String cambiarEstado(){
-        PrediagDAO prediagDao=new PrediagDAO();
-        Estadopre estadopred=new Estadopre();
+
+    public String cambiarEstado() {
+        PrediagDAO prediagDao = new PrediagDAO();
+        Estadopre estadopred = new Estadopre();
         estadopred.setIdEstado(2);
-        Prediagnostico pre=new Prediagnostico(idPrediag,estadopred,paciente,fechaPre);
+        Prediagnostico pre = new Prediagnostico(idPrediag, estadopred, paciente, fechaPre);
         prediagDao.cambiarEstado(pre);
         return "crearCitas";
     }
+
+    public String addPrediagnostico() {
+        PrediagDAO prediagDao = new PrediagDAO();
+//        Paciente pacientee = new Paciente();
+//        pacientee.setIdPaciente(getPacient());
+        Prediagnostico medico = new Prediagnostico(idPrediag, estadopre, fechaPre);
+        prediagDao.addPrediagnostico(medico);
+
+        return "VerExpediente";
+    }
+
+    public String addSintomas() {
+        SintomasDAO sintomaDao = new SintomasDAO();
+        Prediagnostico predia = new Prediagnostico();
+        predia.setIdPrediag(getPrediag());
+        Sintomas sintomaa = new Sintomas(idSintoma, predia, sintoma, descripcion, duracion);
+        sintomaDao.addSintomas(sintomaa);
+
+        return "VerExpediente";
+    }
+
     public int getIdPrediag() {
         return idPrediag;
     }
@@ -115,5 +150,61 @@ public class PrediagBean {
         this.sintomas = sintomas;
     }
 
-     
+    public String getPacient() {
+        return pacient;
+    }
+
+    public void setPacient(String pacient) {
+        this.pacient = pacient;
+    }
+
+    public int getPrediag() {
+        return prediag;
+    }
+
+    public void setPrediag(int prediag) {
+        this.prediag = prediag;
+    }
+
+    public int getIdSintoma() {
+        return idSintoma;
+    }
+
+    public void setIdSintoma(int idSintoma) {
+        this.idSintoma = idSintoma;
+    }
+
+    public Prediagnostico getPrediagnostico() {
+        return prediagnostico;
+    }
+
+    public void setPrediagnostico(Prediagnostico prediagnostico) {
+        this.prediagnostico = prediagnostico;
+    }
+
+    public String getSintoma() {
+        return sintoma;
+    }
+
+    public void setSintoma(String sintoma) {
+        this.sintoma = sintoma;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+    
+    
 }

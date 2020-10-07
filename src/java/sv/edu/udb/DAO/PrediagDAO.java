@@ -111,4 +111,27 @@ public class PrediagDAO {
         }
         return diagnosticos;
     }
+    
+    public void addPrediagnostico(Prediagnostico prediag) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Prediagnostico datos = new Prediagnostico();
+            datos.setIdPrediag(prediag.getIdPrediag());
+            datos.setFechaPre(prediag.getFechaPre());
+            datos.setPaciente(prediag.getPaciente());
+            ses.save(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 }

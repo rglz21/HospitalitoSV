@@ -23,7 +23,7 @@ import sv.edu.udb.entites.Tipoexamenes;
 public class ExamenesBean {
     
     private String idExam;
-     private Laboratorio laboratorio;
+     private Laboratorio laboratorio = new Laboratorio();
      private Tipoexamenes tipoexamenes;
      private String idPaciente;
      private String descripcion;

@@ -7,54 +7,64 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:dataTable styleClass="table table-bordered table-dark table-light table-hover " 
-                         var="list" value="#{expedienteBean.expediente}" >
+        <h:form id="prediag">
+            <h:outputLabel value="#{prediagBean.fechaPre}"/>
+            <h:outputLabel value="#{prediagBean.paciente.nombre} "/>
+            <h:outputLabel value="#{prediagBean.paciente.apellido}"/>
+            <h:dataTable value="#{prediagBean.getSintomasByPrediag(prediagBean.idPrediag)}" var="s">
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID"/>
+                        Sintoma
                     </f:facet>
-                    <h:outputText value="#{list.idExpe}"/>
+                    #{s.sintoma}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID Paciente"/>
+                        Descripcion
                     </f:facet>
-                    <h:outputText value="#{list.paciente.idPaciente}"/>
-                </h:column>
-               <!-- <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente.nombre}"/>
+                    #{s.descripcion}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Apellido"/>
+                        Duracion
                     </f:facet>
-                    <h:outputText value="#{list.paciente.apellido}"/>
+                    #{s.duracion}
                 </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="DUI"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente.dui}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Telefono"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente.telefono}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Direccion"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente.direccion}"/>
-                </h:column>-->
             </h:dataTable>
-            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
-            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+            <h:commandButton action="#{expedienteBean.verExpediente(prediagBean.paciente.idPaciente)}" value="Mostrar expediente"/>
+            <h:commandButton action="crearPrediagnostico" value="Crear Prediagnostico"/>
+        </h:form>
+        <h:form id="tablePrediag">
+            <h:dataTable id="prediags" value="#{prediagBean.prediagActivo}" var="d">
+                <h:column>
+                    <f:facet name="header">
+                        ID Prediagnostico
+                    </f:facet>
+                    #{d.idPrediag}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha
+                    </f:facet>
+                    #{d.fechaPre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Paciente
+                    </f:facet>
+                    #{d.paciente.idPaciente}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.idPrediag)}">
+                        <f:ajax execute="@form"
+                                render="prediag :tablePrediag"
+                                resetValues="true"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
         </h:form>
     </h:body>
 </html>

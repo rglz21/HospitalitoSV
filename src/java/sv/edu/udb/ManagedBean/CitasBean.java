@@ -120,6 +120,12 @@ public class CitasBean {
         List<Citas> lista=citasDao.getCitasByMedico(idMedico);
         return lista;
     }
+    
+    public List<Citas>getCitasByPacientes(String idPaciente){
+        CitasDAO citasDao=new CitasDAO();
+        List<Citas> lista=citasDao.getCitasByPaciente(idPaciente);
+        return lista;
+    }
 
     /**
      * @return the idCita

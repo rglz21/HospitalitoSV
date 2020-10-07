@@ -35,6 +35,10 @@ public class Prediagnostico  implements java.io.Serializable {
        this.fechaPre = fechaPre;
        this.sintomases = sintomases;
     }
+
+    public Prediagnostico(int idPrediag, Estadopre estadopre, Date fechaPre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
     public int getIdPrediag() {
         return this.idPrediag;

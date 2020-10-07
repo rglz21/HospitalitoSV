@@ -1,12 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Bienvenido Cliente
+        <h:form>
+            <h:outputLabel value="Bienvenido: #{loginBean.usuario} estas son sus Citas"/>
+            <h:dataTable value="#{citasBean.getCitasByPacientes(loginBean.usuario)}" var="cm">
+                <h:column>
+                    <f:facet name="header">
+                        Paciente
+                    </f:facet>
+                    #{cm.paciente.idPaciente}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha
+                    </f:facet>
+                    #{cm.fecha}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Hora
+                    </f:facet>
+                    #{cm.hora}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandLink value="Editar" action="#{citasBean.obtenerCitaById(cm.idCita)}">
+                        <f:ajax execute="@form"
+                                render="prediag :tablePrediag"
+                                resetValues="true"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </h:body>
 </html>
 

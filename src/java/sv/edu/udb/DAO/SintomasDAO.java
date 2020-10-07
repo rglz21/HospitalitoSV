@@ -41,4 +41,29 @@ public class SintomasDAO {
         }
         return sintomas;
     }
+    
+    public void addSintomas(Sintomas sintoma) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Sintomas datos = new Sintomas();
+            datos.setIdSintoma(sintoma.getIdSintoma());
+            datos.setPrediagnostico(sintoma.getPrediagnostico());
+            datos.setSintoma(sintoma.getSintoma());
+            datos.setDescripcion(sintoma.getDescripcion());
+            datos.setDuracion(sintoma.getDuracion());
+            ses.save(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 }

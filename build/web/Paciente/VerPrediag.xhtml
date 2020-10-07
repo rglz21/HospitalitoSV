@@ -26,13 +26,19 @@
                     <f:facet name="header">
                         <h:outputText value="Paciente"/>
                     </f:facet>
-                    <h:outputText value="#{list.paciente.apellido}"/>
+                    <h:outputText value="#{list.paciente.idPaciente}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Fecha Diagnostico"/>
                     </f:facet>
                     <h:outputText value="#{list.fechaPre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Diagnostico"/>
+                    </f:facet>
+                    <h:outputText value="#{list.sintomases}"/>
                 </h:column>
 
             </h:dataTable>

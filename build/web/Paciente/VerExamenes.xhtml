@@ -8,9 +8,6 @@
     </h:head>
     <h:body>
         <h:form>
-            <!--<h:inputText id="idMedico" value="#{citasBean.medico}">
-                <f:ajax event="blur" render="citas"/>
-            </h:inputText>-->
             <h:dataTable id="citas" var="list" value="#{examenesBean.examen}">
                 <h:column>
                     <f:facet name="header">
@@ -48,18 +45,6 @@
                     </f:facet>
                     <h:outputText value="#{list.fechaRealizado}"/>
                 </h:column>
-                <!--<h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Paciente"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente}"/>
-                </h:column>-->
-                <!--<h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Medico"/>
-                    </f:facet>
-                    <h:outputText value="#{list.medicos}"/>
-                </h:column>-->
             </h:dataTable>
             <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
             <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
