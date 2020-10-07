@@ -21,14 +21,14 @@ import sv.edu.udb.entites.Prediagnostico;
  */
 public class PrediagDAO {
 
-    public Prediagnostico getPrediagPaciente(String idPrediag) {
+    public Prediagnostico getPrediagPaciente(int idPrediag) {
         Prediagnostico prediag = new Prediagnostico();
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Prediagnostico where idPaciente= :idPrediag";
+            String queryString = "from Prediagnostico where idPrediag= :idPrediag";
             Query query = ses.createQuery(queryString);
             query.setParameter("idPrediag", idPrediag);
             prediag = (Prediagnostico) query.uniqueResult();
@@ -66,7 +66,28 @@ public class PrediagDAO {
         }
         return prediag;
     }
-
+    public void cambiarEstado(Prediagnostico prediag){
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            Prediagnostico editPre=(Prediagnostico) ses.load(Prediagnostico.class, prediag.getIdPrediag());
+            editPre.setIdPrediag(prediag.getIdPrediag());
+            editPre.setEstadopre(prediag.getEstadopre());
+            editPre.setPaciente(prediag.getPaciente());
+            editPre.setFechaPre(prediag.getFechaPre());
+            ses.update(editPre);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
     //Metodo DAO para listar Diagnosticos del paciente
     public List<Prediagnostico> obtenerDiagnostico() {
         List<Prediagnostico> diagnosticos = null;

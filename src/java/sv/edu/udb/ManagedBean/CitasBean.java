@@ -11,9 +11,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import sv.edu.udb.DAO.CitasDAO;
+import sv.edu.udb.DAO.MedicosDAO;
+import sv.edu.udb.DAO.UtilDAO;
+import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
@@ -34,7 +35,8 @@ public class CitasBean {
     private String tipoExamen;
     private String paciente;
     private String medico;
-    private int area;
+    private Areas area;
+    private int idArea;
     /**
      * Creates a new instance of CitasBean
      */
@@ -51,7 +53,10 @@ public class CitasBean {
             setHora(cita.getHora());
             setExamenes(cita.getExamen());
             setTipoExamen(cita.getTipExamen());
-            return "Medicos/editarCitas";
+            MedicosDAO medicosDao=new MedicosDAO();
+            Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
+            area=medico.getAreas();
+            return "editarCitas";
         }else{
             setIdCita(0);
             setIdMedico(null);
@@ -64,7 +69,7 @@ public class CitasBean {
             return "editar1";
         }
     }
-    public void updateCita(){
+    public String updateCita(){
         CitasDAO citasDao=new CitasDAO();
         Citas cita=citasDao.obtenerCita(getIdCita());
         Medicos medic=new Medicos();
@@ -82,6 +87,7 @@ public class CitasBean {
             setHora(cita.getHora());
             setExamenes(cita.getExamen());
             setTipoExamen(cita.getTipExamen());
+            return "indexMedicos";
         }else{
             setIdCita(0);
             setIdMedico(null);
@@ -91,16 +97,18 @@ public class CitasBean {
             setExamenes("");
             setTipoExamen("");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
+            return null;
         }
     }
     public void addCita(){
+        UtilDAO utilDao=new UtilDAO();
         CitasDAO citasDao=new CitasDAO();
         Medicos medic=new Medicos();
         Paciente pacient= new Paciente();
         medic.setIdMedico(getMedico());
         pacient.setIdPaciente(getPaciente());
         
-        int ccitas=citasDao.contarCitas();
+        int ccitas=utilDao.contar("Citas");
         int ncita=++ccitas;
         setIdCita(ncita);
         
@@ -242,14 +250,30 @@ public class CitasBean {
     /**
      * @return the area
      */
-    public int getArea() {
+    public Areas getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(int area) {
+    public void setArea(Areas area) {
         this.area = area;
     }
+
+    /**
+     * @return the idArea
+     */
+    public int getIdArea() {
+        return idArea;
+    }
+
+    /**
+     * @param idArea the idArea to set
+     */
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
+    
 }

@@ -65,6 +65,32 @@ public class MedicinaDAO {
         }
         return medicinas;
     }
+    public void insertMedicina(Medicina medicina){
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Medicina datos = new Medicina();
+            datos.setIdMedicina(medicina.getIdMedicina());
+            datos.setRecetas(medicina.getRecetas());
+            datos.setNombre(medicina.getNombre());
+            datos.setCantidad(medicina.getCantidad());
+            datos.setDosis(medicina.getDosis());
+            datos.setMg(medicina.getMg());
+ 
+            ses.save(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
     
     public void updateMedicamento(String idMedi, Medicina medicina) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();

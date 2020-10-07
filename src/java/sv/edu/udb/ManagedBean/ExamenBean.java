@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import sv.edu.udb.entites.Laboratorio;
 import sv.edu.udb.entites.Tipoexamenes;
 import sv.edu.udb.DAO.ExamenDAO;
+import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Paciente;
 
@@ -62,13 +63,14 @@ public class ExamenBean {
 
 
      
-       public  String  addExamenes() {
+    public  String  addExamenes() {
+        UtilDAO utilDao=new UtilDAO();
         ExamenDAO examenesDao = new ExamenDAO();
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
-        int num = examenesDao.Contar() ;
+        int num = utilDao.contar("Examen");
         int num2 = ++num;
         setIdExam("EXAM-"+num2);
         Examenes exa = new Examenes( idExam, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);

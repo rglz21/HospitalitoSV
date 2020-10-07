@@ -215,28 +215,4 @@ public class ExamenDAO {
         return lab;
     }
     
-     public int Contar () {
-        int cont2 = 0 ;
-        Long cont;
-        SessionFactory sesFact = HibernateUtil.getSessionFactory();
-        Session ses = sesFact.openSession();
-        Transaction tra = null;
-        try {
-            tra = ses.beginTransaction();
-            String queryString = "select count(*) from Examenes";
-            Query query = ses.createQuery(queryString);
-            cont = (Long) query.uniqueResult();
-            cont2 = cont.intValue();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            if (tra != null) {
-                tra.rollback();
-            }
-        } finally {
-            ses.flush();
-            ses.close();
-        }
-
-        return cont2;
-    }
 }

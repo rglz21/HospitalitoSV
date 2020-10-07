@@ -43,4 +43,27 @@ public class PacienteDAO {
         }
         return paciente;
     }
+    public Paciente obtenerPacienteById(String idPaciente) {
+        Paciente paciente = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Paciente where idPaciente=:idPac";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idPac", idPaciente);
+            paciente = (Paciente)query.uniqueResult();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return paciente;
+    }
 }

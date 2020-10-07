@@ -7,7 +7,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form id="recetas">
             <h:panelGrid columns="2">
                 <h:outputLabel value="ID Medico: " for="idMedico"/>
                 <h:selectOneMenu value="#{recetasBean.idMedic}" id="idMedico">
@@ -26,7 +26,33 @@
                 <h:outputLabel value="Dosis: " for="dosis"/>
                 <h:inputText value="#{recetasBean.dosisM}" id="dosis"/>
             </h:panelGrid>
-            <h:commandButton value="Crear Receta" action="#{recetasBean.insertReceta()}"/>
+            <h:commandButton value="Actualizar Receta" action="#{recetasBean.updateReceta()}"/>
+        </h:form>
+        <h:form>
+            <h:dataTable id="tablerecets" value="#{recetasBean.getRecetasByMedic(loginBean.usuario)}" var="rm">
+                <h:column>
+                    <f:facet name="header">
+                        ID Receta
+                    </f:facet>
+                    #{rm.idReceta}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Paciente
+                    </f:facet>
+                    #{rm.paciente.idPaciente}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandLink value="Editar" action="#{recetasBean.obtenerReceta(rm.idReceta)}">
+                        <f:ajax execute="@form"
+                                render="recetas :tablerecets"
+                                resetValues="true"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
         </h:form>
     </h:body>
 </html>

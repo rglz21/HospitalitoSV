@@ -39,6 +39,11 @@ public class PacienteBean {
         List<Paciente> lista = pacienteDao.obtenerPaciente();
         return lista;
     }
+    public Paciente getPacienteById(String idPac){
+       PacienteDAO pacienteDao = new PacienteDAO();
+       Paciente paciente=pacienteDao.obtenerPacienteById(idPac);
+       return paciente;
+    }
 
     public String getIdPaciente() {
         return idPaciente;

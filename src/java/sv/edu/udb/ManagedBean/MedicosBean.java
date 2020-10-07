@@ -46,7 +46,19 @@ public class MedicosBean {
         MedicosDAO medicosDao = new MedicosDAO();
         medicoArea = medicosDao.getMedicosByArea(idArea);
     }
-
+    public void getMedicoById(String idMedic){
+        MedicosDAO medicosDao = new MedicosDAO();
+        Medicos medico=medicosDao.getMedicos1(idMedic);
+        if(medico!=null){
+            setIdMedico(medico.getIdMedico());
+            setNombre(medico.getNombre());
+            setApellido(medico.getApellido());
+            setIdareas(medico.getAreas());
+            setJvpm(medico.getJvpm());
+            setHoraIn(medico.getHoraIn());
+            setHoraOut(medico.getHoraOut());
+        }
+    }
     public void getHoraMedico(String idMedico) {
         System.out.println(idMedico);
         MedicosDAO medicosDao = new MedicosDAO();

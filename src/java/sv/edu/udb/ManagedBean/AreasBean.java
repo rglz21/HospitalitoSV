@@ -18,7 +18,6 @@ import sv.edu.udb.entites.Areas;
 @ManagedBean
 @RequestScoped
 public class AreasBean {
-     private Areas areas=new Areas();
      private int idArea;
      private String area;
     /**

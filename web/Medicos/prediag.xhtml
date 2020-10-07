@@ -8,10 +8,31 @@
     </h:head>
     <h:body>
         <h:form id="prediag">
-            <h:outputLabel value="#{prediagBean.idPrediag}"/>
-            <h:outputLabel value="#{prediagBean.paciente.idPaciente}"/>
             <h:outputLabel value="#{prediagBean.fechaPre}"/>
+            <h:outputLabel value="#{prediagBean.paciente.nombre} "/>
+            <h:outputLabel value="#{prediagBean.paciente.apellido}"/>
+            <h:dataTable value="#{prediagBean.getSintomasByPrediag(prediagBean.idPrediag)}" var="s">
+                <h:column>
+                    <f:facet name="header">
+                        Sintoma
+                    </f:facet>
+                    #{s.sintoma}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Descripcion
+                    </f:facet>
+                    #{s.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Duracion
+                    </f:facet>
+                    #{s.duracion}
+                </h:column>
+            </h:dataTable>
             <h:commandButton action="#{expedienteBean.verExpediente(prediagBean.paciente.idPaciente)}" value="Mostrar expediente"/>
+            <h:commandButton action="crearCitas" value="Agendar cita"/>
         </h:form>
         <h:form id="tablePrediag">
             <h:dataTable id="prediags" value="#{prediagBean.prediagActivo}" var="d">
@@ -37,7 +58,7 @@
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.paciente.idPaciente)}">
+                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.idPrediag)}">
                         <f:ajax execute="@form"
                                 render="prediag :tablePrediag"
                                 resetValues="true"/>

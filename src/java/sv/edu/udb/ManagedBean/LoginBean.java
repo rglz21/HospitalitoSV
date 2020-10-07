@@ -51,7 +51,7 @@ public class LoginBean {
         LoginDAO usuarioDao = new LoginDAO();
         if (usuario.isEmpty() || contrasena.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage("Porfavor llene los campos"));
-            log.InfoLog("Campos Vacios","ERROR");
+            //log.InfoLog("Campos Vacios","ERROR");
             return "login";
             
         } 
@@ -64,16 +64,16 @@ public class LoginBean {
             if (user != null) {
 // Cuando el usuario ya esta verificado
                 if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 1) {
-                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
+                    //log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Paciente/indexPaciente";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 2) {
-                   log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
-                    return "Medico/crearRecetas";
+                   //log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
+                    return "Medicos/indexMedicos";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 3) {
-                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
+                    //log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Farmacia/indexFarmacia";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 4) {
-                    log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
+                    //log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
                     return "Laboratorio/indexLaboratorio";
                 } else {
 // cuando el usuario no esta verificado

@@ -1,18 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <h:form>
-            <h:outputLabel value="ID Receta: " for="idReceta"/>
-            <h:inputText value="#{recetasBean.idRecetas}" id="idRecetas" />
-            <h:outputLabel value="ID Medico: " for="idMedico"/>
-            <h:inputText value="#{recetasBean.idMedic}" id="idMedico" />
-            <h:outputLabel value="ID Paciente: " for="idPaciente"/>
-            <h:inputText value="#{recetasBean.idPacient}" id="idPaciente" />
+            <h:panelGrid columns="2">
+                <h:outputLabel value="ID Medico: " for="idMedico"/>
+                <h:selectOneMenu value="#{recetasBean.idMedic}" id="idMedico">
+                    <f:selectItems value="#{medicosBean.medico}" var="m" itemLabel="#{m.nombre}" itemValue="#{m.idMedico}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="ID Paciente: " for="idPaciente"/>
+                <h:selectOneMenu value="#{recetasBean.idPacient}" id="idPaciente">
+                    <f:selectItems value="#{pacienteBean.paciente}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idPaciente}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="Medicamento: " for="medicina"/>
+                <h:inputText value="#{recetasBean.nombreM}" id="medicina"/>
+                <h:outputLabel value="Mg de medicamento: " for="mg"/>
+                <h:inputText value="#{recetasBean.mgM}" id="mg"/>
+                <h:outputLabel value="Cantidad: " for="cantidad"/>
+                <h:inputText value="#{recetasBean.cantM}" id="cantidad"/>
+                <h:outputLabel value="Dosis: " for="dosis"/>
+                <h:inputText value="#{recetasBean.dosisM}" id="dosis"/>
+            </h:panelGrid>
             <h:commandButton value="Crear Receta" action="#{recetasBean.insertReceta()}"/>
         </h:form>
     </h:body>
