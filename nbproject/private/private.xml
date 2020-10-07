@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/LoginBean.java</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/login.xhtml</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/MedicinaDAO.java</file>
@@ -36,11 +35,6 @@
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/editarCitas.xhtml</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Farmacia/buscarReceta.xhtml</file>
             <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/PacienteBean.java</file>
-=======
-            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/web/Admin/RegistrarAreas.xhtml</file>
-            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/src/java/sv/edu/udb/ManagedBean/AreasBean.java</file>
-            <file>file:/C:/Users/jonat/OneDrive/Documentos/HospitalSV/src/java/sv/edu/udb/DAO/AreasDAO.java</file>
->>>>>>> 0f474413b38b8dc75bd801f21d45a4b4b56f2844
         </group>
     </open-files>
 </project-private>
