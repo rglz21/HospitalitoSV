@@ -22,18 +22,14 @@ import sv.edu.udb.entites.Clinica;
 @ManagedBean
 @RequestScoped
 public class AreasBean {
-<<<<<<< HEAD
-     private int idArea;
-     private String area;
-=======
 
-    private Areas areas = new Areas();
     private int idArea;
+    private String area;
+    private Areas areas = new Areas();
     private Clinica clinica;
     private String nombre;
     private int clinic;
 
->>>>>>> 0f474413b38b8dc75bd801f21d45a4b4b56f2844
     /**
      * Creates a new instance of AreasBean
      */
