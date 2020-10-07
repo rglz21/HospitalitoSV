@@ -33,7 +33,7 @@ public class RegistroBean {
     private String correo;
     private String verificar;
     private int tipo;
-    private String tiipo;
+    private int tiipo;
     private String idPaciente;
     private String nombre;
     private String apellido;
@@ -109,10 +109,10 @@ public class RegistroBean {
         RegistroDAO usuarioDao = new RegistroDAO();
         Usuario usuarioo = usuarioDao.getUsuario1(id);
         Tipousuario tipousu = new Tipousuario();
-        tipousu.setTipo(getTiipo());
+        tipousu.setIdTipo(getTiipo());
         if (usuarioo != null) {
             setUsuario(usuarioo.getUsuario());
-            setTipo(usuarioo.getTipousuario().getIdTipo());
+            setTiipo(usuarioo.getTipousuario().getIdTipo());
             setCorreo(usuarioo.getCorreo());
             setContrasena(usuarioo.getContrasena());
         } else {
@@ -133,7 +133,7 @@ public class RegistroBean {
 
         if (usuarioo != null) {
             Tipousuario tipousu = new Tipousuario();
-            tipousu.setTipo(getTiipo());
+            tipousu.setIdTipo(tiipo);
             Usuario usu = new Usuario(usuario, tipousu, contrasena, correo, "Verificado");
             usuarioDao.updateUsuario(id, usu);
 
@@ -145,7 +145,7 @@ public class RegistroBean {
                     new FacesMessage("Usuario con ID " + id + " NO encontrado"));
         }
 
-        return "VerUsuariosgenerales";
+        return "VerUsuariosGenerales";
 
     }
 
@@ -262,11 +262,11 @@ public class RegistroBean {
         this.verificar = verificar;
     }
 
-    public String getTiipo() {
+    public int getTiipo() {
         return tiipo;
     }
 
-    public void setTiipo(String tiipo) {
+    public void setTiipo(int tiipo) {
         this.tiipo = tiipo;
     }
     

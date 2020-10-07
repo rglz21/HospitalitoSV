@@ -156,6 +156,7 @@ public class RegistroDAO {
             usuario.setContrasena(newUsuario.getContrasena());
             usuario.setCorreo(newUsuario.getCorreo());
             usuario.setTipousuario(newUsuario.getTipousuario());
+            usuario.setVerificar(newUsuario.getVerificar());
             
             ses.update(usuario);
             ses.getTransaction().commit();

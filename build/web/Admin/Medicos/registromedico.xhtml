@@ -10,9 +10,9 @@
         <h:form>
             <h1>Completar la informacion para el Medico a ingresar</h1>
             <h:panelGrid columns="2">
-                <h:outputLabel value="ID Medico: " for="idMedico"/>
-                <h:inputText value="#{medicosBean.idMedico}" id="idMedico" />
-                
+                <h:outputLabel value="Su IDMedico: " for="idMedico"/>
+                <h:outputLabel value="#{registroBean.usuario}" for="idMedico"/>
+                 
                  <h:outputLabel  value="Categoria: " /> 
                 <h:selectOneMenu id="hola" value="#{medicosBean.areas}" styleClass="form-control">
                     <f:selectItems value="#{medicosBean.area}"
@@ -36,7 +36,7 @@
             </h:panelGrid>
             
             <h:panelGrid columns="4">
-                <h:commandButton value="Registrar Medico" action="#{medicosBean.addMedico()}" />
+                <h:commandButton value="Registrar Medico" action="#{medicosBean.addMedico(registroBean.usuario)}" />
             </h:panelGrid>
         </h:form>
     </h:body>

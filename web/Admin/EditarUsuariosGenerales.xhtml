@@ -17,9 +17,9 @@
                 <h:inputText id="id" value="#{registroBean.usuario}"/>
                 
                 <h:outputLabel  value="Tipo Usuario: " /> 
-                <h:selectOneMenu id="hola" value="#{registroBean.tipo}" styleClass="form-control">
+                <h:selectOneMenu id="hola" value="#{registroBean.tiipo}" styleClass="form-control">
                     <f:selectItems value="#{registroBean.tipos}"
-                                   var="l" itemLabel="#{l.tipo}" itemValue="#{l.idTipo}"/>
+                                   var="l" itemLabel="#{l.idTipo}-#{l.tipo}" itemValue="#{l.idTipo}"/>
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="nombres" value="Contraseña: " />
