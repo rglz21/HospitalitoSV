@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package sv.edu.udb.DAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -14,13 +15,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import sv.edu.udb.entites.Usuario;
 import sv.edu.udb.entites.HibernateUtil;
+
 /**
  *
  * @author rgonz
  */
 public class LoginDAO {
-    
-    public Long findByDui(String dui){
+
+    public Long findByDui(String dui) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
@@ -42,17 +44,17 @@ public class LoginDAO {
             ses.close();
         }
     }
-    
-     public void addUsuario(Usuario user) {
+
+    public void addUsuario(Usuario user) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Usuario datos = new Usuario();
-        datos.setUsuario(user.getUsuario());
-        datos.setContrasena(user.getContrasena());
-        datos.setVerificar(user.getVerificar());
+            Usuario datos = new Usuario();
+            datos.setUsuario(user.getUsuario());
+            datos.setContrasena(user.getContrasena());
+            datos.setVerificar(user.getVerificar());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -65,8 +67,8 @@ public class LoginDAO {
             ses.close();
         }
     }
-     
-      public Usuario getUsuarioID(String user) {
+
+    public Usuario getUsuarioID(String user) {
         Usuario empleado = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();

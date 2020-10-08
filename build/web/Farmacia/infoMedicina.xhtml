@@ -9,23 +9,28 @@
     <h:body>
         <h:form >
             <h:panelGrid columns="2">
-                <h:outputLabel for="nombre" value="idMedicamento: " /> <h:inputText id="id" value="#{farmaciaBean.idMedicamento}"/>
-                <h:outputLabel for="apellido" value="Nombre: " /> <h:inputText id="nombres" value="#{farmaciaBean.nombre}"/>
-                <h:outputLabel for="dui" value="Descripcion: " /> <h:inputText id="apellido" value="#{farmaciaBean.descripcion}"/>
-                <h:outputLabel for="telefono" value="Mg: " /> <h:inputText id="telefono" value="#{farmaciaBean.mg}"/>
-                <h:outputLabel for="direccions" value="Cantidad disponible: " /> <h:inputText id="direccion" value="#{farmaciaBean.cantidadDisp}"/>
+                <h:outputLabel for="nombre" value="idMedicamento: " /> 
+                <h:inputText id="id" value="#{farmaciaBean.idMedicamento}"/>
+                <h:outputLabel for="apellido" value="Nombre: " /> 
+                <h:inputText id="nombres" value="#{farmaciaBean.nombre}"/>
+                <h:outputLabel for="dui" value="Descripcion: " /> 
+                <h:inputText id="apellido" value="#{farmaciaBean.descripcion}"/>
+                <h:outputLabel for="telefono" value="Mg: " /> 
+                <h:inputText id="telefono" value="#{farmaciaBean.mg}"/>
+                <h:outputLabel for="direccions" value="Cantidad disponible: " /> 
+                <h:inputText id="direccion" value="#{farmaciaBean.cantidadDisp}"/>
                 <h:outputLabel  value="Categoria: " /> <h:selectOneMenu id="genre"
-                        value="#{farmaciaBean.lab}" styleClass="form-control">
+                                                                        value="#{farmaciaBean.lab}" styleClass="form-control">
                     <f:selectItems value="#{farmaciaBean.laboratorio}"
                                    var="l" itemLabel="#{l.nombre}" itemValue="#{l.idLabMed}"/>
                 </h:selectOneMenu>
-             </h:panelGrid>
-           <h:panelGrid columns="2">
-            <h:commandButton value="Actualizar" action="#{farmaciaBean.updateMedicina()}" />
-           </h:panelGrid>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:commandButton value="Actualizar" action="#{farmaciaBean.updateMedicina()}" />
+            </h:panelGrid>
         </h:form>
-       
-          <h:messages infoStyle="color: blue" globalOnly="true"/>
+
+        <h:messages infoStyle="color: blue" globalOnly="true"/>
     </h:body>
 </html>
 

@@ -15,13 +15,13 @@
                 <h:inputText id="correo" value="#{registroBean.correo}"/>
                 <h:outputLabel for="id" value="ingrese un usuario: " />
                 <h:inputText id="id" value="#{registroBean.usuario}"/>
-                
+
                 <h:outputLabel  value="Tipo Usuario: " /> 
                 <h:selectOneMenu id="hola" value="#{registroBean.tipo}" styleClass="form-control">
                     <f:selectItems value="#{registroBean.tipos}"
                                    var="l" itemLabel="#{l.tipo}" itemValue="#{l.idTipo}"/>
                 </h:selectOneMenu>
-                
+
                 <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
                 <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
             </h:panelGrid>

@@ -11,45 +11,24 @@
     <h:body>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputLabel for="idPrediag" value="ID Prediag: " />
-                <h:inputText id="idPrediag" value="#{prediagBean.idPrediag}"/>
-                
-                <h:outputLabel for="estadopre" value="Estado Pre: " />
-                <h:inputText id="estadopre" value="#{prediagBean.estadopre}"/>
-
-                <h:outputLabel for="fechaPre" value="Fecha Realizado: " />
-                <h:inputText id="fechaPre" size="40" maxlength="60"
-                             value="#{prediagBean.fechaPre}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </h:inputText><br/>
-            </h:panelGrid>
-            <!--Cambiar el loginBean y crear el metodo-->
-            <h:panelGrid columns="2">
-                <h:commandButton value="Ingresar prediagnostico" action="#{prediagBean.addPrediagnostico()}" />
-            </h:panelGrid>
-        </h:form>
-        <br></br>
-        <br></br>
-        <h:form>
-            <h:panelGrid columns="2">
                 <h:outputLabel for="idSintoma" value="ID Sintoma: " />
-                <h:inputText id="idSintoma" value="#{prediagBean.idSintoma}"/>
+                <h:inputText id="idSintoma" value="#{sintomasBean.idSintoma}"/>
                 
-                <h:outputLabel for="idPredia" value="ID Prediag: " />
-                <h:inputText id="idPredia" value="#{prediagBean.prediagnostico.idPrediag}"/>
+                <h:outputLabel for="idPrediag" value="ID Prediag: " />
+                <h:inputText id="idPrediag" value="#{sintomasBean.prediagnostico.idPrediag}"/>
 
                 <h:outputLabel for="sintoma" value="Sintoma: " />
-                <h:inputText id="sintoma" value="#{prediagBean.sintoma}"/>
+                <h:inputText id="sintoma" value="#{sintomasBean.sintoma}"/>
                 
                 <h:outputLabel for="descripcion" value="Descripcion: " />
-                <h:inputText id="descripcion" value="#{prediagBean.descripcion}"/>
+                <h:inputText id="descripcion" value="#{sintomasBean.descripcion}"/>
                 
                 <h:outputLabel for="duracion" value="Duracion: " />
-                <h:inputText id="duracion" value="#{prediagBean.duracion}"/>
+                <h:inputText id="duracion" value="#{sintomasBean.duracion}"/>
             </h:panelGrid>
             <!--Cambiar el loginBean y crear el metodo-->
             <h:panelGrid columns="2">
-                <h:commandButton value="Ingresar sintomas" action="#{prediagBean.addSintomas()}" />
+                <h:commandButton value="Ingresar sintomas" action="#{sintomasBean.addSintomas()}" />
             </h:panelGrid>
         </h:form>
     </h:body>

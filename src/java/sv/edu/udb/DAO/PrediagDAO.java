@@ -66,12 +66,13 @@ public class PrediagDAO {
         }
         return prediag;
     }
-    public void cambiarEstado(Prediagnostico prediag){
+
+    public void cambiarEstado(Prediagnostico prediag) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
-            Prediagnostico editPre=(Prediagnostico) ses.load(Prediagnostico.class, prediag.getIdPrediag());
+            Prediagnostico editPre = (Prediagnostico) ses.load(Prediagnostico.class, prediag.getIdPrediag());
             editPre.setIdPrediag(prediag.getIdPrediag());
             editPre.setEstadopre(prediag.getEstadopre());
             editPre.setPaciente(prediag.getPaciente());
@@ -88,6 +89,7 @@ public class PrediagDAO {
             ses.close();
         }
     }
+
     //Metodo DAO para listar Diagnosticos del paciente
     public List<Prediagnostico> obtenerDiagnostico() {
         List<Prediagnostico> diagnosticos = null;
@@ -111,7 +113,7 @@ public class PrediagDAO {
         }
         return diagnosticos;
     }
-    
+
     public void addPrediagnostico(Prediagnostico prediag) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -120,8 +122,9 @@ public class PrediagDAO {
             tra = ses.beginTransaction();
             Prediagnostico datos = new Prediagnostico();
             datos.setIdPrediag(prediag.getIdPrediag());
-            datos.setFechaPre(prediag.getFechaPre());
             datos.setPaciente(prediag.getPaciente());
+            datos.setFechaPre(prediag.getFechaPre());
+
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {

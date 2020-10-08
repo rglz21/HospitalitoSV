@@ -17,15 +17,16 @@ import sv.edu.udb.entites.HibernateUtil;
  * @author HP Probook
  */
 public class UtilDAO {
+
     public int contar(String entidad) {
-        int cont2 = 0 ;
+        int cont2 = 0;
         Long cont;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "select count(*) from "+entidad;
+            String queryString = "select count(*) from " + entidad;
             Query query = ses.createQuery(queryString);
             cont = (Long) query.uniqueResult();
             cont2 = cont.intValue();

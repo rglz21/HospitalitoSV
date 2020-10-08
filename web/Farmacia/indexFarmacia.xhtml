@@ -10,54 +10,54 @@
         <h:outputLabel value="Bienvenido: #{loginBean.usuario}"/>
         <br/>
         <h:form>
-              <h:commandButton value="Agregar" action="nuevoMedicamento"/>
-              <h:commandButton value="Buscar Receta" action="#{farmaciaBean.buscar()}"/>
-        <h:dataTable var="list" value="#{farmaciaBean.medicina}" >
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ID"/>
-                </f:facet>
-                <h:outputText value="#{list.idMedicamento}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Nombres"/>
-                </f:facet>
-                <h:outputText value="#{list.nombre}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Descripcion"/>
-                </f:facet>
-                <h:outputText value="#{list.descripcion}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="MG"/>
-                </f:facet>
-                <h:outputText value="#{list.mg}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Catidad disponible"/>
-                </f:facet>
-                <h:outputText value="#{list.cantidadDisp}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Laboratorio"/>
-                </f:facet>
-                <h:outputText value="#{list.labmedicinas.idLabMed}"/>
-            </h:column>
-              <h:column>
+            <h:commandButton value="Agregar" action="nuevoMedicamento"/>
+            <h:commandButton value="Buscar Receta" action="#{farmaciaBean.buscar()}"/>
+            <h:dataTable var="list" value="#{farmaciaBean.medicina}" >
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idMedicamento}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombres"/>
+                    </f:facet>
+                    <h:outputText value="#{list.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Descripcion"/>
+                    </f:facet>
+                    <h:outputText value="#{list.descripcion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="MG"/>
+                    </f:facet>
+                    <h:outputText value="#{list.mg}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Catidad disponible"/>
+                    </f:facet>
+                    <h:outputText value="#{list.cantidadDisp}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Laboratorio"/>
+                    </f:facet>
+                    <h:outputText value="#{list.labmedicinas.idLabMed}"/>
+                </h:column>
+                <h:column>
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                  <h:commandButton value="Editar" action="#{farmaciaBean.returnMediId(list.idMedicamento)}"/>
-                  <h:commandButton value="Eliminar" action="#{farmaciaBean.deleteEmpleado(list.idMedicamento)}"/>
-              </h:column>
-        </h:dataTable>
-            </h:form>
+                    <h:commandButton value="Editar" action="#{farmaciaBean.returnMediId(list.idMedicamento)}"/>
+                    <h:commandButton value="Eliminar" action="#{farmaciaBean.deleteEmpleado(list.idMedicamento)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </h:body>
 </html>
 

@@ -64,6 +64,13 @@
                                 resetValues="true"/>
                     </h:commandButton>
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>  
+                    <h:commandButton value="editar" action="#{sintomasBean.returnSintomas(id)}"/>
+                    <h:commandButton value="eliminar" action="#{sintomasBean.deleteSintomas(id)}"/>
+                </h:column>
             </h:dataTable>
         </h:form>
     </h:body>

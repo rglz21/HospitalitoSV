@@ -143,8 +143,8 @@ public class ExamenDAO {
             ses.close();
         }
         return examenes;
-  }
-     
+    }
+
     public Paciente getPaciente(String id) {
         Paciente paciente = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -214,5 +214,5 @@ public class ExamenDAO {
         }
         return lab;
     }
-    
+
 }

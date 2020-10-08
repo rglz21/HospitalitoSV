@@ -2,39 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/LoginBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/login.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/MedicinaDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Prediagnostico.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/ExamenDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/prediag.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/ExpedienteDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Farmacia/infoMedicina.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/util/logger.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/MedicosBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/RecetasBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/MedicosDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/ExamenBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/PrediagDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/ExpedienteBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/AreasDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/UtilDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/entites/Medicina.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/SintomasDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/CitasBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/RecetasDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/LoginDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/DAO/PacienteDAO.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/ExamenesBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/PrediagBean.java</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/crearCitas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/crearRecetas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/editarRecetas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/indexMedicos.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Medicos/editarCitas.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/web/Farmacia/buscarReceta.xhtml</file>
-            <file>file:/C:/Users/HP%20Probook/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/ManagedBean/PacienteBean.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

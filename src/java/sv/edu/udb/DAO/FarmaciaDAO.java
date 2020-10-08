@@ -117,8 +117,8 @@ public class FarmaciaDAO {
             ses.close();
         }
     }
-    
-      public Medicamentos getMedicamentoID(String idmedi) {
+
+    public Medicamentos getMedicamentoID(String idmedi) {
         Medicamentos medicina = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -141,8 +141,8 @@ public class FarmaciaDAO {
 
         return medicina;
     }
-      
-        public Medicamentos getMedicamentoID1(String idmedi) {
+
+    public Medicamentos getMedicamentoID1(String idmedi) {
         Medicamentos medicina = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -165,8 +165,8 @@ public class FarmaciaDAO {
 
         return medicina;
     }
-      
-       public List<Labmedicinas> obtenerLab() {
+
+    public List<Labmedicinas> obtenerLab() {
         List<Labmedicinas> empleados = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -188,8 +188,8 @@ public class FarmaciaDAO {
         }
         return empleados;
     }
-       
-       public void updateMedicamento1(String idMedi, Medicamentos medicina) {
+
+    public void updateMedicamento1(String idMedi, Medicamentos medicina) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;

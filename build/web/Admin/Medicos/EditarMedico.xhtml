@@ -12,14 +12,14 @@
             <h:panelGrid columns="2">
                 <h:outputLabel value="ID Medico: " for="idMedico"/>
                 <h:inputText value="#{medicosBean.idMedico}" id="idMedico" />
-                
-                 <h:outputLabel  value="Categoria: " /> 
+
+                <h:outputLabel  value="Categoria: " /> 
                 <h:selectOneMenu id="hola" value="#{medicosBean.areas}" styleClass="form-control">
                     <f:selectItems value="#{medicosBean.area}"
                                    var="l" itemLabel="#{l.nombre}" itemValue="#{l.idArea}"/>
                 </h:selectOneMenu>
-                 
-               <h:outputLabel value="JVPM: " for="jvpm"/>
+
+                <h:outputLabel value="JVPM: " for="jvpm"/>
                 <h:inputText value="#{medicosBean.jvpm}" id="jvpm" />
 
                 <h:outputLabel value="Nombre: " for="nombre"/>
@@ -34,7 +34,7 @@
                 <h:outputLabel value="Hora Final : " for="apellido"/>
                 <h:inputText value="#{medicosBean.horaOut}" id="horaOut"/> 
             </h:panelGrid>
-            
+
             <h:panelGrid columns="4">
                 <h:commandButton value="Actualizar" action="#{medicosBean.updateExamenes(medicosBean.idMedico)}" />
             </h:panelGrid>

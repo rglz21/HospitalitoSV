@@ -43,6 +43,7 @@ public class PacienteDAO {
         }
         return paciente;
     }
+
     public Paciente obtenerPacienteById(String idPaciente) {
         Paciente paciente = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -53,7 +54,7 @@ public class PacienteDAO {
             String queryString = "from Paciente where idPaciente=:idPac";
             Query query = ses.createQuery(queryString);
             query.setParameter("idPac", idPaciente);
-            paciente = (Paciente)query.uniqueResult();
+            paciente = (Paciente) query.uniqueResult();
 
         } catch (HibernateException e) {
             e.printStackTrace();

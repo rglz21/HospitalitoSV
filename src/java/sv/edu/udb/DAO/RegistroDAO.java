@@ -22,25 +22,26 @@ import sv.edu.udb.util.logger;
  * @author rgonz
  */
 public class RegistroDAO {
-     logger log = new logger();
-    
-      public void addUsuario(Usuario user) throws IOException {
+
+    logger log = new logger();
+
+    public void addUsuario(Usuario user) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Usuario datos = new Usuario();
-        datos.setUsuario(user.getUsuario());
-        datos.setContrasena(user.getContrasena());
-        datos.setCorreo(user.getCorreo());
-        datos.setTipousuario(user.getTipousuario());
-        datos.setVerificar(user.getVerificar());
+            Usuario datos = new Usuario();
+            datos.setUsuario(user.getUsuario());
+            datos.setContrasena(user.getContrasena());
+            datos.setCorreo(user.getCorreo());
+            datos.setTipousuario(user.getTipousuario());
+            datos.setVerificar(user.getVerificar());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-             log.InfoLog(e+"","ERROR");
+            log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -49,23 +50,24 @@ public class RegistroDAO {
             ses.close();
         }
     }
-      public void addUsuarioGeneral(Usuario user) throws IOException {
+
+    public void addUsuarioGeneral(Usuario user) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Usuario datos = new Usuario();
-        datos.setUsuario(user.getUsuario());
-        datos.setContrasena(user.getContrasena());
-        datos.setCorreo(user.getCorreo());
-        datos.setTipousuario(user.getTipousuario());
-        datos.setVerificar(user.getVerificar());
+            Usuario datos = new Usuario();
+            datos.setUsuario(user.getUsuario());
+            datos.setContrasena(user.getContrasena());
+            datos.setCorreo(user.getCorreo());
+            datos.setTipousuario(user.getTipousuario());
+            datos.setVerificar(user.getVerificar());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-             log.InfoLog(e+"","ERROR");
+            log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -74,25 +76,25 @@ public class RegistroDAO {
             ses.close();
         }
     }
-    
-        public void addInformacion(Paciente nuevo) throws IOException {
+
+    public void addInformacion(Paciente nuevo) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-        Paciente datos = new Paciente();
-        datos.setIdPaciente(nuevo.getIdPaciente());
-        datos.setNombre(nuevo.getNombre());
-        datos.setApellido(nuevo.getApellido());
-        datos.setDui(nuevo.getDui());
-        datos.setTelefono(nuevo.getTelefono());
-        datos.setDireccion(nuevo.getDireccion());
+            Paciente datos = new Paciente();
+            datos.setIdPaciente(nuevo.getIdPaciente());
+            datos.setNombre(nuevo.getNombre());
+            datos.setApellido(nuevo.getApellido());
+            datos.setDui(nuevo.getDui());
+            datos.setTelefono(nuevo.getTelefono());
+            datos.setDireccion(nuevo.getDireccion());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-             log.InfoLog(e+"","ERROR");
+            log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -101,30 +103,30 @@ public class RegistroDAO {
             ses.close();
         }
     }
-        
-        public List<Usuario> getUsuario(){
-        List<Usuario> areas=null;
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Usuario";
-            Query query=ses.createQuery(queryString);
-            areas=query.list();
-        }catch(Exception e){
+
+    public List<Usuario> getUsuario() {
+        List<Usuario> areas = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Usuario";
+            Query query = ses.createQuery(queryString);
+            areas = query.list();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }
         return areas;
     }
-        
-        public void deleteUsuario(String id) {
+
+    public void deleteUsuario(String id) {
 
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -144,8 +146,8 @@ public class RegistroDAO {
             ses.close();
         }
     }
-        
-        public void updateUsuario(String id, Usuario newUsuario) {
+
+    public void updateUsuario(String id, Usuario newUsuario) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
@@ -157,7 +159,7 @@ public class RegistroDAO {
             usuario.setCorreo(newUsuario.getCorreo());
             usuario.setTipousuario(newUsuario.getTipousuario());
             usuario.setVerificar(newUsuario.getVerificar());
-            
+
             ses.update(usuario);
             ses.getTransaction().commit();
         } catch (Exception e) {

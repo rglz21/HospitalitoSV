@@ -94,16 +94,6 @@ public class PrediagBean {
         return "VerExpediente";
     }
 
-    public String addSintomas() {
-        SintomasDAO sintomaDao = new SintomasDAO();
-        Prediagnostico predia = new Prediagnostico();
-        predia.setIdPrediag(getPrediag());
-        Sintomas sintomaa = new Sintomas(idSintoma, predia, sintoma, descripcion, duracion);
-        sintomaDao.addSintomas(sintomaa);
-
-        return "VerExpediente";
-    }
-
     public int getIdPrediag() {
         return idPrediag;
     }

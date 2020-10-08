@@ -19,27 +19,27 @@ import sv.edu.udb.entites.HibernateUtil;
  * @author HP Probook
  */
 public class EstadoPreDAO {
-    
-    public List<Estadopre> getEstados(){
-        List<Estadopre> estadoPre=new ArrayList<Estadopre>();
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Estadopre";
-            Query query=ses.createQuery(queryString);
-            estadoPre=query.list();
-        }catch(Exception e){
+
+    public List<Estadopre> getEstados() {
+        List<Estadopre> estadoPre = new ArrayList<Estadopre>();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Estadopre";
+            Query query = ses.createQuery(queryString);
+            estadoPre = query.list();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }
         return estadoPre;
     }
-    
+
 }

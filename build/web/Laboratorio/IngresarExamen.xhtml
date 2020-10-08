@@ -10,43 +10,43 @@
         <h4>Introduce la informacion</h4>
         <h:form>
             <h:panelGrid columns="2">
-                  <h:outputLabel value="Ingresar Usuario del Paciente"> </h:outputLabel>
+                <h:outputLabel value="Ingresar Usuario del Paciente"> </h:outputLabel>
                 <h:inputText id="id" value="#{examenBean.idPaciente}"/>
                 <h:commandButton value="Actualizar" action="#{examenBean.returnPaciente(examenBean.idPaciente)}" >
-                  <f:ajax execute="@form"
-                                            render="authorForm :datatableauthors"
-                                            resetValues="true"/>
+                    <f:ajax execute="@form"
+                            render="authorForm :datatableauthors"
+                            resetValues="true"/>
                 </h:commandButton>
-           </h:panelGrid>
-            
+            </h:panelGrid>
+
         </h:form>
-        
-       
-        
+
+
+
         <h:form id="datatableauthors">
-            
- 
-            
+
+
+
             Paciente: <h:inputText id="paciente" size="40" maxlength="60"
-                         value="#{examenBean.idPaciente}" /> <br/>
+                                   value="#{examenBean.idPaciente}" /> <br/>
             Tipo de examen: <h:selectOneMenu id="gen"
-                        value="#{examenBean.tipo}" styleClass="form-control">
+                                             value="#{examenBean.tipo}" styleClass="form-control">
                 <f:selectItems value="#{examenBean.exam1}"
-                                   var="l" itemLabel="#{l.tipo}" itemValue="#{l.idTipo}"/>
-                </h:selectOneMenu>
+                               var="l" itemLabel="#{l.tipo}" itemValue="#{l.idTipo}"/>
+            </h:selectOneMenu>
             Descripcion : <h:inputText id="descripcion" size="40" maxlength="60"
-                             value="#{examenBean.descripcion}" /><br/>           
-            
-             Laboratorio :<h:selectOneMenu id="genre"
-                        value="#{examenBean.lab}" styleClass="form-control">
-                 <f:selectItems value="#{examenBean.laboratorio1}"
-                                   var="l" itemLabel="#{l.horaA} - #{l.horaC}" itemValue="#{l.idLab}"/>
-                </h:selectOneMenu>
-                       
+                                       value="#{examenBean.descripcion}" /><br/>           
+
+            Laboratorio :<h:selectOneMenu id="genre"
+                                          value="#{examenBean.lab}" styleClass="form-control">
+                <f:selectItems value="#{examenBean.laboratorio1}"
+                               var="l" itemLabel="#{l.horaA} - #{l.horaC}" itemValue="#{l.idLab}"/>
+            </h:selectOneMenu>
+
             Fecha:<h:inputText id="fcha" size="40" maxlength="60"
                                value="#{examenBean.fechaRealizado}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText><br/>
-            
-            
+
+
             <h:panelGrid columns="4">
                 <h:commandButton value="Mandar" action="#{examenBean.addExamenes()}" />
             </h:panelGrid>

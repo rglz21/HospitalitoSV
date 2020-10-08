@@ -18,27 +18,27 @@ import sv.edu.udb.entites.HibernateUtil;
  * @author jonat
  */
 public class ClinicaDAO {
-    
-    public List<Clinica> obtenerClinica(){
-        List<Clinica> clinica=null;
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Clinica";
-            Query query=ses.createQuery(queryString);
-            clinica=query.list();
-        }catch(Exception e){
+
+    public List<Clinica> obtenerClinica() {
+        List<Clinica> clinica = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Clinica";
+            Query query = ses.createQuery(queryString);
+            clinica = query.list();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }
         return clinica;
     }
-    
+
 }

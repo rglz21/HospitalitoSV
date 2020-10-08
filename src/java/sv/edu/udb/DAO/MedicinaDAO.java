@@ -20,52 +20,55 @@ import sv.edu.udb.entites.Medicina;
  * @author HP Probook
  */
 public class MedicinaDAO {
-    public List<Medicina> getMedicinasByReceta(int idReceta){
-        List<Medicina> medicinas=new ArrayList<Medicina>();
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Medicinas where idReceta= :idRec";
-            Query query=ses.createQuery(queryString);
+
+    public List<Medicina> getMedicinasByReceta(int idReceta) {
+        List<Medicina> medicinas = new ArrayList<Medicina>();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Medicinas where idReceta= :idRec";
+            Query query = ses.createQuery(queryString);
             query.setParameter("idRec", idReceta);
-            medicinas=query.list();
-        }catch(Exception e){
+            medicinas = query.list();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }
         return medicinas;
     }
+
     // para farmacias
-    public Medicina getMedicinasByReceta1(int idReceta){
-        Medicina medicinas=new Medicina();
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Medicina where idReceta= :idRec";
-            Query query=ses.createQuery(queryString);
+    public Medicina getMedicinasByReceta1(int idReceta) {
+        Medicina medicinas = new Medicina();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Medicina where idReceta= :idRec";
+            Query query = ses.createQuery(queryString);
             query.setParameter("idRec", idReceta);
-            medicinas=(Medicina) query.uniqueResult();
-        }catch(Exception e){
+            medicinas = (Medicina) query.uniqueResult();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }
         return medicinas;
     }
-    public void insertMedicina(Medicina medicina){
+
+    public void insertMedicina(Medicina medicina) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
@@ -78,7 +81,7 @@ public class MedicinaDAO {
             datos.setCantidad(medicina.getCantidad());
             datos.setDosis(medicina.getDosis());
             datos.setMg(medicina.getMg());
- 
+
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -91,7 +94,7 @@ public class MedicinaDAO {
             ses.close();
         }
     }
-    
+
     public void updateMedicamento(String idMedi, Medicina medicina) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -105,7 +108,7 @@ public class MedicinaDAO {
             datos.setCantidad(medicina.getCantidad());
             datos.setDosis(medicina.getDosis());
             datos.setMg(medicina.getMg());
- 
+
             ses.update(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -118,24 +121,24 @@ public class MedicinaDAO {
             ses.close();
         }
     }
-    
-       public Medicina getMedicinasByReceta1(String idReceta){
-        Medicina medicinas=new Medicina();
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="from Medicina where idReceta= :idRec";
-            Query query=ses.createQuery(queryString);
+
+    public Medicina getMedicinasByReceta1(String idReceta) {
+        Medicina medicinas = new Medicina();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Medicina where idReceta= :idRec";
+            Query query = ses.createQuery(queryString);
             query.setParameter("idRec", idReceta);
-            medicinas=(Medicina) query.uniqueResult();
-        }catch(Exception e){
+            medicinas = (Medicina) query.uniqueResult();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }

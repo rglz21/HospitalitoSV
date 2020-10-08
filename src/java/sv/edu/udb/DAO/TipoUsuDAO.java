@@ -18,23 +18,23 @@ import sv.edu.udb.entites.Tipousuario;
  * @author jonat
  */
 public class TipoUsuDAO {
-    
-     public List<Tipousuario> getTipoUsu(){
-        List<Tipousuario> tipoUsuario=null;
-        SessionFactory sesFact=HibernateUtil.getSessionFactory();
-        Session ses=sesFact.openSession();
-        Transaction tra=null;
-        try{
-            tra=ses.beginTransaction();
-            String queryString="FROM Tipousuario WHERE idtipo IN (3, 4)";
-            Query query=ses.createQuery(queryString);
-            tipoUsuario=query.list();
-        }catch(Exception e){
+
+    public List<Tipousuario> getTipoUsu() {
+        List<Tipousuario> tipoUsuario = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "FROM Tipousuario WHERE idtipo IN (3, 4)";
+            Query query = ses.createQuery(queryString);
+            tipoUsuario = query.list();
+        } catch (Exception e) {
             e.printStackTrace();
-            if(tra!=null){
+            if (tra != null) {
                 tra.rollback();
             }
-        }finally{
+        } finally {
             ses.flush();
             ses.close();
         }

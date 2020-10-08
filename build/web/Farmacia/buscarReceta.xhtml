@@ -11,27 +11,32 @@
             <h:panelGrid columns="2">
                 <h:inputText id="id" value="#{farmaciaBean.idMedicina}"/>
                 <h:commandButton value="Actualizar" action="#{farmaciaBean.returnReceta(farmaciaBean.idMedicina)}" >
-                  <f:ajax execute="@form"
-                                            render="authorForm :datatableauthors"
-                                            resetValues="true"/>
+                    <f:ajax execute="@form"
+                            render="authorForm :datatableauthors"
+                            resetValues="true"/>
                 </h:commandButton>
-           </h:panelGrid>
+            </h:panelGrid>
         </h:form>
         <h:form  id="datatableauthors">
             <h:panelGrid columns="2">
-                <h:outputLabel for="nombre" value="idMedicamento: " /> <h:inputText id="id" value="#{farmaciaBean.idMedicina}"/>
-                <h:outputLabel for="apellido" value="Nombre: " /> <h:inputText id="nombres" value="#{farmaciaBean.nombre1}"/>
-                <h:outputLabel for="dui" value="Cantidad: " /> <h:inputText id="apellido" value="#{farmaciaBean.cantidad}"/>
-                <h:outputLabel for="telefono" value="Dosis: " /> <h:inputText id="telefono" value="#{farmaciaBean.dosis}"/>
-                <h:outputLabel for="direccions" value="mg: " /> <h:inputText id="direccion" value="#{farmaciaBean.mg1}"/>
-             </h:panelGrid>
-          <h:panelGrid columns="2">
-              <h:commandButton value="Actualizar" action="#{farmaciaBean.updateMedi()}" />
-              <h:commandButton value="Reclamado" action="#{farmaciaBean.updateMedicina1()}" />
-           </h:panelGrid>
+                <h:outputLabel for="nombre" value="idMedicamento: " /> 
+                <h:inputText id="id" value="#{farmaciaBean.idMedicina}"/>
+                <h:outputLabel for="apellido" value="Nombre: " /> 
+                <h:inputText id="nombres" value="#{farmaciaBean.nombre1}"/>
+                <h:outputLabel for="dui" value="Cantidad: " /> 
+                <h:inputText id="apellido" value="#{farmaciaBean.cantidad}"/>
+                <h:outputLabel for="telefono" value="Dosis: " /> 
+                <h:inputText id="telefono" value="#{farmaciaBean.dosis}"/>
+                <h:outputLabel for="direccions" value="mg: " /> 
+                <h:inputText id="direccion" value="#{farmaciaBean.mg1}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:commandButton value="Actualizar" action="#{farmaciaBean.updateMedi()}" />
+                <h:commandButton value="Reclamado" action="#{farmaciaBean.updateMedicina1()}" />
+            </h:panelGrid>
         </h:form>
-       
-          <h:messages infoStyle="color: blue" globalOnly="true"/>
+
+        <h:messages infoStyle="color: blue" globalOnly="true"/>
     </h:body>
 </html>
 

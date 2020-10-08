@@ -20,7 +20,7 @@ import sv.edu.udb.entites.Tipoexamenes;
  * @author jonat
  */
 public class ExamenesDAO {
-    
+
     public List<Examenes> obtenerExamen() {
         List<Examenes> examen = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -43,7 +43,8 @@ public class ExamenesDAO {
         }
         return examen;
     }
-    public List<Tipoexamenes> obtenerTipos(){
+
+    public List<Tipoexamenes> obtenerTipos() {
         List<Tipoexamenes> tipoExamen = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
