@@ -1,1 +1,3 @@
 [4/10/2020 16:1:49][ERROR] Nueva Persona guardada
+[9/10/2020 1:43:54][ERROR] org.hibernate.exception.ConstraintViolationException: could not execute statement
+[9/10/2020 1:50:25][ERROR] org.hibernate.exception.ConstraintViolationException: could not execute statement

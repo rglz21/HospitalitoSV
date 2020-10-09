@@ -1,27 +1,175 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Informacion</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+        <link rel="stylesheet" href="../Vista/css/animate.css"/>
+
+        <link rel="stylesheet" href="../Vista/css/owl.carousel.min.css"/>
+        <link rel="stylesheet" href="../Vista/css/owl.theme.default.min.css"/>
+        <link rel="stylesheet" href="../Vista/css/magnific-popup.css"/>
+
+        <link rel="stylesheet" href="../Vista/css/bootstrap-datepicker.css"/>
+        <link rel="stylesheet" href="../Vista/css/jquery.timepicker.css"/>
+
+        <link rel="stylesheet" href="../Vista/css/flaticon.css"/>
+        <link rel="stylesheet" href="../Vista/css/style.css"/>
     </h:head>
+    
     <h:body>
-        <h:form>
-        <h1>Completar la siguiente informacion</h1>
-        <p>Queremos darte el mejor servicio, necesitamos los datos que vez a continuacion.</p>
-        <!--Cambiar los beans-->
-        <h:outputLabel value=" Este es su id de paciente: #{registroBean.usuario}"/>
-         <h:panelGrid columns="2">
-             <h:outputLabel for="nombre" value="Nombre: " /> <h:inputText id="id" value="#{registroBean.nombre}"/>
-             <h:outputLabel for="apellido" value="Apellido: " /> <h:inputText id="nombres" value="#{registroBean.apellido}"/>
-             <h:outputLabel for="dui" value="Dui: " /> <h:inputText id="apellido" value="#{registroBean.dui}"/>
-             <h:outputLabel for="telefono" value="Telefono: " /> <h:inputText id="telefono" value="#{registroBean.telefono}"/>
-             <h:outputLabel for="direccions" value="Direccion: " /> <h:inputTextarea id="direccion" value="#{registroBean.direccion}"/>
-         </h:panelGrid>
-          <h:panelGrid columns="4">
-              <h:commandButton value="Registrarse" action="#{registroBean.addInformacion(registroBean.usuario)}" />
-            </h:panelGrid>
-        </h:form>
+        
+        <div class="wrap">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-md-3 mb-md-0 mb-4 d-flex align-items-center">
+                        <a class="navbar-brand" href="index.html">Hospital SV</a>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-8 mb-md-0 mb-3">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-location-arrow"></span></div>
+                                    <div class="text"><span>Dirección</span><span>El salvador</span></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-phone"></span></div>
+                                    <div class="text"><span>Numero</span><span>(+503) 7337-9321</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="width: 60%;border-style: solid; border-color: black; border-radius: 25px;margin-left: 20%;margin-bottom: 10px;">
+            <h:form>
+                <h1 class="mb-4" style="text-align: center; color: #3C3E50">Completar la siguiente informacion</h1>
+                <p class="subheading" style="text-align: center; color: #3C3E50">Queremos darte el mejor servicio, necesitamos los datos que vez a continuacion.</p>
+                <!--Cambiar los beans-->
+                <div class="p-formgroup-inline" style="text-align: center">
+                    <h2 style="text-align: center; color: black" value=" Este es su id de paciente: #{registroBean.usuario}"/>
+                    <div class="form-group">
+                        <h:outputLabel for="nombre" value="Nombre: " style="color: black; font-size: 15px;"/> 
+                        <h:inputText id="nombre" value="#{registroBean.nombre}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    </div>  
+                    <div class="form-group">      
+                        <h:outputLabel for="apellido" value="Apellido: " style="color: black; font-size: 15px;"/> 
+                        <h:inputText id="apellido" value="#{registroBean.apellido}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    </div> 
+                    <div class="form-group">     
+                        <h:outputLabel for="dui" value="Dui: " style="color: black; font-size: 15px;"/> 
+                        <h:inputText id="dui" value="#{registroBean.dui}" style="margin-left: 35px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    </div>
+                    <div class="form-group">     
+                        <h:outputLabel for="telefono" value="Telefono: " style="color: black; font-size: 15px;"/> 
+                        <h:inputText id="telefono" value="#{registroBean.telefono}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    </div>
+                    <div class="form-group">     
+                        <h:outputLabel for="direccions" value="Direccion: " style="color: black; font-size: 15px;"/> 
+                        <h:inputTextarea id="direccion" value="#{registroBean.direccion}" style="margin-left: 5px;border-style: solid; border-color: black; border-radius: 5px;"/>
+                    </div>
+                    <div class="form-group"> 
+                        <h:commandButton class="btn btn-secondary py-3 px-4" value="Registrarse" action="#{registroBean.addInformacion(registroBean.usuario)}" />
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        
+        <footer class="footer ftco-section ftco-no-pt">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-6 col-lg">
+                        <div class="ftco-footer-widget py-4 py-md-5">
+                            <h2 class="logo"><a href="#">Chiropractic</a></h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-4">
+                                <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg">
+                        <div class="ftco-footer-widget ml-md-5 py-5">
+                            <h2 class="ftco-heading-2">Services</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Spinal Manupulation</a></li>
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Electrotherapy</a></li>
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Manual Lympahtic</a></li>
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Medical Acupuncture</a></li>
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Therapeutic Exercise</a></li>
+                                <li><a href="#" class="py-1 d-block"><span class="fa fa-check mr-3"></span>Joint Mobilization</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg">
+                        <div class="ftco-footer-widget py-4 py-md-5">
+                            <h2 class="ftco-heading-2">Contact information</h2>
+                            <div class="block-23 mb-3">
+                                <ul>
+                                    <li><span class="icon fa fa-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                    <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                    <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">info@yourdomain.com</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg">
+                        <div class="ftco-footer-widget bg-primary p-4 py-5">
+                            <h2 class="ftco-heading-2">Business Hours</h2>
+                            <div class="opening-hours">
+                                <h4>Opening Days:</h4>
+                                <p class="pl-3">
+                                    <span>Monday – Friday : 9am to 20 pm</span>
+                                    <span>Saturday : 9am to 17 pm</span>
+                                </p>
+                                <h4>Vacations:</h4>
+                                <p class="pl-3">
+                                    <span>All Sunday Days</span>
+                                    <span>All Official Holidays</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <p>
+                            Universidad Don Bosco 2020 | Proyecto de DFW | Grupo 5
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        
+        <script src="../Vista/js/jquery.min.js"></script>
+        <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="../Vista/js/popper.min.js"></script>
+        <script src="../Vista/js/bootstrap.min.js"></script>
+        <script src="../Vista/js/jquery.easing.1.3.js"></script>
+        <script src="../Vista/js/jquery.waypoints.min.js"></script>
+        <script src="../Vista/js/jquery.stellar.min.js"></script>
+        <script src="../Vista/js/jquery.animateNumber.min.js"></script>
+        <script src="../Vista/js/bootstrap-datepicker.js"></script>
+        <script src="../Vista/js/jquery.timepicker.min.js"></script>
+        <script src="../Vista/js/owl.carousel.min.js"></script>
+        <script src="../Vista/js/jquery.magnific-popup.min.js"></script>
+        <script src="../Vista/js/scrollax.min.js"></script>
+        <script src="../Vista/js/google-map.js"></script>
+        <script src="../Vista/js/main.js"></script>
+        
     </h:body>
 </html>
 

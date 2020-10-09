@@ -5,28 +5,56 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Login</title>
+        <link type="text/css" rel="stylesheet" href="Vista/login.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     </h:head>
-    <h:body>
-      <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel for="id" value="Usuario: " /> 
-                <h:inputText id="id" value="#{loginBean.usuario}">
-                   
-                </h:inputText>
-                <h:outputLabel for="nombres" value="Contraseña: " /> <h:inputText id="nombres" value="#{loginBean.contrasena}"/>
-            </h:panelGrid>
 
-            <h:panelGrid columns="4">
-                <h:commandButton value="Ingresar" action="#{loginBean.sesionUser()}" />
-            </h:panelGrid>
-          <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
-          <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
-         
-        </h:form>
-        <br/>
-        <h:form>
-       <h:commandButton value="Registrate" action="#{loginBean.registro()}" />
-       </h:form>
+    <h:body>
+
+        <div class="wrapper">
+            <div class="container">
+                <div class="cuadro"></div>
+                <h1>Bienvenido al Hospital SV</h1> 
+                <h:form class="form">
+
+                        <h:outputLabel for="id" value="Usuario: "  style="font-size: 20px;"/> 
+                        <h:inputText id="id" value="#{loginBean.usuario}">
+                             <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
+                        </h:inputText>
+                        <h:outputLabel for="nombres" value="Contraseña: " style="font-size: 20px"/> 
+                        <h:inputSecret id="nombres" value="#{loginBean.contrasena}"/>
+                        <br/>
+                        <h:commandButton value="Ingresar" action="#{loginBean.sesionUser()}" id="login-button"/>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+                    <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>  
+                    
+                </h:form>
+            </div>
+            
+            <ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+            </ul>
+            
+        </div>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script type="text/javascript">
+            $("#login-button").click(function (event) {
+                event.preventDefault();
+                $('form').fadeOut(500);
+                $('.wrapper').addClass('form-success');
+            });
+        </script> 
+
     </h:body>
 </html>
 
