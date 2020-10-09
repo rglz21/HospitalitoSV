@@ -19,18 +19,19 @@
 
                         <h:outputLabel for="id" value="Usuario: "  style="font-size: 20px;"/> 
                         <h:inputText id="id" value="#{loginBean.usuario}">
-                             <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
+                            <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
                         </h:inputText>
                         <h:outputLabel for="nombres" value="Contraseña: " style="font-size: 20px"/> 
                         <h:inputSecret id="nombres" value="#{loginBean.contrasena}"/>
                         <br/>
                         <h:commandButton value="Ingresar" action="#{loginBean.sesionUser()}" id="login-button"/>
-                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
-                    <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>  
-                    
+                        <h:commandButton value="Registrate" action="#{loginBean.registro()}" id='regist-button'/>
+                        <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+                        <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>  
+
                 </h:form>
             </div>
-            
+
             <ul class="bg-bubbles">
 		<li></li>
 		<li></li>
@@ -42,6 +43,11 @@
 		<li></li>
 		<li></li>
 		<li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
             
         </div>
@@ -50,7 +56,7 @@
         <script type="text/javascript">
             $("#login-button").click(function (event) {
                 event.preventDefault();
-                $('form').fadeOut(500);
+                $('form').fadeOut(100);
                 $('.wrapper').addClass('form-success');
             });
         </script> 

@@ -26,6 +26,8 @@
     </h:head>
     <h:body>
         
+        
+        
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -35,15 +37,11 @@
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-8 mb-md-0 mb-3">
-                                <div class="top-wrap d-flex">
-                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-location-arrow"></span></div>
-                                    <div class="text"><span>Dirección</span><span>El salvador</span></div>
-                                </div>
                             </div>
                             <div class="col">
                                 <div class="top-wrap d-flex">
-                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-phone"></span></div>
-                                    <div class="text"><span>Numero</span><span>(+503) 7337-9321</span></div>
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
+                                    <div class="text"><span>Regresar</span><span><a href="../index.xhtml">Salir</a></span></div>
                                 </div>
                             </div>
                         </div>
@@ -53,10 +51,25 @@
         </div>
         
         
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"><a href="../login.xhtml" class="nav-link">Iniciar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
 
             
 
-        <div style="width: 60%;border-style: solid; border-color: black; border-radius: 25px;margin-left: 20%;margin-bottom: 10px;">
+        <div style="width: 60%;border-style: solid; border-color: black; border-radius: 25px;margin-left: 20%;margin-bottom: 30px; margin-top: 30px;">
             <h:form>
                 <h1 class="mb-4" style="text-align: center; color: #3C3E50">Registrarse</h1>
                 <div class="p-formgroup-inline" style="text-align: center">
@@ -73,8 +86,8 @@
                         <h:inputText id="contra" value="#{registroBean.contrasena}" style="margin-left: 65px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>
                     <!--Cambiar el loginBean y crear el metodo-->
-                    <div class="form-group">
-                        <h:commandButton value="Siguiente" class="btn btn-secondary py-3 px-4" action="#{registroBean.addUsuario()}"/>
+                    <div class="form-group" style="text-align: center">
+                        <h:commandButton value="Siguiente" class="btn btn-secondary" action="#{registroBean.addUsuario()}"/>
                     </div>
                 </div>
             </h:form>
