@@ -100,7 +100,7 @@ public class CitasBean {
             return null;
         }
     }
-    public void addCita(){
+    public String addCita(){
         UtilDAO utilDao=new UtilDAO();
         CitasDAO citasDao=new CitasDAO();
         Medicos medic=new Medicos();
@@ -114,7 +114,10 @@ public class CitasBean {
         
         Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,examenes,tipoExamen);
         citasDao.addCita(cita);
+        
+        return "indexMedicos";
     }
+    
     public List<Citas>getCitasByMedicos(String idMedico){
         CitasDAO citasDao=new CitasDAO();
         List<Citas> lista=citasDao.getCitasByMedico(idMedico);
