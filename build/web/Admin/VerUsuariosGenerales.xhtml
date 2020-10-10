@@ -49,14 +49,16 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+                 <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active"><a href="VerUsuariosGenerales.xhtml" class="nav-link">Ver Usuarios</a></li>
-                         <li class="nav-item "><a href="RegistrarUsuarios.xhtml" class="nav-link">Registrar Usuarios</a></li>
-                          <li class="nav-item "><a href="EditarUsuariosGenerales.xhtml" class="nav-link">Editar Usuarios</a></li>
-                          <li class="nav-item "><a href="indexAdnmin.xhtml" class="nav-link">Regresar</a></li>
+                        <li class="nav-item active"><h:commandLink action="VerUsuariosGenerales.xhtml" value="Usuario" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="RegistrarUsuarios.xhtml" value="Registrar" class="nav-link"/></li>
+                       
+                        <li class="nav-item "><h:commandLink action="indexAdnmin.xhtml" value="index" class="nav-link"/></li>
                     </ul>
                 </div>
+                    </h:form>
             </div>
         </nav>
         

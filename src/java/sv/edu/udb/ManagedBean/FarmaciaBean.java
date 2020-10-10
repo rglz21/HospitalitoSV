@@ -229,6 +229,7 @@ public class FarmaciaBean {
         return "buscarReceta";
         }
 
+        
     public int getReceta() {
         return receta;
     }

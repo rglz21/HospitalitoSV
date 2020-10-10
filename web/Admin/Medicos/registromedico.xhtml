@@ -48,15 +48,16 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+               <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><a href="VerMedicos.xhtml" class="nav-link">Ver Medicos</a></li>
-                         <li class="nav-item active"><a href="registromedico.xhtml" class="nav-link">Registrar Medicos</a></li>
-                          <li class="nav-item "><a href="EditarMedico.xhtml" class="nav-link">Editar Medicos</a></li>
-                          <li class="nav-item "><a href="NewUsuMedico.xhtml" class="nav-link">Nuevo Usuario Medico</a></li>
-                          <li class="nav-item "><a href="../indexAdnmin.xhtml" class="nav-link">Regresar</a></li>
+                        <li class="nav-item "><h:commandLink action="VerMedicos.xhtml" value="Medicos" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="registromedico.xhtml" value="Registro" class="nav-link"/></li>
+                        <li class="nav-item  "><h:commandLink action="NewUsuMedico.xhtml" value="Nuevo Medico" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="../indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
                     </ul>
                 </div>
+                    </h:form>
             </div>
         </nav>
         

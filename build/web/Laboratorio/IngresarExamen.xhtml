@@ -48,13 +48,14 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+                <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active"><a href="Examen.xhtml" class="nav-link">Examenes</a></li>
-                        <li class="nav-item "><a href="EditarExamen.xhtml" class="nav-link">Editar Examenes</a></li>
-                        <li class="nav-item "><a href="IngresarExamen.xhtml" class="nav-link">Ingresar Examenes</a></li>
+                        <li class="nav-item "><h:commandLink action="Examen.xhtml" value="Examenes" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="IngresarExamen.xhtml" value="Ingresar" class="nav-link"/></li>
                     </ul>
                 </div>
+               </h:form>
             </div>
         </nav>
         

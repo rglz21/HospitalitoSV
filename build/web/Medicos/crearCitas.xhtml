@@ -48,16 +48,16 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars"></span> Menu
                     </button>
-                    <div class="collapse navbar-collapse" id="ftco-nav">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item "><a href="indexMedicos.xhtml" class="nav-link">Medico</a></li>
-                            <li class="nav-item active"><a href="crearCitas.xhtml" class="nav-link">Crear Citas</a></li>
-                            <li class="nav-item "><a href="crearRecetas.xhtml" class="nav-link">Crear Receta</a></li>
-                            <li class="nav-item "><a href="editarCitas.xhtml" class="nav-link">Editar Citas</a></li>
-                            <li class="nav-item "><a href="editarRecetas.xhtml" class="nav-link">Editar Recetas</a></li>
-                            <li class="nav-item "><a href="prediag.xhtml" class="nav-link">Prediagnostico</a></li>
-                        </ul>
-                    </div>
+                     <h:form>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item "><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="crearCitas.xhtml" value="Nueva Cita" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="crearRecetas.xhtml" value="Nueva Receta" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
+                    </ul>
+                </div>
+                    </h:form>
                 </div>
             </nav>
 

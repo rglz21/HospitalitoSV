@@ -49,17 +49,18 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+               <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><a href="indexPaciente.xhtml" class="nav-link">Paciente</a></li>
-                        <li class="nav-item active"><a href="VerExpediente.xhtml" class="nav-link">Ver Expediente</a></li>
-                        <li class="nav-item "><a href="VerExamenes.xhtml" class="nav-link">Ver Examenes</a></li>
-                        <li class="nav-item "><a href="VerPacientes.xhtml" class="nav-link">Ver Paciente</a></li>
-                        <li class="nav-item "><a href="VerPrediag.xhtml" class="nav-link">Ver Prediagrama</a></li>
-                        <li class="nav-item "><a href="AladirPrediag.xhtml" class="nav-link">Añadir Prediagrama</a></li>
-                        <li class="nav-item "><a href="editarPrediag.xhtml" class="nav-link">Editar Prediagrama</a></li>
+                        <li class="nav-item "><h:commandLink action="indexPaciente.xhtml" value="Index" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="VerPacientes.xhtml" value="Pacientes" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="VerPrediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="AladirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
                     </ul>
                 </div>
+                    </h:form>
             </div>
         </nav>
 

@@ -48,13 +48,15 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+                <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><a href="indexFarmacia.xhtml" class="nav-link">Farmacia</a></li>
-                        <li class="nav-item "><a href="buscarReceta.xhtml" class="nav-link">Buscar Receta</a></li>
-                        <li class="nav-item active"><a href="nuevoMedicamento.xhtml" class="nav-link">Nuevos Medicamentos</a></li>
+                        <li class="nav-item "><h:commandLink action="indexFarmacia" value="Farmacia" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="buscarReceta.xhtml"  value="Buscar Receta" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="nuevoMedicamento.xhtml" value="Nuevos Medicamentos" class="nav-link"/></li>
                     </ul>
                 </div>
+                </h:form>    
             </div>
         </nav>
         

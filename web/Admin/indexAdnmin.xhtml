@@ -61,12 +61,13 @@
         <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
             <h1 style="text-align: center">Bienvenido Admin</h1>
             <p style="text-align: center">¿ En que hara desea trabajar ?</p>
-            
+            <h:form>
             <div class="form-group" style="text-align: center">
-                <h:commandButton class="btn btn-warning" value="Usuarios" action="#" style="margin: 10px;" />
-                <h:commandButton class="btn btn-secondary" value="Medicos" action="#" style="margin: 10px;" />
-                <h:commandButton class="btn btn-dark" value="Areas" action="#" style="margin: 10px;" />
+                <h:commandButton class="btn btn-warning" value="Usuarios" action="VerUsuariosGenerales" style="margin: 10px;" />
+                <h:commandButton class="btn btn-secondary" value="Medicos" action="VerMedicos" style="margin: 10px;" />
+                <h:commandButton class="btn btn-dark" value="Areas" action="VerAreas" style="margin: 10px;" />
             </div>
+                </h:form>
         </div>
         
         
