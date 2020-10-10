@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
-        <title>Registrar Usuario Tipo Medico</title>
+        <title>Editar Informacion de Medicos</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="../../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../../Vista/css/style.css"/>
     </h:head>
+
     <h:body>
 
         <div class="wrap">
@@ -33,7 +34,7 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../../index.xhtml">Salir</a></span></div>
+                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
                                 </div>
                             </div>
                         </div>
@@ -47,14 +48,13 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-               <h:form>
+                <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item "><h:commandLink action="NewUsuMedico.xhtml" value="Nuevo Medico" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="registromedico.xhtml" value="Registro" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="VerMedicos.xhtml" value="Medicos" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="registromedico.xhtml"  value="Registrar" class="nav-link"/></li>
-                          
-                        <li class="nav-item active "><h:commandLink action="NewUsuMedico.xhtml" value="Nuevo Medico" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="../indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
                     </ul>
                 </div>
                     </h:form>
@@ -62,36 +62,49 @@
         </nav>
 
 
-        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">    
+
+        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
             <h:form>
-
-                <div class=" heading-section text-center">
-                    <h1>Nuevo Usuario Medico</h1>
+                <h1 class=" heading-section text-center">Editar la informacion para el Medico a ingresar</h1>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel value="ID Medico: " for="idMedico"/>
+                    <h:inputText value="#{medicosBean.idMedico}" id="idMedico" />
                 </div>
                 <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese correo electronico: " /> 
-                    <h:inputText id="correo" value="#{registroBean.correo}"/>
+                    <h:outputLabel  value="Categoria: " /> 
+                    <h:selectOneMenu id="hola" value="#{medicosBean.areas}" styleClass="p-formgroup-inline" style="margin-left: 0px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
+                        <f:selectItems value="#{medicosBean.area}"
+                                       var="l" itemLabel="#{l.nombre}" itemValue="#{l.idArea}"/>
+                    </h:selectOneMenu>
                 </div>
                 <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese un usuario: " />
-                    <h:inputText id="id" value="#{registroBean.usuario}"/>
+                    <h:outputLabel value="JVPM: " for="jvpm"/>
+                    <h:inputText value="#{medicosBean.jvpm}" id="jvpm" />
                 </div>
                 <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
-                    <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
+                    <h:outputLabel value="Nombre: " for="nombre"/>
+                    <h:inputText value="#{medicosBean.nombre}" id="nombre" />
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel value="Apellido : " for="apellido"/>
+                    <h:inputText value="#{medicosBean.apellido}" id="apellido" />
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel value="Hora Inicial : " for="apellido"/>
+                    <h:inputText value="#{medicosBean.horaIn}" id="horaIn"/>  
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel value="Hora Final : " for="apellido"/>
+                    <h:inputText value="#{medicosBean.horaOut}" id="horaOut"/> 
                 </div>
 
-
-
-                <!--Cambiar el loginBean y crear el metodo-->
-
-
-                <div class="form-group" style="text-align: center">
-                    <h:commandButton class="btn btn-primary" value="Siguiente" action="#{registroBean.addUsuarioMedico()}" />
+                <div class="form-group" style="margin-left: 20%">
+                    <h:commandButton class="btn btn-primary" value="Actualizar" action="#{medicosBean.updateExamenes(medicosBean.idMedico)}" />
                 </div>
-
             </h:form>
         </div>
+
+
 
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
@@ -181,4 +194,3 @@
 
     </h:body>
 </html>
-

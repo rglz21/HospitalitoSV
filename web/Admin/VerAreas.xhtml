@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <h:head>
-        <title>Registrar Usuario Tipo Medico</title>
+        <title>Areas</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -18,8 +18,10 @@
         <link rel="stylesheet" href="../../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../../Vista/css/style.css"/>
     </h:head>
+    
+    
     <h:body>
-
+        
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -33,7 +35,7 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../../index.xhtml">Salir</a></span></div>
+                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
                                 </div>
                             </div>
                         </div>
@@ -47,52 +49,58 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-               <h:form>
+                <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="VerMedicos.xhtml" value="Medicos" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="registromedico.xhtml"  value="Registrar" class="nav-link"/></li>
-                          
-                        <li class="nav-item active "><h:commandLink action="NewUsuMedico.xhtml" value="Nuevo Medico" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="../indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="VerAreas.xhtml" value="Areas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="RegistrarAreas.xhtml" value="Registro" class="nav-link"/></li>                        
+                        <li class="nav-item "><h:commandLink action="indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
                     </ul>
                 </div>
                     </h:form>
             </div>
         </nav>
-
-
-        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">    
-            <h:form>
-
-                <div class=" heading-section text-center">
-                    <h1>Nuevo Usuario Medico</h1>
+        
+        
+        <h:form>
+            <div class=" heading-section text-center">
+                    <h1>Ver Tabla de Areas</h1>
                 </div>
-                <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese correo electronico: " /> 
-                    <h:inputText id="correo" value="#{registroBean.correo}"/>
-                </div>
-                <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese un usuario: " />
-                    <h:inputText id="id" value="#{registroBean.usuario}"/>
-                </div>
-                <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
-                    <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
-                </div>
-
-
-
-                <!--Cambiar el loginBean y crear el metodo-->
-
-
-                <div class="form-group" style="text-align: center">
-                    <h:commandButton class="btn btn-primary" value="Siguiente" action="#{registroBean.addUsuarioMedico()}" />
-                </div>
-
-            </h:form>
-        </div>
-
+            
+            
+            <h:dataTable class="table table-striped table-dark" 
+                         var="list" value="#{areasBean.area}" >
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{list.idArea}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{list.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID clinica"/>
+                    </f:facet>
+                    <h:outputText value="#{list.clinica.idClinic}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandButton value="editar" class="btn btn-warning" action="#{areasBean.returnAreas(list.idArea)}"/>
+                    <h:commandButton value="eliminar" class="btn btn-danger" action="#{areasBean.deleteMedicos(list.idArea)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+        </h:form>
+        
+        
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
                 <div class="row mb-5">
@@ -160,8 +168,9 @@
                 </div>
             </div>
         </footer>
-
-
+        
+        
+        
         <script src="../../Vista/js/jquery.min.js"></script>
         <script src="../../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../../Vista/js/popper.min.js"></script>
@@ -177,8 +186,7 @@
         <script src="../../Vista/js/scrollax.min.js"></script>
         <script src="../../Vista/js/google-map.js"></script>
         <script src="../../Vista/js/main.js"></script>
-
-
+        
     </h:body>
 </html>
 

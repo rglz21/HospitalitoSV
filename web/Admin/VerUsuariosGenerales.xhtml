@@ -106,8 +106,8 @@
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandButton value="editar" action="#{registroBean.returnUsuarios(list.usuario)}"/>
-                    <h:commandButton value="eliminar" action="#{registroBean.deleteUsuarios(list.usuario)}"/>
+                    <h:commandButton value="editar" class="btn btn-primary" action="#{registroBean.returnUsuarios(list.usuario)}"/>
+                    <h:commandButton value="eliminar" class="btn btn-danger" action="#{registroBean.deleteUsuarios(list.usuario)}"/>
                 </h:column>
             </h:dataTable>
             <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>

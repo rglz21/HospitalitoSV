@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Registrar Areas</title>
+        <title>Registrar Usuario Tipo Medico</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -17,7 +18,6 @@
         <link rel="stylesheet" href="../../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../../Vista/css/style.css"/>
     </h:head>
-
     <h:body>
 
         <div class="wrap">
@@ -33,7 +33,7 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../../index.xhtml">Salir</a></span></div>
+                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
                                 </div>
                             </div>
                         </div>
@@ -47,13 +47,13 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-              <h:form>
+               <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="VerAreas.xhtml" value="Areas" class="nav-link"/></li>
-                        <li class="nav-item active "><h:commandLink action="RegistrarAreas.xhtml" value="Registro" class="nav-link"/></li>
-                        
-                          <li class="nav-item "><h:commandLink action="../indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="NewUsuMedico.xhtml" value="Nuevo Medico" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="registromedico.xhtml" value="Registro" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="VerMedicos.xhtml" value="Medicos" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="indexAdnmin.xhtml" value="Index" class="nav-link"/></li>
                     </ul>
                 </div>
                     </h:form>
@@ -61,34 +61,36 @@
         </nav>
 
 
-        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
+        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">    
             <h:form>
+
                 <div class=" heading-section text-center">
-                    <h1>Registrar la informacion para Areas</h1>
+                    <h1>Nuevo Usuario Medico</h1>
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel for="id" value="ingrese correo electronico: " /> 
+                    <h:inputText id="correo" value="#{registroBean.correo}"/>
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel for="id" value="ingrese un usuario: " />
+                    <h:inputText id="id" value="#{registroBean.usuario}"/>
+                </div>
+                <div class="form-group" style="margin-left: 20%">
+                    <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
+                    <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
                 </div>
 
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="ID Area: " for="idArea"/>
-                    <h:inputText value="#{areasBean.idArea}" required="true" requiredMessage="no puede ir vacio los campos" id="idArea" />
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel  value="Clinica: " /> 
-                    <h:selectOneMenu id="hola" value="#{areasBean.clinic}" styleClass="p-formgroup-inline" style="margin-left: 0 ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;" >
-                        <f:selectItems value="#{areasBean.clinicas}"
-                                       var="l" itemLabel="#{l.nombre}" itemValue="#{l.idClinic}"/>
-                    </h:selectOneMenu>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Nombre: " for="nombre"/>
-                    <h:inputText value="#{areasBean.nombre}" required="true" requiredMessage="no puede ir vacio los campos" id="nombre" />
-                </div>
+
+
+                <!--Cambiar el loginBean y crear el metodo-->
+
 
                 <div class="form-group" style="text-align: center">
-                    <h:commandButton class="btn btn-primary" value="Registrar Medico" action="#{areasBean.addAreas()}" />
+                    <h:commandButton class="btn btn-primary" value="Siguiente" action="#{registroBean.addUsuarioMedico()}" />
                 </div>
+
             </h:form>
         </div>
-
 
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
@@ -159,7 +161,6 @@
         </footer>
 
 
-
         <script src="../../Vista/js/jquery.min.js"></script>
         <script src="../../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../../Vista/js/popper.min.js"></script>
@@ -177,8 +178,6 @@
         <script src="../../Vista/js/main.js"></script>
 
 
-
-
     </h:body>
-</html> 
+</html>
 
