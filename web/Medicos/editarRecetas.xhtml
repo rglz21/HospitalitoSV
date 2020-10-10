@@ -83,19 +83,19 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                 <h:outputLabel value="Medicamento: " for="medicina"/>
-                <h:inputText value="#{recetasBean.nombreM}" id="medicina"/>
+                <h:inputText value="#{recetasBean.nombreM}" required="true" requiredMessage="no puede ir vacio los campos" id="medicina"/>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                 <h:outputLabel value="Mg de medicamento: " for="mg"/>
-                <h:inputText value="#{recetasBean.mgM}" id="mg"/>
+                <h:inputText value="#{recetasBean.mgM}" required="true" requiredMessage="no puede ir vacio los campos" id="mg"/>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                 <h:outputLabel value="Cantidad: " for="cantidad"/>
-                <h:inputText value="#{recetasBean.cantM}" id="cantidad"/>
+                <h:inputText value="#{recetasBean.cantM}" required="true" requiredMessage="no puede ir vacio los campos" id="cantidad"/>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                 <h:outputLabel value="Dosis: " for="dosis"/>
-                <h:inputText value="#{recetasBean.dosisM}" id="dosis"/>
+                <h:inputText value="#{recetasBean.dosisM}" required="true" requiredMessage="no puede ir vacio los campos" id="dosis"/>
                 </div>
             <div class="form-group" style="margin-left: 40%">
                 <h:commandButton class="btn btn-primary" value="Actualizar Receta" action="#{recetasBean.updateReceta()}"/>

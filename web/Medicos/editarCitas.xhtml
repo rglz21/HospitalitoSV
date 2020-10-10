@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel value="Medico" for="medicos"/>
-                    <h:inputText id="medico" value="#{citasBean.idMedico.idMedico}" disabled="true"/>
+                    <h:inputText id="medico" required="true" requiredMessage="no puede ir vacio los campos" value="#{citasBean.idMedico.idMedico}" disabled="true"/>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel value="Paciente" for="pacientes"/>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel value="Fecha" for="fecha"/>
-                    <h:inputText value="#{citasBean.fechaCita}" id="fecha" styleClass="form-control">
+                    <h:inputText value="#{citasBean.fechaCita}" required="true" requiredMessage="no puede ir vacio los campos" id="fecha" styleClass="form-control">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:inputText>
                 </div>

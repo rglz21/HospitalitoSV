@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group" style="margin-left: 0%">
                     <h:outputLabel value="Fecha" for="fecha"/>
-                    <h:inputText value="#{citasBean.fechaCita}" id="fecha" styleClass="form-control">
+                    <h:inputText value="#{citasBean.fechaCita}" required="true" requiredMessage="no puede ir vacio los campos" id="fecha" styleClass="form-control">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:inputText>
                     </div>

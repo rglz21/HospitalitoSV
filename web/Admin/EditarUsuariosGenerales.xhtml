@@ -70,22 +70,22 @@
                 </div>
                 <div class="form-group" style="margin-left: 20%">
                     <h:outputLabel for="id" value="correo Electronico: " style="margin-left: 0%"/>
-                    <h:inputText id="correo" value="#{registroBean.correo}" size="40" maxlength="60" style="margin-left: 20px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    <h:inputText id="correo" value="#{registroBean.correo}" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 20px; border-style: solid; border-color: black; border-radius: 5px;"/>
                 </div>
                 <div class="form-group" style="margin-left: 20%">
                     <h:outputLabel for="id" value="Usuario: " />
-                    <h:inputText id="id" value="#{registroBean.usuario}" size="40" maxlength="60" style="margin-left: 80px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    <h:inputText id="id" value="#{registroBean.usuario}" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 80px; border-style: solid; border-color: black; border-radius: 5px;"/>
                 </div>
                 <div class="form-group" style="margin-left: 20%">
                     <h:outputLabel  value="Tipo Usuario: " /> 
-                    <h:selectOneMenu id="hola" value="#{registroBean.tiipo}" styleClass="p-formgroup-inline" style="margin-left: 50px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
+                    <h:selectOneMenu id="hola" value="#{registroBean.tiipo}" styleClass="p-formgroup-inline" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 50px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
                         <f:selectItems value="#{registroBean.tipos}"
                                        var="l" itemLabel="#{l.idTipo}-#{l.tipo}" itemValue="#{l.idTipo}"/>
                     </h:selectOneMenu>
                 </div>
                 <div class="form-group" style="margin-left: 20%">
                     <h:outputLabel for="nombres" value="Contraseña: "/>
-                    <h:inputText id="nombres" value="#{registroBean.contrasena}" size="40" maxlength="60" style="margin-left: 60px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    <h:inputText id="nombres" value="#{registroBean.contrasena}" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 60px; border-style: solid; border-color: black; border-radius: 5px;"/>
                 </div>
                 <!--Cambiar el loginBean y crear el metodo-->
                 <div class="form-group" style="text-align: center">

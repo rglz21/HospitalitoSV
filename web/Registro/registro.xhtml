@@ -3,7 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Registrate</title>
         <meta charset="utf-8"/>
@@ -75,21 +76,25 @@
                 <div class="p-formgroup-inline" style="text-align: center">
                     <div class="form-group">
                         <h:outputLabel for="correo" value="ingrese su correo electronico: " style="color: black; font-size: 15px;"/>
-                        <h:inputText id="correo" value="#{registroBean.correo}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="correo" value="#{registroBean.correo}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="usuario" value="ingrese un usuario: " style="color: black; font-size: 15px;"/>
-                        <h:inputText id="usuario" value="#{registroBean.usuario}" style="margin-left: 70px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="usuario" value="#{registroBean.usuario}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 70px; border-style: solid; border-color: black; border-radius: 5px;">
+                        <f:ajax event="blur" listener="#{loginBean.contarUsuario(registroBean.usuario)}" render="@form"/>
+                        </h:inputText>
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="contra" value="Ingrese Contraseña: " style="color: black; font-size: 15px;"/>
-                        <h:inputText id="contra" value="#{registroBean.contrasena}" style="margin-left: 65px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="contra" value="#{registroBean.contrasena}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 65px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>
                     <!--Cambiar el loginBean y crear el metodo-->
                     <div class="form-group" style="text-align: center">
-                        <h:commandButton value="Siguiente" class="btn btn-secondary" action="#{registroBean.addUsuario()}"/>
+                        <h:commandButton value="Siguiente" class="btn btn-secondary" action="#{registroBean.addUsuario(registroBean.usuario)}"/>
                     </div>
                 </div>
+                 <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+                <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
             </h:form>
         </div>
 

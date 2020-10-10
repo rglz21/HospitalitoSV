@@ -44,6 +44,11 @@ public class LoginBean {
             FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
         }
     }
+    public void contarUsuario(String usuario){
+     if (loginDao.findByuser(usuario) > 0) {
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
+        }
+    }
 
     public String sesionUser() throws IOException {
          logger log = new logger();
@@ -74,7 +79,7 @@ public class LoginBean {
                     return "Farmacia/indexFarmacia";
                 } else if (newUser.equals(usuario) && contra.equals(contrasena) && veri.equals("Verificado") && tipoUsuario == 4) {
                     //log.InfoLog("Usuario:"+usuario+" ha ingresado","INFO");
-                    return "Laboratorio/indexLaboratorio";
+                    return "Laboratorio/Examen";
                 } else {
 // cuando el usuario no esta verificado
                     if (user.getUsuario().equals(usuario) && user.getContrasena().equals(contrasena)) {

@@ -77,15 +77,15 @@
         <h:form  id="datatableauthors">
             <h:panelGrid columns="2" style="margin-left: 30%">
                 <h:outputLabel for="nombre" value="idMedicamento: " style="color: black;" /> 
-                <h:inputText id="id" value="#{farmaciaBean.idMedicina}" />
+                <h:inputText id="id" required="true" requiredMessage="Debe poner el id del medicamento" value="#{farmaciaBean.idMedicina}" />
                 <h:outputLabel for="apellido" value="Nombre: " style="color: black;"/> 
-                <h:inputText id="nombres" value="#{farmaciaBean.nombre1}"/>
+                <h:inputText id="nombres"required="true" requiredMessage="Debe poner el nombre de la medicina" value="#{farmaciaBean.nombre1}"/>
                 <h:outputLabel for="dui" value="Cantidad: " style="color: black;"/> 
-                <h:inputText id="apellido" value="#{farmaciaBean.cantidad}"/>
+                <h:inputText id="apellido" required="true" requiredMessage="Debe poner la cantidad" value="#{farmaciaBean.cantidad}"/>
                 <h:outputLabel for="telefono" value="Dosis: " style="color: black;"/> 
-                <h:inputText id="telefono" value="#{farmaciaBean.dosis}"/>
+                <h:inputText id="telefono" required="true" requiredMessage="Debe poner la dosis" value="#{farmaciaBean.dosis}"/>
                 <h:outputLabel for="direccions" value="mg: " style="color: black;"/> 
-                <h:inputText id="direccion" value="#{farmaciaBean.mg1}"/>
+                <h:inputText id="direccion" required="true" requiredMessage="Debe poner Mg" value="#{farmaciaBean.mg1}"/>
             </h:panelGrid>
             <h:panelGrid columns="2" style="margin-left: 35%; margin-top: 10px; margin-bottom: 10px;">
                 <h:commandButton class="btn btn-primary" value="Actualizar" action="#{farmaciaBean.updateMedi()}" />

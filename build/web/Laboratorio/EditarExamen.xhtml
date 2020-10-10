@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="paciente" value="Paciente: " />
-                    <h:inputText id="paciente" size="40" maxlength="60" value="#{examenBean.idPaciente}" style="margin-left: 20px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                    <h:inputText id="paciente" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" value="#{examenBean.idPaciente}" style="margin-left: 20px; border-style: solid; border-color: black; border-radius: 5px;"/>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="Tipo" value="Tipo de examen: " />
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="descripcion" value="Descripcion :  " />
-                    <h:inputText id="descripcion" size="40" maxlength="60" value="#{examenBean.descripcion}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>       
+                    <h:inputText id="descripcion" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" value="#{examenBean.descripcion}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>       
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="Lab" value="Laboratorio :  " />
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="fecha" value="Fecha:  " />
-                    <h:inputText id="fecha" size="40" maxlength="60" value="#{examenBean.fechaRealizado}" style="margin-left: 40px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
+                    <h:inputText id="fecha" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" value="#{examenBean.fechaRealizado}" style="margin-left: 40px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:inputText>
                 </div>   

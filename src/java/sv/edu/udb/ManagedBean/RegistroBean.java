@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.AreasDAO;
+import sv.edu.udb.DAO.LoginDAO;
 import sv.edu.udb.DAO.RegistroDAO;
 import sv.edu.udb.DAO.TipoUsuDAO;
 import sv.edu.udb.entites.Paciente;
@@ -40,6 +41,7 @@ public class RegistroBean {
     private String dui;
     private String telefono;
     private String direccion;
+    private LoginDAO loginDao = new LoginDAO();
 
     /**
      * Creates a new instance of RegistroBean
@@ -51,7 +53,11 @@ public class RegistroBean {
         return usuario;
     }
 
-    public String addUsuario() throws IOException {
+    public String addUsuario(String dui) throws IOException {
+         if (loginDao.findByuser(dui) > 0) {
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
+             return "registro";
+        }else{
         RegistroDAO productoDao = new RegistroDAO();
         Tipousuario nuevo = new Tipousuario();
         nuevo.setIdTipo(1);
@@ -60,6 +66,8 @@ public class RegistroBean {
         logger log = new logger();
         log.InfoLog("Nueva persona Registrado", "INFO");
         return "informacion";
+         }
+       
     }
     
      public String addUsuarioGeneral() throws IOException {
@@ -74,6 +82,7 @@ public class RegistroBean {
     }
 
     public String addUsuarioMedico() throws IOException {
+    
         RegistroDAO productoDao = new RegistroDAO();
         Tipousuario nuevo = new Tipousuario();
         nuevo.setIdTipo(2);
@@ -82,15 +91,21 @@ public class RegistroBean {
         logger log = new logger();
         log.InfoLog("Nuevo usuario tipo Medico Registrado", "INFO");
         return "registromedico";
+        
+        
     }
 
     // falta aplicarlo a la vista.
-    public String addInformacion(String id) throws IOException {
+    public String addInformacion(String id,String dui) throws IOException {
+          if (loginDao.findByDui(dui) > 0) {
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
+             return "informacion";
+        }else{
         RegistroDAO productoDao = new RegistroDAO();
         Paciente pro = new Paciente(id, nombre, apellido, dui, telefono, direccion);
         productoDao.addInformacion(pro);
         return "/Paciente/indexPaciente";
-
+          }
     }
     
     public List<Tipousuario> getTipos() {

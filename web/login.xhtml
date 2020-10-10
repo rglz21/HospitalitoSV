@@ -18,11 +18,11 @@
                 <h:form class="form">
 
                         <h:outputLabel for="id" value="Usuario: "  style="font-size: 20px;"/> 
-                        <h:inputText id="id" value="#{loginBean.usuario}">
+                        <h:inputText id="id" value="#{loginBean.usuario}" required="true" requiredMessage="no puede ir vacio los campos" >
                             <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
                         </h:inputText>
                         <h:outputLabel for="nombres" value="Contraseña: " style="font-size: 20px"/> 
-                        <h:inputSecret id="nombres" value="#{loginBean.contrasena}"/>
+                        <h:inputSecret id="nombres" value="#{loginBean.contrasena}" required="true" requiredMessage="no puede ir vacio los campos" />
                         <br/>
                         <h:commandButton value="Ingresar" action="#{loginBean.sesionUser()}" id="login-button"/>
                         <h:commandButton value="Registrate" action="#{loginBean.registro()}" id='regist-button'/>

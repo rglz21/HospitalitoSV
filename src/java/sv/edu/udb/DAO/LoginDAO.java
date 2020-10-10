@@ -44,6 +44,29 @@ public class LoginDAO {
             ses.close();
         }
     }
+    
+     public Long findByuser(String usuario ) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "select count(*) from Usuario where usuario = :duiFind";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("duiFind", usuario);
+            Long find = (Long) query.uniqueResult();
+            return find;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+            return null;
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 
     public void addUsuario(Usuario user) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();

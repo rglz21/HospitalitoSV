@@ -62,15 +62,15 @@
              <h1 style="text-align: center;">Actualizar</h1>
             <h:panelGrid columns="2" style="margin-left: 30%">
                 <h:outputLabel for="nombre" value="idMedicamento: " /> 
-                <h:inputText id="id" value="#{farmaciaBean.idMedicamento}"/>
+                <h:inputText id="id" required="true" requiredMessage="Debe poner el id del medicamento" value="#{farmaciaBean.idMedicamento}"/>
                 <h:outputLabel for="apellido" value="Nombre: " /> 
-                <h:inputText id="nombres" value="#{farmaciaBean.nombre}"/>
+                <h:inputText id="nombres" required="true" requiredMessage="Debe poner el nombre del medicamento" value="#{farmaciaBean.nombre}"/>
                 <h:outputLabel for="dui" value="Descripcion: " /> 
-                <h:inputText id="apellido" value="#{farmaciaBean.descripcion}"/>
+                <h:inputText id="apellido" required="true" requiredMessage="Debe poner la descipcion" value="#{farmaciaBean.descripcion}"/>
                 <h:outputLabel for="telefono" value="Mg: " /> 
-                <h:inputText id="telefono" value="#{farmaciaBean.mg}"/>
+                <h:inputText id="telefono" required="true" requiredMessage="Debe poner el Mg" value="#{farmaciaBean.mg}"/>
                 <h:outputLabel for="direccions" value="Cantidad disponible: " /> 
-                <h:inputText id="direccion" value="#{farmaciaBean.cantidadDisp}"/>
+                <h:inputText id="direccion" required="true" requiredMessage="Debe poner la cantidad disponible" value="#{farmaciaBean.cantidadDisp}"/>
                 <h:outputLabel  value="Categoria: " /> 
                 <h:selectOneMenu id="genre" value="#{farmaciaBean.lab}" styleClass="form-control">
                     <f:selectItems value="#{farmaciaBean.laboratorio}" var="l" itemLabel="#{l.nombre}" itemValue="#{l.idLabMed}"/>

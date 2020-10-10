@@ -69,7 +69,7 @@
 
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel value="ID Area: " for="idArea"/>
-                    <h:inputText value="#{areasBean.idArea}" id="idArea" />
+                    <h:inputText value="#{areasBean.idArea}" required="true" requiredMessage="no puede ir vacio los campos" id="idArea" />
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel  value="Clinica: " /> 
@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel value="Nombre: " for="nombre"/>
-                    <h:inputText value="#{areasBean.nombre}" id="nombre" />
+                    <h:inputText value="#{areasBean.nombre}" required="true" requiredMessage="no puede ir vacio los campos" id="nombre" />
                 </div>
 
                 <div class="form-group" style="text-align: center">

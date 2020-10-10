@@ -70,7 +70,7 @@ public class ExamenBean {
         Tipoexamenes tipo1 = new Tipoexamenes();
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
-        int num = utilDao.contar("Examen");
+        int num = utilDao.contar("Examenes");
         int num2 = ++num;
         setIdExam("EXAM-"+num2);
         Examenes exa = new Examenes( idExam, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Informacion</title>
         <meta charset="utf-8"/>
@@ -52,7 +53,7 @@
         </div>
         
         <div style="width: 60%;border-style: solid; border-color: black; border-radius: 25px;margin-left: 20%;margin-bottom: 10px;">
-            <h:form>
+            <h:form >
                 <h1 class="mb-4" style="text-align: center; color: #3C3E50">Completar la siguiente informacion</h1>
                 <p class="subheading" style="text-align: center; color: #3C3E50">Queremos darte el mejor servicio, necesitamos los datos que vez a continuacion.</p>
                 <!--Cambiar los beans-->
@@ -60,28 +61,32 @@
                     <h2 style="text-align: center; color: black" value=" Este es su id de paciente: #{registroBean.usuario}"/>
                     <div class="form-group">
                         <h:outputLabel for="nombre" value="Nombre: " style="color: black; font-size: 15px;"/> 
-                        <h:inputText id="nombre" value="#{registroBean.nombre}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="nombre" value="#{registroBean.nombre}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>  
                     <div class="form-group">      
                         <h:outputLabel for="apellido" value="Apellido: " style="color: black; font-size: 15px;"/> 
-                        <h:inputText id="apellido" value="#{registroBean.apellido}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="apellido" value="#{registroBean.apellido}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div> 
                     <div class="form-group">     
                         <h:outputLabel for="dui" value="Dui: " style="color: black; font-size: 15px;"/> 
-                        <h:inputText id="dui" value="#{registroBean.dui}" style="margin-left: 35px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="dui" value="#{registroBean.dui}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 35px; border-style: solid; border-color: black; border-radius: 5px;">
+                         <f:ajax event="blur" listener="#{loginBean.countPaciente(registroBean.dui)}" render="@form"/>
+                        </h:inputText>
                     </div>
                     <div class="form-group">     
                         <h:outputLabel for="telefono" value="Telefono: " style="color: black; font-size: 15px;"/> 
-                        <h:inputText id="telefono" value="#{registroBean.telefono}" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputText id="telefono" value="#{registroBean.telefono}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 5px; border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>
                     <div class="form-group">     
                         <h:outputLabel for="direccions" value="Direccion: " style="color: black; font-size: 15px;"/> 
-                        <h:inputTextarea id="direccion" value="#{registroBean.direccion}" style="margin-left: 5px;border-style: solid; border-color: black; border-radius: 5px;"/>
+                        <h:inputTextarea id="direccion" value="#{registroBean.direccion}" required="true" requiredMessage="no puede ir vacio los campos" style="margin-left: 5px;border-style: solid; border-color: black; border-radius: 5px;"/>
                     </div>
                     <div class="form-group"> 
-                        <h:commandButton class="btn btn-secondary py-3 px-4" value="Registrarse" action="#{registroBean.addInformacion(registroBean.usuario)}" />
+                        <h:commandButton class="btn btn-secondary py-3 px-4" value="Registrarse" action="#{registroBean.addInformacion(registroBean.usuario,registroBean.dui)}" />
                     </div>
                 </div>
+                <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
+                <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/> 
             </h:form>
         </div>
         
