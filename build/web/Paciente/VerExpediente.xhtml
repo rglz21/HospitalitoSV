@@ -31,11 +31,15 @@
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-8 mb-md-0 mb-3">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-location-arrow"></span></div>
+                                    <div class="text"><span>Dirección</span><span>El salvador</span></div>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="top-wrap d-flex">
-                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-phone"></span></div>
+                                    <div class="text"><span>Numero</span><span>(+503) 7337-9321</span></div>
                                 </div>
                             </div>
                         </div>
@@ -49,24 +53,22 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-               <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="indexPaciente.xhtml" value="Index" class="nav-link"/></li>
-                        <li class="nav-item active"><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="VerPacientes.xhtml" value="Pacientes" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="VerPrediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="AladirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
+                        <li class="nav-item "><a href="indexPaciente.xhtml" class="nav-link">Paciente</a></li>
+                        <li class="nav-item active"><a href="VerExpediente.xhtml" class="nav-link">Ver Expediente</a></li>
+                        <li class="nav-item "><a href="VerExamenes.xhtml" class="nav-link">Ver Examenes</a></li>
+                        <li class="nav-item "><a href="VerPacientes.xhtml" class="nav-link">Ver Paciente</a></li>
+                        <li class="nav-item "><a href="VerPrediag.xhtml" class="nav-link">Ver Prediagrama</a></li>
+                        <li class="nav-item "><a href="AladirPrediag.xhtml" class="nav-link">Añadir Prediagrama</a></li>
+                        <li class="nav-item "><a href="editarPrediag.xhtml" class="nav-link">Editar Prediagrama</a></li>
                     </ul>
                 </div>
-                    </h:form>
             </div>
         </nav>
 
 
         <h:form id="prediag">
-            <h:outputLabel value="#{prediagBean.fechaPre}"/>
             <h:outputLabel value="#{prediagBean.paciente.nombre} "/>
             <h:outputLabel value="#{prediagBean.paciente.apellido}"/>
             <h:dataTable class="table table-striped table-dark" value="#{prediagBean.getSintomasByPrediag(prediagBean.idPrediag)}" var="s">
@@ -87,6 +89,13 @@
                         Duracion
                     </f:facet>
                     #{s.duracion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>  
+                    <h:commandButton value="editar" action="#{sintomasBean.returnSintomas(s.idSintoma)}"/>
+                    <h:commandButton value="eliminar" action="#{sintomasBean.deleteSintomas(s.idSintoma)}"/>
                 </h:column>
             </h:dataTable>
 
@@ -127,13 +136,6 @@
                                 render="prediag :tablePrediag"
                                 resetValues="true"/>
                     </h:commandButton>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>  
-                    <h:commandButton value="editar" action="#{sintomasBean.returnSintomas(id)}"/>
-                    <h:commandButton value="eliminar" action="#{sintomasBean.deleteSintomas(id)}"/>
                 </h:column>
             </h:dataTable>
         </h:form>
@@ -225,4 +227,3 @@
 
     </h:body>
 </html>
-

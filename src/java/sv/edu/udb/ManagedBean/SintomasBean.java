@@ -5,6 +5,8 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
+import java.text.ParseException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -27,6 +29,7 @@ public class SintomasBean {
     private String descripcion;
     private String duracion;
     private int prediag;
+    private int predi;
 
     /**
      * Creates a new instance of SintomasBean
@@ -34,10 +37,12 @@ public class SintomasBean {
     public SintomasBean() {
     }
 
-    public String addSintomas() {
+    public String addSintomas(String idPacient) throws IOException, ParseException {
+        PrediagBean metodo = new PrediagBean();
+        metodo.addPrediagnostico(idPacient);
         SintomasDAO sintomaDao = new SintomasDAO();
         Prediagnostico predia = new Prediagnostico();
-        predia.setIdPrediag(getPrediag());
+        predia.setIdPrediag(getPredi());
         Sintomas sintomaa = new Sintomas(idSintoma, predia, sintoma, descripcion, duracion);
         sintomaDao.addSintomas(sintomaa);
 
@@ -48,16 +53,16 @@ public class SintomasBean {
         SintomasDAO sintomaDao = new SintomasDAO();
         Sintomas sintomaa = sintomaDao.getSintomas1(id);
         Prediagnostico prediagnost = new Prediagnostico();
-        prediagnost.setIdPrediag(getPrediag());
+        prediagnost.setIdPrediag(getPredi());
         if (sintomaa != null) {
             setIdSintoma(sintomaa.getIdSintoma());
-            setPrediag(sintomaa.getPrediagnostico().getIdPrediag());
+            setPredi(sintomaa.getPrediagnostico().getIdPrediag());
             setSintoma(sintomaa.getSintoma());
             setDescripcion(sintomaa.getDescripcion());
             setDuracion(sintomaa.getDuracion());
         } else {
             setIdSintoma(0);
-            setPrediag(0);
+            setPredi(0);
             setSintoma("");
             setDescripcion("");
             setDuracion("");
@@ -70,12 +75,12 @@ public class SintomasBean {
 
     public String updateSintomas(int id) {
         SintomasDAO sintomaDao = new SintomasDAO();
-        Sintomas medico = sintomaDao.getSintomas1(id);
+        Sintomas sintomas = sintomaDao.getSintomas1(id);
 
-        if (medico != null) {
-            Prediagnostico pre = new Prediagnostico();
-            pre.setIdPrediag(getPrediag());
-            Sintomas sint = new Sintomas(idSintoma, pre, sintoma, descripcion, duracion);
+        if (sintomas != null) {
+            Prediagnostico predia = new Prediagnostico();
+            predia.setIdPrediag(getPredi());
+            Sintomas sint = new Sintomas(idSintoma, predia, sintoma, descripcion, duracion);
             sintomaDao.updateSintomas(id, sint);
 
             FacesContext.getCurrentInstance().addMessage("successMessage",
@@ -86,7 +91,7 @@ public class SintomasBean {
                     new FacesMessage("Medico con ID " + id + " NO encontrado"));
         }
 
-        return "VerMedicos";
+        return "VerExpediente";
 
     }
 
@@ -97,7 +102,7 @@ public class SintomasBean {
         if (sintoma != null) {
             sintomasDao.deleteSintomas(id);
             setIdSintoma(0);
-            setPrediag(0);
+            setPredi(0);
             setSintoma("");
             setDescripcion("");
             setDuracion("");
@@ -159,4 +164,11 @@ public class SintomasBean {
         this.prediag = prediag;
     }
     
+    public int getPredi() {
+        return predi;
+    }
+
+    public void setPredi(int predi) {
+        this.predi = predi;
+    }
 }

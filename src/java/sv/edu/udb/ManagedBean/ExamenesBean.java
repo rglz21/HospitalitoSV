@@ -12,6 +12,7 @@ import javax.faces.bean.RequestScoped;
 import sv.edu.udb.DAO.ExamenesDAO;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Laboratorio;
+import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Tipoexamenes;
 
 /**
@@ -28,6 +29,7 @@ public class ExamenesBean {
      private String idPaciente;
      private String descripcion;
      private Date fechaRealizado;
+     private Paciente paciente;
     /**
      * Creates a new instance of ExamenesBean
      */
@@ -45,6 +47,14 @@ public class ExamenesBean {
         List<Tipoexamenes> tipo=examenDao.obtenerTipos();
         return tipo;
     }
+    
+     
+    public List<Examenes> getExamenesByPaciente(String idExam) {
+        ExamenesDAO examenDao = new ExamenesDAO();
+        List<Examenes> lista = (List<Examenes>) examenDao.getExamenPaciente(idExam);
+        return lista;
+    }
+    
     public String getIdExam() {
         return idExam;
     }
@@ -91,6 +101,14 @@ public class ExamenesBean {
 
     public void setFechaRealizado(Date fechaRealizado) {
         this.fechaRealizado = fechaRealizado;
+    }
+    
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
     
     

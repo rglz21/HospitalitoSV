@@ -12,6 +12,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import sv.edu.udb.ManagedBean.PrediagBean;
 import sv.edu.udb.entites.HibernateUtil;
 import sv.edu.udb.entites.Prediagnostico;
 
@@ -122,8 +123,9 @@ public class PrediagDAO {
             tra = ses.beginTransaction();
             Prediagnostico datos = new Prediagnostico();
             datos.setIdPrediag(prediag.getIdPrediag());
+            datos.setEstadopre(prediag.getEstadopre());
             datos.setPaciente(prediag.getPaciente());
-            datos.setFechaPre(prediag.getFechaPre());
+            datos.setFechaPre(new java.sql.Date(prediag.getFechaPre().getTime()));
 
             ses.save(datos);
             ses.getTransaction().commit();
@@ -136,5 +138,72 @@ public class PrediagDAO {
             ses.flush();
             ses.close();
         }
+    }
+
+    public void deletePrediagnostico(int id) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Prediagnostico predia = (Prediagnostico) ses.get(Prediagnostico.class, id);
+            ses.delete(predia);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
+
+    public void updatePrediag(int id, Prediagnostico newPredia) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Prediagnostico predia = (Prediagnostico) ses.load(Prediagnostico.class, id);
+            predia.setIdPrediag(newPredia.getIdPrediag());
+            predia.setEstadopre(newPredia.getEstadopre());
+            predia.setFechaPre(newPredia.getFechaPre());
+
+            ses.update(predia);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
+
+    public Prediagnostico getPrediag1(int id) {
+        Prediagnostico predia = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Prediagnostico where id = :idFind";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idFind", id);
+            predia = (Prediagnostico) query.uniqueResult();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return predia;
     }
 }

@@ -69,7 +69,7 @@
             <div class=" heading-section text-center">
                     <h1>Examenes</h1>
                 </div>
-            <h:dataTable class="table table-striped table-dark" id="citas" var="list" value="#{examenesBean.examen}">
+            <h:dataTable class="table table-striped table-dark" id="citas" var="list" value="#{examenesBean.getExamenesByPaciente(examenBean.idPaciente)}">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="ID Examen"/>

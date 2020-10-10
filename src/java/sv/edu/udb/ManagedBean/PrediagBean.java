@@ -5,13 +5,18 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.PacienteDAO;
 import sv.edu.udb.DAO.PrediagDAO;
 import sv.edu.udb.DAO.SintomasDAO;
+import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Estadopre;
 import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Prediagnostico;
@@ -31,6 +36,7 @@ public class PrediagBean {
     private Date fechaPre;
     private String pacient;
     private Sintomas sintomas = new Sintomas();
+    private int estado;
 
     //tabla simtomas
     private int idSintoma;
@@ -39,6 +45,8 @@ public class PrediagBean {
     private String descripcion;
     private String duracion;
     private int prediag;
+    private String fecha;
+    private String archivo;
 
     /**
      * Creates a new instance of PrediagBean
@@ -84,14 +92,82 @@ public class PrediagBean {
         return "crearCitas";
     }
 
-    public String addPrediagnostico() {
+   public void addPrediagnostico(String idpacient) throws IOException, ParseException {
+        UtilDAO utilDao=new UtilDAO();
         PrediagDAO prediagDao = new PrediagDAO();
-//        Paciente pacientee = new Paciente();
-//        pacientee.setIdPaciente(getPacient());
-        Prediagnostico medico = new Prediagnostico(idPrediag, estadopre, fechaPre);
-        prediagDao.addPrediagnostico(medico);
+        Estadopre estado = new Estadopre();
+        Paciente pacien = new Paciente();
+        int num = utilDao.contar("Prediagnostico");
+        int num2 = ++num;
+        
+        setIdPrediag(num2);
+        estado.setIdEstado(1);
+        pacien.setIdPaciente(idpacient);
+        
+        
+        Prediagnostico predia = new Prediagnostico(idPrediag, estado, pacien, fechaPre);
+        prediagDao.addPrediagnostico(predia);
+    }
 
-        return "VerExpediente";
+//    public void returnPrediag(int id) {
+//        PrediagDAO prediaDao = new PrediagDAO();
+//        Prediagnostico predia = prediaDao.getPrediag1(id);
+//        Estadopre esta = new Estadopre();
+//        esta.setIdEstado(getEstado());
+//        if (predia != null) {
+//            setIdPrediag(predia.getIdPrediag());
+//            setEstado(predia.getEstadopre().getIdEstado());
+//            setFechaPre(predia.getFechaPre());
+//;
+//        } else {
+//            setIdPrediag(0);
+//            setEstado(0);
+//            setFechaPre(null);
+//
+//            FacesContext.getCurrentInstance().addMessage("successMessage",
+//                    new FacesMessage("Medico NO especificado"));
+//        }
+//        return "editarPrediag";
+//    }
+    
+//    public void updatePrediag(int id) {
+//        PrediagDAO prediaDao = new PrediagDAO();
+//        Prediagnostico predia = prediaDao.getPrediag1(id);
+//
+//        if (predia != null) {
+//            Estadopre esta = new Estadopre();
+//            Paciente pacien = new Paciente();
+//            
+//            
+//            esta.setIdEstado(getEstado());
+//            Prediagnostico pre = new Prediagnostico(idPrediag, esta, pacien, fechaPre);
+//            prediaDao.updatePrediag(id, pre);
+//
+//            FacesContext.getCurrentInstance().addMessage("successMessage",
+//                    new FacesMessage("Medico con ID " + id + " Actualizado"));
+//        } else {
+//
+//            FacesContext.getCurrentInstance().addMessage("successMessage",
+//                    new FacesMessage("Medico con ID " + id + " NO encontrado"));
+//        }
+//    }
+
+    public void deletePrediag(int id) {
+        PrediagDAO prediaDao = new PrediagDAO();
+        Prediagnostico predia = prediaDao.getPrediag1(id);
+
+        if (predia != null) {
+            prediaDao.deletePrediagnostico(id);
+            setIdPrediag(0);
+            setEstado(0);
+            setPacient("");
+            setFechaPre(null);
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Medico con ID " + id + " Eliminado"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("medico con ID " + id + " NO encontrado"));
+        }
     }
 
     public int getIdPrediag() {
@@ -196,5 +272,20 @@ public class PrediagBean {
         this.duracion = duracion;
     }
     
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     
 }

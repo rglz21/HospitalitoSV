@@ -66,4 +66,27 @@ public class ExamenesDAO {
         }
         return tipoExamen;
     }
+    
+    public Examenes getExamenPaciente(String idExam) {
+        Examenes exam = new Examenes();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Examenes where idExam= :idExam";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idExam", idExam);
+            exam = (Examenes) query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return exam;
+    }
 }
