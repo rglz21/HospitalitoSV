@@ -19,6 +19,7 @@ import sv.edu.udb.entites.Paciente;
 import sv.edu.udb.entites.Tipousuario;
 import sv.edu.udb.entites.Usuario;
 import sv.edu.udb.util.logger;
+import sv.edu.udb.util.sendEmail;
 
 /**
  *
@@ -58,16 +59,37 @@ public class RegistroBean {
             FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
              return "registro";
         }else{
+        sendEmail enviar = new sendEmail();
+        verificar = enviar.enviar(correo);
         RegistroDAO productoDao = new RegistroDAO();
         Tipousuario nuevo = new Tipousuario();
         nuevo.setIdTipo(1);
-        Usuario pro = new Usuario(usuario, nuevo, contrasena, correo, "Verificado");
+        Usuario pro = new Usuario(usuario, nuevo, contrasena, correo,verificar);
         productoDao.addUsuario(pro);
         logger log = new logger();
         log.InfoLog("Nueva persona Registrado", "INFO");
+        verificar = "";
         return "informacion";
          }
        
+    }
+    
+    public String confirmarUser(String id){
+     RegistroDAO usuarioDao = new RegistroDAO();
+        Usuario usuarioo = usuarioDao.getUsuario1(id);
+
+        if (usuarioo != null) {
+            Usuario usu = new Usuario("Verificado");
+            usuarioDao.confirmarUser(id, usu);
+
+        } else {
+
+           
+        }
+
+        return "/Paciente/indexPaciente";
+
+        
     }
     
      public String addUsuarioGeneral() throws IOException {
@@ -104,7 +126,7 @@ public class RegistroBean {
         RegistroDAO productoDao = new RegistroDAO();
         Paciente pro = new Paciente(id, nombre, apellido, dui, telefono, direccion);
         productoDao.addInformacion(pro);
-        return "/Paciente/indexPaciente";
+        return "/Registro/confirmacion";
           }
     }
     

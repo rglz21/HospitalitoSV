@@ -26,6 +26,10 @@ public class Usuario  implements java.io.Serializable {
        this.verificar = verificar;
     }
    
+     public Usuario(String verificar) {
+       this.verificar = verificar;
+    }
+    
     public String getUsuario() {
         return this.usuario;
     }

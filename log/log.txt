@@ -14,3 +14,14 @@
 [10/10/2020 3:6:29][INFO] Nuevo usuario tipo Medico Registrado
 [10/10/2020 3:7:38][INFO] Nuevo usuario tipo Medico Registrado
 [10/10/2020 3:8:39][INFO] Nuevo usuario tipo Medico Registrado
+[28/10/2020 17:5:18][INFO] Nueva persona Registrado
+[28/10/2020 17:18:1][INFO] Nueva persona Registrado
+[28/10/2020 17:21:43][INFO] Nueva persona Registrado
+[28/10/2020 17:27:10][INFO] Nueva persona Registrado
+[28/10/2020 17:49:23][INFO] Nueva persona Registrado
+[28/10/2020 17:53:19][INFO] Nueva persona Registrado
+[28/10/2020 18:1:37][INFO] Nueva persona Registrado
+[28/10/2020 20:4:10][INFO] Nueva persona Registrado
+[28/10/2020 20:34:13][INFO] Nueva persona Registrado
+[28/10/2020 20:42:8][INFO] Nueva persona Registrado
+[28/10/2020 20:49:56][INFO] Nueva persona Registrado

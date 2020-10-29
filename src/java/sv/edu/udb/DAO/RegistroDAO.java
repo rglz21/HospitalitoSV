@@ -50,7 +50,26 @@ public class RegistroDAO {
             ses.close();
         }
     }
-
+ public void confirmarUser(String id, Usuario newUsuario) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Usuario usuario = (Usuario) ses.load(Usuario.class, id);
+            usuario.setVerificar(newUsuario.getVerificar());
+            ses.update(usuario);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
     public void addUsuarioGeneral(Usuario user) throws IOException {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
