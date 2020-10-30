@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -16,6 +16,8 @@ public class Clinica  implements java.io.Serializable {
      private String direccion;
      private String telefono;
      private Set<Areas> areases = new HashSet<Areas>(0);
+     private Set<Farmacia> farmacias = new HashSet<Farmacia>(0);
+     private Set<Laboratorio> laboratorios = new HashSet<Laboratorio>(0);
 
     public Clinica() {
     }
@@ -27,12 +29,14 @@ public class Clinica  implements java.io.Serializable {
         this.direccion = direccion;
         this.telefono = telefono;
     }
-    public Clinica(int idClinic, String nombre, String direccion, String telefono, Set<Areas> areases) {
+    public Clinica(int idClinic, String nombre, String direccion, String telefono, Set<Areas> areases, Set<Farmacia> farmacias, Set<Laboratorio> laboratorios) {
        this.idClinic = idClinic;
        this.nombre = nombre;
        this.direccion = direccion;
        this.telefono = telefono;
        this.areases = areases;
+       this.farmacias = farmacias;
+       this.laboratorios = laboratorios;
     }
    
     public int getIdClinic() {
@@ -69,6 +73,20 @@ public class Clinica  implements java.io.Serializable {
     
     public void setAreases(Set<Areas> areases) {
         this.areases = areases;
+    }
+    public Set<Farmacia> getFarmacias() {
+        return this.farmacias;
+    }
+    
+    public void setFarmacias(Set<Farmacia> farmacias) {
+        this.farmacias = farmacias;
+    }
+    public Set<Laboratorio> getLaboratorios() {
+        return this.laboratorios;
+    }
+    
+    public void setLaboratorios(Set<Laboratorio> laboratorios) {
+        this.laboratorios = laboratorios;
     }
 
 

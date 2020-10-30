@@ -97,7 +97,7 @@ public class PrediagBean {
         PrediagDAO prediagDao = new PrediagDAO();
         Estadopre estado = new Estadopre();
         Paciente pacien = new Paciente();
-        int num = utilDao.contar("Prediagnostico");
+        int num = utilDao.contarString("Prediagnostico","idPrediag");
         int num2 = ++num;
         
         setIdPrediag(num2);

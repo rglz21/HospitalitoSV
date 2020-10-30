@@ -52,6 +52,7 @@ public class FarmaciaDAO {
             tra = ses.beginTransaction();
             Medicamentos datos = new Medicamentos();
             datos.setIdMedicamento(medicina.getIdMedicamento());
+            datos.setFarmacia(medicina.getFarmacia());
             datos.setLabmedicinas(medicina.getLabmedicinas());
             datos.setNombre(medicina.getNombre());
             datos.setDescripcion(medicina.getDescripcion());

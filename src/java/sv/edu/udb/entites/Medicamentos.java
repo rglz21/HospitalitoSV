@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 
@@ -10,6 +10,7 @@ public class Medicamentos  implements java.io.Serializable {
 
 
      private String idMedicamento;
+     private Farmacia farmacia;
      private Labmedicinas labmedicinas;
      private String nombre;
      private String descripcion;
@@ -18,17 +19,16 @@ public class Medicamentos  implements java.io.Serializable {
 
     public Medicamentos() {
     }
-
-    public Medicamentos(String idMedicamento, Labmedicinas labmedicinas, String nombre, String descripcion, String mg, int cantidadDisp) {
+    public Medicamentos(int cantidadDisp) {
+       this.cantidadDisp = cantidadDisp;
+    }
+    public Medicamentos(String idMedicamento, Farmacia farmacia, Labmedicinas labmedicinas, String nombre, String descripcion, String mg, int cantidadDisp) {
        this.idMedicamento = idMedicamento;
+       this.farmacia = farmacia;
        this.labmedicinas = labmedicinas;
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.mg = mg;
-       this.cantidadDisp = cantidadDisp;
-    }
-    
-    public Medicamentos(int cantidadDisp) {
        this.cantidadDisp = cantidadDisp;
     }
    
@@ -38,6 +38,13 @@ public class Medicamentos  implements java.io.Serializable {
     
     public void setIdMedicamento(String idMedicamento) {
         this.idMedicamento = idMedicamento;
+    }
+    public Farmacia getFarmacia() {
+        return this.farmacia;
+    }
+    
+    public void setFarmacia(Farmacia farmacia) {
+        this.farmacia = farmacia;
     }
     public Labmedicinas getLabmedicinas() {
         return this.labmedicinas;

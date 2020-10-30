@@ -18,18 +18,44 @@ import sv.edu.udb.entites.HibernateUtil;
  */
 public class UtilDAO {
 
-    public int contar(String entidad) {
+    public int contarString(String entidad, String idName) {
         int cont2 = 0;
-        Long cont;
+        String top;
+        String[] split;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "select count(*) from " + entidad;
+            String queryString = "SELECT "+idName+" FROM " + entidad +" ORDER BY "+idName+" DESC";
             Query query = ses.createQuery(queryString);
-            cont = (Long) query.uniqueResult();
-            cont2 = cont.intValue();
+            query.setMaxResults(1);
+            top = (String) query.uniqueResult();
+            split = top.split("-");
+            cont2=Integer.parseInt(split[1]);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+
+        return cont2;
+    }
+    public int contar(String entidad, String idName) {
+        int cont2 = 0;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "SELECT "+idName+" FROM " + entidad +" ORDER BY "+idName+" DESC";
+            Query query = ses.createQuery(queryString);
+            query.setMaxResults(1);
+            cont2 = (int) query.uniqueResult();
         } catch (HibernateException e) {
             e.printStackTrace();
             if (tra != null) {

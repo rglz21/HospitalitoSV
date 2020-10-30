@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09-20-2020 11:06:06 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 10-30-2020 09:21:49 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="sv.edu.udb.entites.Prediagnostico" table="prediagnostico" catalog="hospital" optimistic-lock="version">
         <id name="idPrediag" type="int">

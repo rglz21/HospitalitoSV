@@ -60,26 +60,12 @@
         </nav>
         
         <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
-        <h:form>
-            <h1 style="text-align: center">Introduce la informacion</h1>
-            <h:panelGrid columns="2" style="margin-left: 30%">
-                <h:outputLabel value="Ingresar Usuario del Paciente"> </h:outputLabel>
-                <h:inputText id="id" required="true" requiredMessage="no puede ir vacio los campos" value="#{examenBean.idPaciente}"/>
-                <h:commandButton class="btn btn-primary" value="Actualizar" action="#{examenBean.returnPaciente(examenBean.idPaciente)}" style="margin-left: 70%;margin-bottom: 20px; margin-top: 20px;">
-                    <f:ajax execute="@form"
-                            render="authorForm :datatableauthors"
-                            resetValues="true"/>
-                </h:commandButton>
-            </h:panelGrid>
-
-        </h:form>
+        
 
         <h:form id="datatableauthors" style="margin-left: 30%">
 
 
             <h:panelGrid columns="2" >
-            Paciente: <h:inputText id="paciente" size="40" maxlength="60"
-                                required="true" requiredMessage="no puede ir vacio los campos"   value="#{examenBean.idPaciente}" /> <br/>
             Tipo de examen: <h:selectOneMenu id="gen"
                                              value="#{examenBean.tipo}" styleClass="form-control">
                 <f:selectItems value="#{examenBean.exam1}"

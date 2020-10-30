@@ -66,10 +66,6 @@
                     <h1>Introduce la informacion</h1>
                 </div>
                 <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel for="paciente" value="Paciente: " />
-                    <h:inputText id="paciente" size="40" maxlength="60" required="true" requiredMessage="no puede ir vacio los campos" value="#{examenBean.idPaciente}" style="margin-left: 20px; border-style: solid; border-color: black; border-radius: 5px;"/>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="Tipo" value="Tipo de examen: " />
                     <h:selectOneMenu id="Tipo" value="#{examenBean.tipo}" styleClass="p-formgroup-inline" style="margin-left: 5px ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;">
                         <f:selectItems value="#{examenBean.exam1}"

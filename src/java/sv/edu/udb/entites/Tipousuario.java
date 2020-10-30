@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Tipousuario  implements java.io.Serializable {
 
 
-     private Integer idTipo;
+     private int idTipo;
      private String tipo;
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
@@ -19,19 +19,21 @@ public class Tipousuario  implements java.io.Serializable {
     }
 
 	
-    public Tipousuario(String tipo) {
+    public Tipousuario(int idTipo, String tipo) {
+        this.idTipo = idTipo;
         this.tipo = tipo;
     }
-    public Tipousuario(String tipo, Set<Usuario> usuarios) {
+    public Tipousuario(int idTipo, String tipo, Set<Usuario> usuarios) {
+       this.idTipo = idTipo;
        this.tipo = tipo;
        this.usuarios = usuarios;
     }
    
-    public Integer getIdTipo() {
+    public int getIdTipo() {
         return this.idTipo;
     }
     
-    public void setIdTipo(Integer idTipo) {
+    public void setIdTipo(int idTipo) {
         this.idTipo = idTipo;
     }
     public String getTipo() {

@@ -69,12 +69,6 @@
             <h:dataTable class="table table-sm table-dark" var="list" value="#{examenBean.examenes}" >
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID"/>
-                    </f:facet>
-                    <h:outputText value="#{list.idPaciente}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
                         <h:outputText value="tipexamenes"/>
                     </f:facet>
                     <h:outputText value="#{list.tipoexamenes.idTipo}"/>

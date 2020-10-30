@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 
@@ -17,7 +17,9 @@ public class Usuario  implements java.io.Serializable {
 
     public Usuario() {
     }
-
+    public Usuario(String verificar) {
+       this.verificar = verificar;
+    }
     public Usuario(String usuario, Tipousuario tipousuario, String contrasena, String correo, String verificar) {
        this.usuario = usuario;
        this.tipousuario = tipousuario;
@@ -26,10 +28,6 @@ public class Usuario  implements java.io.Serializable {
        this.verificar = verificar;
     }
    
-     public Usuario(String verificar) {
-       this.verificar = verificar;
-    }
-    
     public String getUsuario() {
         return this.usuario;
     }

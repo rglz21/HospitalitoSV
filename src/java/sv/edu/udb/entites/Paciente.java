@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -17,7 +17,6 @@ public class Paciente  implements java.io.Serializable {
      private String dui;
      private String telefono;
      private String direccion;
-     private Set<Recetas> recetases = new HashSet<Recetas>(0);
      private Set<Prediagnostico> prediagnosticos = new HashSet<Prediagnostico>(0);
      private Set<Citas> citases = new HashSet<Citas>(0);
      private Set<Expediente> expedientes = new HashSet<Expediente>(0);
@@ -34,14 +33,13 @@ public class Paciente  implements java.io.Serializable {
         this.telefono = telefono;
         this.direccion = direccion;
     }
-    public Paciente(String idPaciente, String nombre, String apellido, String dui, String telefono, String direccion, Set<Recetas> recetases, Set<Prediagnostico> prediagnosticos, Set<Citas> citases, Set<Expediente> expedientes) {
+    public Paciente(String idPaciente, String nombre, String apellido, String dui, String telefono, String direccion, Set<Prediagnostico> prediagnosticos, Set<Citas> citases, Set<Expediente> expedientes) {
        this.idPaciente = idPaciente;
        this.nombre = nombre;
        this.apellido = apellido;
        this.dui = dui;
        this.telefono = telefono;
        this.direccion = direccion;
-       this.recetases = recetases;
        this.prediagnosticos = prediagnosticos;
        this.citases = citases;
        this.expedientes = expedientes;
@@ -88,13 +86,6 @@ public class Paciente  implements java.io.Serializable {
     
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-    public Set<Recetas> getRecetases() {
-        return this.recetases;
-    }
-    
-    public void setRecetases(Set<Recetas> recetases) {
-        this.recetases = recetases;
     }
     public Set<Prediagnostico> getPrediagnosticos() {
         return this.prediagnosticos;

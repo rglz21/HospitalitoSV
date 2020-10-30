@@ -53,7 +53,7 @@ public class ExamenDAO {
         try {
             tra = ses.beginTransaction();
             Examenes datos = new Examenes();
-            datos.setIdPaciente(examanes.getIdPaciente());
+            datos.setCitas(examanes.getCitas());
             datos.setTipoexamenes(examanes.getTipoexamenes());
             datos.setIdExam(examanes.getIdExam());
             datos.setFechaRealizado(examanes.getFechaRealizado());
@@ -103,7 +103,7 @@ public class ExamenDAO {
             tra = ses.beginTransaction();
             Examenes examenes = (Examenes) ses.load(Examenes.class, id);
             examenes.setIdExam(newExamenes.getIdExam());
-            examenes.setIdPaciente(newExamenes.getIdPaciente());
+            examenes.setCitas(examenes.getCitas());
             examenes.setLaboratorio(newExamenes.getLaboratorio());
             examenes.setFechaRealizado(newExamenes.getFechaRealizado());
             examenes.setDescripcion(newExamenes.getDescripcion());

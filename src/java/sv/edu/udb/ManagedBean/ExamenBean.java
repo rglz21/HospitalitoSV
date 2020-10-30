@@ -16,6 +16,7 @@ import sv.edu.udb.entites.Laboratorio;
 import sv.edu.udb.entites.Tipoexamenes;
 import sv.edu.udb.DAO.ExamenDAO;
 import sv.edu.udb.DAO.UtilDAO;
+import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Paciente;
 
@@ -32,11 +33,12 @@ public class ExamenBean {
      * Creates a new instance of ExamenBean
      */
     private String  idExam;
+    private Citas cita;
+    private int idCita;
      private Laboratorio laboratorio;
      private int lab;
      private Tipoexamenes tipoexamenes;
      private int tipo;
-     private String idPaciente;
      private String descripcion;
      private Date fechaRealizado;
      
@@ -68,12 +70,14 @@ public class ExamenBean {
         ExamenDAO examenesDao = new ExamenDAO();
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
+        Citas newCita=new Citas();
+        newCita.setIdCita(idCita);
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
-        int num = utilDao.contar("Examenes");
+        int num = utilDao.contarString("Examenes", "idExam");
         int num2 = ++num;
         setIdExam("EXAM-"+num2);
-        Examenes exa = new Examenes( idExam, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);
+        Examenes exa = new Examenes( idExam, newCita, nuevo, tipo1 , descripcion, fechaRealizado);
         examenesDao.addExamenes(exa);
         
         return "Examen";
@@ -84,14 +88,16 @@ public class ExamenBean {
         Examenes examen = examenDao.getExamenes1(id);
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
+        Citas newCita=new Citas();
+        newCita.setIdCita(idCita);
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
         if (examen != null) {
 
             setIdExam(examen.getIdExam());
+            setIdCita(examen.getCitas().getIdCita());
             setLab(examen.getLaboratorio().getIdLab());
             setTipo(examen.getTipoexamenes().getIdTipo());
-            setIdPaciente(examen.getIdPaciente());
             setDescripcion(examen.getDescripcion());
             setFechaRealizado(examen.getFechaRealizado());
             
@@ -100,9 +106,9 @@ public class ExamenBean {
            
         } else {
             setIdExam("");
+            setIdCita(0);
             setLab(0);
             setTipo(0);
-            setIdPaciente("");
             setDescripcion("");
             setFechaRealizado(null);
             
@@ -117,14 +123,16 @@ public class ExamenBean {
         Examenes examen = examenDao.getExamenes1(id);
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
+        Citas newCita=new Citas();
+        newCita.setIdCita(idCita);
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
         if (examen != null) {
 
             setIdExam(examen.getIdExam());
+            setIdCita(examen.getCitas().getIdCita());
             setLab(examen.getLaboratorio().getIdLab());
             setTipo(examen.getTipoexamenes().getIdTipo());
-            setIdPaciente(examen.getIdPaciente());
             setDescripcion(examen.getDescripcion());
             setFechaRealizado(examen.getFechaRealizado());
             
@@ -133,9 +141,9 @@ public class ExamenBean {
            
         } else {
             setIdExam("");
+            setIdCita(0);
             setLab(0);
             setTipo(0);
-            setIdPaciente("");
             setDescripcion("");
             setFechaRealizado(null);
             
@@ -160,26 +168,7 @@ public class ExamenBean {
   
   
           
-          
-          
-   public void returnPaciente(String id) {
-       
-        ExamenDAO pacienteDao = new ExamenDAO();
-        Paciente paciente = pacienteDao.getPaciente(id);
-      
-        if (paciente != null) {
-
-            setIdPaciente(paciente.getIdPaciente());
-          
-           
-        } else {
-            setIdPaciente("");
-            
-            
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Paciente NO encontrado"));
-        }
-   }
+    
        public String deleteExamenes( String id) {
         ExamenDAO examenDao = new ExamenDAO();
         Examenes examen = examenDao.getExamenes1(id);
@@ -187,9 +176,9 @@ public class ExamenBean {
         if (examen != null) {
             examenDao.deleteExamenes(id);
             setIdExam("");
+            setIdCita(0);
             setLab(0);
             setTipo(0);
-            setIdPaciente("");
             setDescripcion("");
             setFechaRealizado(null);
             FacesContext.getCurrentInstance().addMessage(null,
@@ -209,11 +198,13 @@ public class ExamenBean {
         if (obtexamen!= null) {
         Laboratorio nuevo = new Laboratorio();
         Tipoexamenes tipo1 = new Tipoexamenes();
+        Citas newCita=new Citas();
+        newCita.setIdCita(idCita);
         nuevo.setIdLab(lab);
         tipo1.setIdTipo(tipo);
              
         
-          Examenes exa = new Examenes( id, nuevo, tipo1 , idPaciente, descripcion, fechaRealizado);
+          Examenes exa = new Examenes( id, newCita, nuevo, tipo1, descripcion, fechaRealizado);
 
             examenDao.updateExamenes(id, exa);
      
@@ -279,13 +270,6 @@ public class ExamenBean {
         this.tipo = Tipo;
     }
 
-    public String getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(String idPaciente) {
-        this.idPaciente = idPaciente;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -301,6 +285,34 @@ public class ExamenBean {
 
     public void setFechaRealizado(Date fechaRealizado) {
         this.fechaRealizado = fechaRealizado;
+    }
+
+    /**
+     * @return the cita
+     */
+    public Citas getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(Citas cita) {
+        this.cita = cita;
+    }
+
+    /**
+     * @return the idCita
+     */
+    public int getIdCita() {
+        return idCita;
+    }
+
+    /**
+     * @param idCita the idCita to set
+     */
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
     }
    
    

@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,7 +18,6 @@ public class Medicos  implements java.io.Serializable {
      private String apellido;
      private String horaIn;
      private String horaOut;
-     private Set<Recetas> recetases = new HashSet<Recetas>(0);
      private Set<Citas> citases = new HashSet<Citas>(0);
 
     public Medicos() {
@@ -34,7 +33,7 @@ public class Medicos  implements java.io.Serializable {
         this.horaIn = horaIn;
         this.horaOut = horaOut;
     }
-    public Medicos(String idMedico, Areas areas, String jvpm, String nombre, String apellido, String horaIn, String horaOut, Set<Recetas> recetases, Set<Citas> citases) {
+    public Medicos(String idMedico, Areas areas, String jvpm, String nombre, String apellido, String horaIn, String horaOut, Set<Citas> citases) {
        this.idMedico = idMedico;
        this.areas = areas;
        this.jvpm = jvpm;
@@ -42,7 +41,6 @@ public class Medicos  implements java.io.Serializable {
        this.apellido = apellido;
        this.horaIn = horaIn;
        this.horaOut = horaOut;
-       this.recetases = recetases;
        this.citases = citases;
     }
    
@@ -94,13 +92,6 @@ public class Medicos  implements java.io.Serializable {
     
     public void setHoraOut(String horaOut) {
         this.horaOut = horaOut;
-    }
-    public Set<Recetas> getRecetases() {
-        return this.recetases;
-    }
-    
-    public void setRecetases(Set<Recetas> recetases) {
-        this.recetases = recetases;
     }
     public Set<Citas> getCitases() {
         return this.citases;

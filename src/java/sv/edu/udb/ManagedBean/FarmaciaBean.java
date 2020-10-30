@@ -13,7 +13,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.FarmaciaDAO;
 import sv.edu.udb.DAO.MedicinaDAO;
+import sv.edu.udb.entites.Farmacia;
 import sv.edu.udb.entites.Labmedicinas;
+import sv.edu.udb.entites.Laboratorio;
 import sv.edu.udb.entites.Medicamentos;
 import sv.edu.udb.entites.Medicina;
 import sv.edu.udb.entites.Recetas;
@@ -53,8 +55,10 @@ public class FarmaciaBean {
        public String addPro() {
         FarmaciaDAO farmaciaDao = new FarmaciaDAO();
         Labmedicinas nuevo = new Labmedicinas();
+        Farmacia far= new Farmacia();
+        far.setIdFarma(1);
         nuevo.setIdLabMed(lab);
-        Medicamentos farmacia = new Medicamentos(idMedicamento, nuevo, nombre,descripcion, mg,cantidadDisp);
+        Medicamentos farmacia = new Medicamentos(idMedicamento, far, nuevo, nombre,descripcion, mg,cantidadDisp);
         farmaciaDao.addMedicamento(farmacia);
         
         return "indexFarmacia";
@@ -103,10 +107,11 @@ public class FarmaciaBean {
         Medicamentos obtfarmacia = farmaciaDao.getMedicamentoID(getIdMedicamento());
 
         if (obtfarmacia != null) {
-            
+            Farmacia far= new Farmacia();
+        far.setIdFarma(1);
             Labmedicinas nuevo = new Labmedicinas();
             nuevo.setIdLabMed(lab);
-            Medicamentos farmacia = new Medicamentos(idMedicamento, nuevo, nombre,descripcion, mg,cantidadDisp);
+            Medicamentos farmacia = new Medicamentos(idMedicamento, far, nuevo, nombre,descripcion, mg,cantidadDisp);
 
             farmaciaDao.updateMedicamento(getIdMedicamento(), farmacia);
 //            obtfarmacia = farmaciaDao.getMedicamentoID(getIdMedicamento());

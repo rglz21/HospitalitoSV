@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,16 +15,18 @@ public class Consulta  implements java.io.Serializable {
      private String descripcion;
      private Date fecha;
      private String diagnostico;
+     private String idMedico;
 
     public Consulta() {
     }
 
-    public Consulta(String idConsulta, Expediente expediente, String descripcion, Date fecha, String diagnostico) {
+    public Consulta(String idConsulta, Expediente expediente, String descripcion, Date fecha, String diagnostico, String idMedico) {
        this.idConsulta = idConsulta;
        this.expediente = expediente;
        this.descripcion = descripcion;
        this.fecha = fecha;
        this.diagnostico = diagnostico;
+       this.idMedico = idMedico;
     }
    
     public String getIdConsulta() {
@@ -61,6 +63,13 @@ public class Consulta  implements java.io.Serializable {
     
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
+    }
+    public String getIdMedico() {
+        return this.idMedico;
+    }
+    
+    public void setIdMedico(String idMedico) {
+        this.idMedico = idMedico;
     }
 
 

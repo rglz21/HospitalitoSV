@@ -79,8 +79,6 @@ public class CitasDAO {
             datos.setPaciente(cita.getPaciente());
             datos.setFecha(cita.getFecha());
             datos.setHora(cita.getHora());
-            datos.setExamen(cita.getExamen());
-            datos.setTipExamen(cita.getTipExamen());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -124,10 +122,9 @@ public class CitasDAO {
         Transaction tra = null;
         try {
             Citas editCita = (Citas) ses.load(Citas.class, idCita);
+            editCita.setMedicos(cita.getMedicos());
             editCita.setFecha(cita.getFecha());
             editCita.setHora(cita.getHora());
-            editCita.setExamen(cita.getExamen());
-            editCita.setTipExamen(cita.getTipExamen());
             ses.update(editCita);
             ses.getTransaction().commit();
         } catch (Exception e) {

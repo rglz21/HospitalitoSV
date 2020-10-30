@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,23 +12,20 @@ public class Recetas  implements java.io.Serializable {
 
 
      private int idReceta;
-     private Medicos medicos;
-     private Paciente paciente;
+     private Citas citas;
      private Set<Medicina> medicinas = new HashSet<Medicina>(0);
 
     public Recetas() {
     }
 
 	
-    public Recetas(int idReceta, Medicos medicos, Paciente paciente) {
+    public Recetas(int idReceta, Citas citas) {
         this.idReceta = idReceta;
-        this.medicos = medicos;
-        this.paciente = paciente;
+        this.citas = citas;
     }
-    public Recetas(int idReceta, Medicos medicos, Paciente paciente, Set<Medicina> medicinas) {
+    public Recetas(int idReceta, Citas citas, Set<Medicina> medicinas) {
        this.idReceta = idReceta;
-       this.medicos = medicos;
-       this.paciente = paciente;
+       this.citas = citas;
        this.medicinas = medicinas;
     }
    
@@ -39,19 +36,12 @@ public class Recetas  implements java.io.Serializable {
     public void setIdReceta(int idReceta) {
         this.idReceta = idReceta;
     }
-    public Medicos getMedicos() {
-        return this.medicos;
+    public Citas getCitas() {
+        return this.citas;
     }
     
-    public void setMedicos(Medicos medicos) {
-        this.medicos = medicos;
-    }
-    public Paciente getPaciente() {
-        return this.paciente;
-    }
-    
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setCitas(Citas citas) {
+        this.citas = citas;
     }
     public Set<Medicina> getMedicinas() {
         return this.medicinas;

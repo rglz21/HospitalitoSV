@@ -41,24 +41,24 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="hospital"/>
-  <table-filter match-name="labmedicinas"/>
-  <table-filter match-name="areas"/>
-  <table-filter match-name="paciente"/>
-  <table-filter match-name="recetas"/>
-  <table-filter match-name="sintomas"/>
-  <table-filter match-name="prediagnostico"/>
-  <table-filter match-name="examenes"/>
-  <table-filter match-name="consulta"/>
-  <table-filter match-name="laboratorio"/>
   <table-filter match-name="medicos"/>
-  <table-filter match-name="farmacia"/>
-  <table-filter match-name="clinica"/>
-  <table-filter match-name="tipousuario"/>
-  <table-filter match-name="medicina"/>
-  <table-filter match-name="estadopre"/>
   <table-filter match-name="medicamentos"/>
-  <table-filter match-name="expediente"/>
+  <table-filter match-name="prediagnostico"/>
+  <table-filter match-name="areas"/>
   <table-filter match-name="tipoexamenes"/>
   <table-filter match-name="usuario"/>
+  <table-filter match-name="labmedicinas"/>
+  <table-filter match-name="paciente"/>
+  <table-filter match-name="consulta"/>
+  <table-filter match-name="laboratorio"/>
+  <table-filter match-name="farmacia"/>
+  <table-filter match-name="tipousuario"/>
+  <table-filter match-name="clinica"/>
   <table-filter match-name="citas"/>
+  <table-filter match-name="estadopre"/>
+  <table-filter match-name="expediente"/>
+  <table-filter match-name="medicina"/>
+  <table-filter match-name="sintomas"/>
+  <table-filter match-name="examenes"/>
+  <table-filter match-name="recetas"/>
 </hibernate-reverse-engineering>

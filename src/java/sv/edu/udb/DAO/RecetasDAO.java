@@ -56,8 +56,7 @@ public class RecetasDAO {
             tra = ses.beginTransaction();
             Recetas newRec = new Recetas();
             newRec.setIdReceta(receta.getIdReceta());
-            newRec.setMedicos(receta.getMedicos());
-            newRec.setPaciente(receta.getPaciente());
+            newRec.setCitas(receta.getCitas());
             ses.save(newRec);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -104,8 +103,7 @@ public class RecetasDAO {
             tra = ses.beginTransaction();
             Recetas editRecet = (Recetas) ses.load(Recetas.class, idReceta);
             editRecet.setIdReceta(receta.getIdReceta());
-            editRecet.setMedicos(receta.getMedicos());
-            editRecet.setPaciente(receta.getPaciente());
+            editRecet.setCitas(receta.getCitas());
             editRecet.setMedicinas(receta.getMedicinas());
             ses.update(editRecet);
             ses.getTransaction().commit();

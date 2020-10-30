@@ -16,6 +16,7 @@ import sv.edu.udb.DAO.MedicosDAO;
 import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Citas;
+import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
 
@@ -31,8 +32,6 @@ public class CitasBean {
     private Paciente idPaciente;
     private Date fechaCita;
     private String hora;
-    private String examenes;
-    private String tipoExamen;
     private String paciente;
     private String medico;
     private Areas area;
@@ -51,8 +50,6 @@ public class CitasBean {
             setIdPaciente(cita.getPaciente());
             setFechaCita(cita.getFecha());
             setHora(cita.getHora());
-            setExamenes(cita.getExamen());
-            setTipoExamen(cita.getTipExamen());
             MedicosDAO medicosDao=new MedicosDAO();
             Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
             area=medico.getAreas();
@@ -63,8 +60,6 @@ public class CitasBean {
             setIdPaciente(null);
             setFechaCita(new java.util.Date());
             setHora("");
-            setExamenes("");
-            setTipoExamen("");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
             return "editar1";
         }
@@ -77,7 +72,7 @@ public class CitasBean {
         medic.setIdMedico(medico);
         pacient.setIdPaciente(paciente);
         if(cita != null){
-            Citas editCita=new Citas(idCita,medic,pacient,fechaCita,hora,examenes,tipoExamen);
+            Citas editCita=new Citas(idCita,medic,pacient,fechaCita,hora);
             citasDao.updateCita(getIdCita(), editCita);
             cita=citasDao.obtenerCita(getIdCita());
             setIdCita(cita.getIdCita());
@@ -85,8 +80,6 @@ public class CitasBean {
             setIdPaciente(cita.getPaciente());
             setFechaCita(cita.getFecha());
             setHora(cita.getHora());
-            setExamenes(cita.getExamen());
-            setTipoExamen(cita.getTipExamen());
             return "indexMedicos";
         }else{
             setIdCita(0);
@@ -94,8 +87,6 @@ public class CitasBean {
             setIdPaciente(null);
             setFechaCita(new java.util.Date());
             setHora("");
-            setExamenes("");
-            setTipoExamen("");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
             return null;
         }
@@ -108,11 +99,11 @@ public class CitasBean {
         medic.setIdMedico(getMedico());
         pacient.setIdPaciente(getPaciente());
         
-        int ccitas=utilDao.contar("Citas");
+        int ccitas=utilDao.contarString("Citas","idCita");
         int ncita=++ccitas;
         setIdCita(ncita);
         
-        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,examenes,tipoExamen);
+        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora);
         citasDao.addCita(cita);
         
         return "indexMedicos";
@@ -171,35 +162,6 @@ public class CitasBean {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
-    /**
-     * @return the examenes
-     */
-    public String getExamenes() {
-        return examenes;
-    }
-
-    /**
-     * @param examenes the examenes to set
-     */
-    public void setExamenes(String examenes) {
-        this.examenes = examenes;
-    }
-
-    /**
-     * @return the tipoExamen
-     */
-    public String getTipoExamen() {
-        return tipoExamen;
-    }
-
-    /**
-     * @param tipoExamen the tipoExamen to set
-     */
-    public void setTipoExamen(String tipoExamen) {
-        this.tipoExamen = tipoExamen;
-    }
-
     /**
      * @return the paciente
      */

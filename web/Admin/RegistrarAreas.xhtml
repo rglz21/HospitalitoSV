@@ -67,10 +67,6 @@
                 </div>
 
                 <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="ID Area: " for="idArea"/>
-                    <h:inputText value="#{areasBean.idArea}" required="true" requiredMessage="no puede ir vacio los campos" id="idArea" />
-                </div>
-                <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel  value="Clinica: " /> 
                     <h:selectOneMenu id="hola" value="#{areasBean.clinic}" styleClass="p-formgroup-inline" style="margin-left: 0 ;width: 290px; height: 40px; border-style: solid; border-color: black; border-radius: 5px;" >
                         <f:selectItems value="#{areasBean.clinicas}"

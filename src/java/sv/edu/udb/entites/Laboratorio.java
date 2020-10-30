@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Laboratorio  implements java.io.Serializable {
 
 
      private int idLab;
+     private Clinica clinica;
      private String horaA;
      private String horaC;
      private Set<Examenes> exameneses = new HashSet<Examenes>(0);
@@ -20,13 +21,15 @@ public class Laboratorio  implements java.io.Serializable {
     }
 
 	
-    public Laboratorio(int idLab, String horaA, String horaC) {
+    public Laboratorio(int idLab, Clinica clinica, String horaA, String horaC) {
         this.idLab = idLab;
+        this.clinica = clinica;
         this.horaA = horaA;
         this.horaC = horaC;
     }
-    public Laboratorio(int idLab, String horaA, String horaC, Set<Examenes> exameneses) {
+    public Laboratorio(int idLab, Clinica clinica, String horaA, String horaC, Set<Examenes> exameneses) {
        this.idLab = idLab;
+       this.clinica = clinica;
        this.horaA = horaA;
        this.horaC = horaC;
        this.exameneses = exameneses;
@@ -38,6 +41,13 @@ public class Laboratorio  implements java.io.Serializable {
     
     public void setIdLab(int idLab) {
         this.idLab = idLab;
+    }
+    public Clinica getClinica() {
+        return this.clinica;
+    }
+    
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
     }
     public String getHoraA() {
         return this.horaA;

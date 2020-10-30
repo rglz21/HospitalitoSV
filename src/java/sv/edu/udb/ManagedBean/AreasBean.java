@@ -12,6 +12,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.AreasDAO;
 import sv.edu.udb.DAO.ClinicaDAO;
+import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Clinica;
 
@@ -50,9 +51,13 @@ public class AreasBean {
     
     public String addAreas() {
         AreasDAO areasDao = new AreasDAO();
+        UtilDAO utilDao=new UtilDAO();
         Clinica clinicas = new Clinica();
         clinicas.setIdClinic(getClinic());
-        Areas area = new Areas(idArea, clinicas, nombre);
+        
+        int ccitas=utilDao.contar("Areas","idArea");
+        int ncita=++ccitas;
+        Areas area = new Areas(ncita, clinicas, nombre);
         areasDao.addAreas(area);
 
         return "VerAreas";

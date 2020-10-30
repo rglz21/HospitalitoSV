@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import sv.edu.udb.DAO.MedicinaDAO;
 import sv.edu.udb.DAO.RecetasDAO;
 import sv.edu.udb.DAO.UtilDAO;
+import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Medicina;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
@@ -26,10 +27,8 @@ import sv.edu.udb.util.logger;
 @SessionScoped
 public class RecetasBean {
     private int idRecetas;
-    private Medicos medico;
-    private Paciente paciente;
-    private String idMedic;
-    private String idPacient;
+    private Citas cita;
+    private int idCita;
     private Medicina medicina=new Medicina();
     private String nombreM;
     private String mgM;
@@ -51,8 +50,6 @@ public class RecetasBean {
         MedicinaDAO medicinaDao=new MedicinaDAO();
         
         setIdRecetas(receta.getIdReceta());
-        setMedico(receta.getMedicos());
-        setPaciente(receta.getPaciente());
         
         Medicina medicin=medicinaDao.getMedicinasByReceta1(idReceta);
         medicina.setIdMedicina(medicin.getIdMedicina());
@@ -61,20 +58,15 @@ public class RecetasBean {
         setMgM(medicin.getMg());
         setCantM(medicin.getCantidad());
         setDosisM(medicin.getDosis());
-        setIdMedic(medico.getIdMedico());
-        setIdPacient(paciente.getIdPaciente());
         //logger log = new logger();
         //log.InfoLog("Nueva Receta insertada","INFO");
     }
     public void updateReceta() throws IOException{
         RecetasDAO recetasDao=new RecetasDAO();
         MedicinaDAO medicinaDao=new MedicinaDAO();
-        Medicos medic=new Medicos();
-        Paciente pacient= new Paciente();
-        
-        medic.setIdMedico(getIdMedic());
-        pacient.setIdPaciente(getIdPacient());
-        Recetas receta=new Recetas(idRecetas, medic, pacient);
+        Citas ncita=new Citas();
+        ncita.setIdCita(idCita);
+        Recetas receta=new Recetas(idRecetas,ncita);
         recetasDao.updateReceta(idRecetas,receta);
         
         medicina.setRecetas(receta);
@@ -93,18 +85,15 @@ public class RecetasBean {
         UtilDAO utilDao=new UtilDAO();
         RecetasDAO recetasDao=new RecetasDAO();
         MedicinaDAO medicinaDao=new MedicinaDAO();
-        Medicos medic=new Medicos();
-        Paciente pacient= new Paciente();
-        
-        medic.setIdMedico(getIdMedic());
-        pacient.setIdPaciente(getIdPacient());
-        int count=utilDao.contar("Recetas");
+        Citas ncita=new Citas();
+        ncita.setIdCita(idCita);
+        int count=utilDao.contarString("Recetas","idReceta");
         int newidR=++count;
         setIdRecetas(newidR);
-        Recetas receta=new Recetas(idRecetas, medic, pacient);
+        Recetas receta=new Recetas(idRecetas,ncita);
         recetasDao.insertReceta(receta);
         
-        int count2=utilDao.contar("Medicina");
+        int count2=utilDao.contarString("Medicina","idMedicina");
         int id=++count2;
         String newidM= String.valueOf(id);
         System.out.println(newidM);
@@ -131,62 +120,6 @@ public class RecetasBean {
      */
     public void setIdRecetas(int idRecetas) {
         this.idRecetas = idRecetas;
-    }
-
-    /**
-     * @return the medico
-     */
-    public Medicos getMedico() {
-        return medico;
-    }
-
-    /**
-     * @param medico the medico to set
-     */
-    public void setMedico(Medicos medico) {
-        this.medico = medico;
-    }
-
-    /**
-     * @return the paciente
-     */
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    /**
-     * @param paciente the paciente to set
-     */
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    /**
-     * @return the idMedic
-     */
-    public String getIdMedic() {
-        return idMedic;
-    }
-
-    /**
-     * @param idMedic the idMedic to set
-     */
-    public void setIdMedic(String idMedic) {
-        this.idMedic = idMedic;
-    }
-
-    /**
-     * @return the idPacient
-     */
-    public String getIdPacient() {
-        return idPacient;
-    }
-
-    /**
-     * @param idPacient the idPacient to set
-     */
-    public void setIdPacient(String idPacient) {
-        this.idPacient = idPacient;
     }
 
     /**
@@ -257,6 +190,34 @@ public class RecetasBean {
      */
     public void setDosisM(String dosisM) {
         this.dosisM = dosisM;
+    }
+
+    /**
+     * @return the cita
+     */
+    public Citas getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(Citas cita) {
+        this.cita = cita;
+    }
+
+    /**
+     * @return the idCita
+     */
+    public int getIdCita() {
+        return idCita;
+    }
+
+    /**
+     * @param idCita the idCita to set
+     */
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
     }
     
 }

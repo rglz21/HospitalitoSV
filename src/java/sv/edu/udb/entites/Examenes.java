@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 09-20-2020 11:06:04 AM by Hibernate Tools 4.3.1
+// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,20 +11,20 @@ public class Examenes  implements java.io.Serializable {
 
 
      private String idExam;
+     private Citas citas;
      private Laboratorio laboratorio;
      private Tipoexamenes tipoexamenes;
-     private String idPaciente;
      private String descripcion;
      private Date fechaRealizado;
 
     public Examenes() {
     }
 
-    public Examenes(String idExam, Laboratorio laboratorio, Tipoexamenes tipoexamenes, String idPaciente, String descripcion, Date fechaRealizado) {
+    public Examenes(String idExam, Citas citas, Laboratorio laboratorio, Tipoexamenes tipoexamenes, String descripcion, Date fechaRealizado) {
        this.idExam = idExam;
+       this.citas = citas;
        this.laboratorio = laboratorio;
        this.tipoexamenes = tipoexamenes;
-       this.idPaciente = idPaciente;
        this.descripcion = descripcion;
        this.fechaRealizado = fechaRealizado;
     }
@@ -35,6 +35,13 @@ public class Examenes  implements java.io.Serializable {
     
     public void setIdExam(String idExam) {
         this.idExam = idExam;
+    }
+    public Citas getCitas() {
+        return this.citas;
+    }
+    
+    public void setCitas(Citas citas) {
+        this.citas = citas;
     }
     public Laboratorio getLaboratorio() {
         return this.laboratorio;
@@ -49,13 +56,6 @@ public class Examenes  implements java.io.Serializable {
     
     public void setTipoexamenes(Tipoexamenes tipoexamenes) {
         this.tipoexamenes = tipoexamenes;
-    }
-    public String getIdPaciente() {
-        return this.idPaciente;
-    }
-    
-    public void setIdPaciente(String idPaciente) {
-        this.idPaciente = idPaciente;
     }
     public String getDescripcion() {
         return this.descripcion;
