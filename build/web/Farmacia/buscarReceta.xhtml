@@ -2,9 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <title>Informacion</title>
         <meta charset="utf-8"/>
@@ -19,10 +18,10 @@
         <link rel="stylesheet" href="../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../Vista/css/style.css"/>
     </h:head>
-    
-    
+
+
     <h:body>
-        
+
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -50,52 +49,69 @@
                     <span class="fa fa-bars"></span> Menu
                 </button>
                 <h:form>
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="indexFarmacia" value="Farmacia" class="nav-link"/></li>
-                        <li class="nav-item active"><h:commandLink action="buscarReceta.xhtml"  value="Buscar Receta" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="nuevoMedicamento.xhtml" value="Nuevos Medicamentos" class="nav-link"/></li>
-                    </ul>
-                </div>
-                    </h:form>
+                    <div class="collapse navbar-collapse" id="ftco-nav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item "><h:commandLink action="indexFarmacia" value="Farmacia" class="nav-link"/></li>
+                            <li class="nav-item active"><h:commandLink action="buscarReceta.xhtml"  value="Buscar Receta" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="nuevoMedicamento.xhtml" value="Nuevos Medicamentos" class="nav-link"/></li>
+                        </ul>
+                    </div>
+                </h:form>
             </div>
         </nav>
-        
-        
-        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
-        <h:form>
-            <h1 style="text-align: center">Buscador</h1>
-            <h:panelGrid columns="2" style="margin-left: 30%">
-                <h:inputText id="id" value="#{farmaciaBean.idMedicina}"/>
-                <h:commandButton class="btn btn-light" value="Actualizar" action="#{farmaciaBean.returnReceta(farmaciaBean.idMedicina)}" >
-                    <f:ajax execute="@form"
-                            render="authorForm :datatableauthors"
-                            resetValues="true"/>
-                </h:commandButton>
-            </h:panelGrid>
-        </h:form>
-        <h:form  id="datatableauthors">
-            <h:panelGrid columns="2" style="margin-left: 30%">
-                <h:outputLabel for="nombre" value="idMedicamento: " style="color: black;" /> 
-                <h:inputText id="id" required="true" requiredMessage="Debe poner el id del medicamento" value="#{farmaciaBean.idMedicina}" />
-                <h:outputLabel for="apellido" value="Nombre: " style="color: black;"/> 
-                <h:inputText id="nombres" required="true" requiredMessage="Debe poner el nombre de la medicina" value="#{farmaciaBean.nombre1}"/>
-                <h:outputLabel for="dui" value="Cantidad: " style="color: black;"/> 
-                <h:inputText id="apellido" required="true" requiredMessage="Debe poner la cantidad" value="#{farmaciaBean.cantidad}"/>
-                <h:outputLabel for="telefono" value="Dosis: " style="color: black;"/> 
-                <h:inputText id="telefono" required="true" requiredMessage="Debe poner la dosis" value="#{farmaciaBean.dosis}"/>
-                <h:outputLabel for="direccions" value="mg: " style="color: black;"/> 
-                <h:inputText id="direccion" required="true" requiredMessage="Debe poner Mg" value="#{farmaciaBean.mg1}"/>
-            </h:panelGrid>
-            <h:panelGrid columns="2" style="margin-left: 35%; margin-top: 10px; margin-bottom: 10px;">
-                <h:commandButton class="btn btn-primary" value="Actualizar" action="#{farmaciaBean.updateMedi()}" />
-                <h:commandButton class="btn btn-success" value="Reclamado" action="#{farmaciaBean.updateMedicina1()}" />
-            </h:panelGrid>
-        </h:form>
 
-        <h:messages infoStyle="color: blue" globalOnly="true"/>
+
+        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
+            <h:form>
+                <h1 style="text-align: center">Buscador</h1>
+                <h:panelGrid columns="2" style="margin-left: 30%">
+                    <h:inputText id="id" value="#{farmaciaBean.idMedicina}"/>
+                    <h:commandButton class="btn btn-light" value="Actualizar" action="#{farmaciaBean.returnReceta(farmaciaBean.idMedicina)}"/>
+                </h:panelGrid>
+             </h:form>
+             <h:form>
+                <h:dataTable var="list1" value="#{farmaciaBean.medicinas}"  class="table table-sm table-dark">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{list1.idMedicina}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{list1.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad"/>
+                        </f:facet>
+                        <h:outputText value="#{list1.cantidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dosis"/>
+                        </f:facet>
+                        <h:outputText value="#{list1.dosis}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="MG"/>
+                        </f:facet>
+                        <h:outputText value="#{list1.mg}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Operations
+                        </f:facet> 
+                        <h:commandButton class="btn btn-success" value="Reclamado" action="#{farmaciaBean.updateMedicina1(list1.nombre,list1.idMedicina,list1.recetas.idReceta)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+               
         </div>
-        
+
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
                 <div class="row mb-5">
@@ -163,8 +179,8 @@
                 </div>
             </div>
         </footer>
-        
-        
+
+
         <script src="../Vista/js/jquery.min.js"></script>
         <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../Vista/js/popper.min.js"></script>
@@ -180,7 +196,7 @@
         <script src="../Vista/js/scrollax.min.js"></script>
         <script src="../Vista/js/google-map.js"></script>
         <script src="../Vista/js/main.js"></script>
-        
+
     </h:body>
 </html>
 

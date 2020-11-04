@@ -26,7 +26,7 @@ import sv.edu.udb.util.logger;
  * @author rgonz
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class FarmaciaBean {
  
     // Tabla Medicamento
@@ -46,10 +46,12 @@ public class FarmaciaBean {
      private String dosis;
      private String mg1;
      logger log = new logger();
+     //tabla medicinas
+    private List<Medicina> medicinas;
 
-    /**
-     * Creates a new instance of FarmaciaBean
-     */
+    
+   
+
     public FarmaciaBean() {
     }
        public String addPro() {
@@ -140,30 +142,7 @@ public class FarmaciaBean {
     // para mostrar las receta segun el id
         public void returnReceta(int id) {
         MedicinaDAO medicinaDao = new MedicinaDAO();
-        Medicina farmacia1 = medicinaDao.getMedicinasByReceta1(id);
-
-        if (farmacia1 != null) {
-
-    Medicina farmacia = medicinaDao.getMedicinasByReceta1(id);
-           
-            setIdMedicina(farmacia.getIdMedicina());
-            setReceta(farmacia.getRecetas().getIdReceta());
-            setNombre1(farmacia.getNombre());
-            setCantidad(farmacia.getCantidad());
-            setDosis(farmacia.getDosis());
-            setMg1(farmacia.getMg());
-          
-        } else {
-           setIdMedicina("");
-            setReceta(0);
-            setNombre1("");
-            setCantidad(0);
-            setDosis("");
-            setMg1("");
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Medica NO Encontrada"));
-        }
-      
+        medicinas = medicinaDao.getMedicinasByReceta(id); 
     }
          public String updateMedi() {
         MedicinaDAO medicinaDao = new MedicinaDAO();
@@ -188,11 +167,11 @@ public class FarmaciaBean {
 
     }
          // para actualizar la cantidad disponible
-         public String updateMedicina1() {
+         public String updateMedicina1(String nombre,String id,int receta) {
         FarmaciaDAO farmaciaDao = new FarmaciaDAO();
         MedicinaDAO medicinaDao = new MedicinaDAO();
-        Medicamentos obtfarmacia = farmaciaDao.getMedicamentoID1(getNombre1());
-        Medicina obtfarmacia1 = medicinaDao.getMedicinasByReceta1(getIdMedicina());
+        Medicamentos obtfarmacia = farmaciaDao.getMedicamentoID1(nombre);
+        Medicina obtfarmacia1 = medicinaDao.getMedicinasByReceta1(id);
 
         if (obtfarmacia != null) {
          
@@ -200,16 +179,19 @@ public class FarmaciaBean {
             Medicamentos farmacia = new Medicamentos(nue);
 
             farmaciaDao.updateMedicamento1(obtfarmacia.getIdMedicamento(), farmacia);
-
+            Medicina medi = new Medicina("Reclamado");
+            medicinaDao.updateEstadoMedicamento(id, medi);
+            returnReceta(receta);
+// ver porque no me actualiza el estado
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Medicamento con Nombre " + getNombre1() + " Actualizado"));
+                    new FacesMessage("Medicamento con Nombre " + nombre + " Actualizado"));
         } else {
          
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Medicamento con Nombre " + getNombre1() + " NO encontrado"));
+                    new FacesMessage("Medicamento con Nombre " + nombre + " NO encontrado"));
         }
 
-        return "indexFarmacia";
+        return "buscarReceta";
 
     }
            public String deleteEmpleado(String id) {
@@ -346,6 +328,15 @@ public class FarmaciaBean {
 
     public void setCantidadDisp(int cantidadDisp) {
         this.cantidadDisp = cantidadDisp;
+    }
+    
+     public List<Medicina> getMedicinas() {
+        return medicinas;
+    }
+
+    
+    public void setMedicinas(List<Medicina> medicinas) {    
+        this.medicinas = medicinas;
     }
 
      

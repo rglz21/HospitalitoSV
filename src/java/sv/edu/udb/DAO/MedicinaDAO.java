@@ -21,6 +21,7 @@ import sv.edu.udb.entites.Medicina;
  */
 public class MedicinaDAO {
 
+    // lo cambie un poco para filtrar los id recetas que no se haya reclamado, esto en farmacia
     public List<Medicina> getMedicinasByReceta(int idReceta) {
         List<Medicina> medicinas = new ArrayList<Medicina>();
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -28,9 +29,10 @@ public class MedicinaDAO {
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Medicinas where idReceta= :idRec";
+            String queryString = "from Medicina where idReceta= :idRec and estado != :estado";
             Query query = ses.createQuery(queryString);
             query.setParameter("idRec", idReceta);
+            query.setParameter("estado","Reclamado");
             medicinas = query.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,6 +123,27 @@ public class MedicinaDAO {
             ses.close();
         }
     }
+    
+     public void updateEstadoMedicamento(String idMedi, Medicina medicina) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Medicina datos = (Medicina) ses.load(Medicina.class, idMedi);
+            datos.setEstado(medicina.getEstado());
+            ses.update(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 
     public Medicina getMedicinasByReceta1(String idReceta) {
         Medicina medicinas = new Medicina();
@@ -129,7 +152,7 @@ public class MedicinaDAO {
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Medicina where idReceta= :idRec";
+            String queryString = "from Medicina where idMedicina= :idRec";
             Query query = ses.createQuery(queryString);
             query.setParameter("idRec", idReceta);
             medicinas = (Medicina) query.uniqueResult();

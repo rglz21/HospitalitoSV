@@ -15,6 +15,7 @@ public class Medicina  implements java.io.Serializable {
      private int cantidad;
      private String dosis;
      private String mg;
+     private String estado;
 
     public Medicina() {
     }
@@ -26,6 +27,17 @@ public class Medicina  implements java.io.Serializable {
        this.cantidad = cantidad;
        this.dosis = dosis;
        this.mg = mg;
+    }
+     public Medicina(String estado) {
+       this.estado = estado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
    
     public String getIdMedicina() {

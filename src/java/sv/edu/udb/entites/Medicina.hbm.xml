@@ -23,5 +23,8 @@
         <property name="mg" type="string">
             <column name="mg" length="25" not-null="true" />
         </property>
+         <property name="estado" type="string">
+            <column name="estado" length="11" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>
