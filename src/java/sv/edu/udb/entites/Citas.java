@@ -1,5 +1,5 @@
 package sv.edu.udb.entites;
-// Generated 10-30-2020 09:21:46 AM by Hibernate Tools 4.3.1
+// Generated 11-10-2020 10:37:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,6 +17,7 @@ public class Citas  implements java.io.Serializable {
      private Paciente paciente;
      private Date fecha;
      private String hora;
+     private String estado;
      private Set<Examenes> exameneses = new HashSet<Examenes>(0);
      private Set<Recetas> recetases = new HashSet<Recetas>(0);
 
@@ -24,19 +25,21 @@ public class Citas  implements java.io.Serializable {
     }
 
 	
-    public Citas(int idCita, Medicos medicos, Paciente paciente, Date fecha, String hora) {
+    public Citas(int idCita, Medicos medicos, Paciente paciente, Date fecha, String hora, String estado) {
         this.idCita = idCita;
         this.medicos = medicos;
         this.paciente = paciente;
         this.fecha = fecha;
         this.hora = hora;
+        this.estado = estado;
     }
-    public Citas(int idCita, Medicos medicos, Paciente paciente, Date fecha, String hora, Set<Examenes> exameneses, Set<Recetas> recetases) {
+    public Citas(int idCita, Medicos medicos, Paciente paciente, Date fecha, String hora, String estado, Set<Examenes> exameneses, Set<Recetas> recetases) {
        this.idCita = idCita;
        this.medicos = medicos;
        this.paciente = paciente;
        this.fecha = fecha;
        this.hora = hora;
+       this.estado = estado;
        this.exameneses = exameneses;
        this.recetases = recetases;
     }
@@ -75,6 +78,13 @@ public class Citas  implements java.io.Serializable {
     
     public void setHora(String hora) {
         this.hora = hora;
+    }
+    public String getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     public Set<Examenes> getExameneses() {
         return this.exameneses;

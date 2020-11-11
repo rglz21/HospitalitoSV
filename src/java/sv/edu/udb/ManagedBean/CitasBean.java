@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.CitasDAO;
@@ -16,6 +17,7 @@ import sv.edu.udb.DAO.MedicosDAO;
 import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Citas;
+import sv.edu.udb.entites.Consulta;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
@@ -36,10 +38,21 @@ public class CitasBean {
     private String medico;
     private Areas area;
     private int idArea;
+    private String estado;
+    private Consulta con=new Consulta();
+    @ManagedProperty(value="#{consultaBean}")
+    private ConsultaBean conBean;
+
     /**
      * Creates a new instance of CitasBean
      */
     public CitasBean() {
+    }
+    public String guardarCita(){
+        CitasDAO citasDao=new CitasDAO();
+        Citas cita=citasDao.obtenerCita(idCita);
+        conBean.addConsulta(cita, con);
+        return "indexMedicos";
     }
     public String obtenerCitaById(int idCita){
         CitasDAO citasDao=new CitasDAO();
@@ -53,7 +66,7 @@ public class CitasBean {
             MedicosDAO medicosDao=new MedicosDAO();
             Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
             area=medico.getAreas();
-            return "editarCitas";
+            return "citaOpen";
         }else{
             setIdCita(0);
             setIdMedico(null);
@@ -72,7 +85,7 @@ public class CitasBean {
         medic.setIdMedico(medico);
         pacient.setIdPaciente(paciente);
         if(cita != null){
-            Citas editCita=new Citas(idCita,medic,pacient,fechaCita,hora);
+            Citas editCita=new Citas(idCita,medic,pacient,fechaCita,hora,estado);
             citasDao.updateCita(getIdCita(), editCita);
             cita=citasDao.obtenerCita(getIdCita());
             setIdCita(cita.getIdCita());
@@ -103,7 +116,7 @@ public class CitasBean {
         int ncita=++ccitas;
         setIdCita(ncita);
         
-        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora);
+        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,estado);
         citasDao.addCita(cita);
         
         return "indexMedicos";
@@ -112,6 +125,11 @@ public class CitasBean {
     public List<Citas>getCitasByMedicos(String idMedico){
         CitasDAO citasDao=new CitasDAO();
         List<Citas> lista=citasDao.getCitasByMedico(idMedico);
+        return lista;
+    }
+    public List<Citas>getCitasPerdidas(String idMedico){
+        CitasDAO citasDao=new CitasDAO();
+        List<Citas> lista=citasDao.getCitasPerdidas(idMedico);
         return lista;
     }
     
@@ -244,6 +262,48 @@ public class CitasBean {
      */
     public void setIdArea(int idArea) {
         this.idArea = idArea;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the conBean
+     */
+    public ConsultaBean getConBean() {
+        return conBean;
+    }
+
+    /**
+     * @param conBean the conBean to set
+     */
+    public void setConBean(ConsultaBean conBean) {
+        this.conBean = conBean;
+    }
+
+    /**
+     * @return the con
+     */
+    public Consulta getCon() {
+        return con;
+    }
+
+    /**
+     * @param con the con to set
+     */
+    public void setCon(Consulta con) {
+        this.con = con;
     }
 
     

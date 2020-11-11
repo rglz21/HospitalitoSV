@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Login</title>
         <link type="text/css" rel="stylesheet" href="Vista/login.css"/>
@@ -15,21 +16,19 @@
             <div class="container">
                 <div class="cuadro"></div>
                 <h1>Bienvenido al Hospital SV</h1> 
-                <h:form class="form">
-
-                        <h:outputLabel for="id" value="Usuario: "  style="font-size: 20px;"/> 
-                        <h:inputText id="id" value="#{loginBean.usuario}" required="true" requiredMessage="no puede ir vacio los campos" >
-                            <f:ajax event="blur" listener="#{loginBean.countPaciente(loginBean.usuario)}" render="@form"/>
-                        </h:inputText>
-                        <h:outputLabel for="nombres" value="Contraseña: " style="font-size: 20px"/> 
-                        <h:inputSecret id="nombres" value="#{loginBean.contrasena}" required="true" requiredMessage="no puede ir vacio los campos" />
-                        <br/>
-                        <h:commandButton value="Ingresar" action="#{loginBean.sesionUser()}" id="login-button"/>
-                        <h:commandButton value="Registrate" action="#{loginBean.registro()}" id='regist-button'/>
-                        <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
-                        <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>  
-
-                </h:form>
+                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                    <font color="red">
+                        Favor verifique que sus datos sean correctos o que su cuenta este verificada
+                    </font>
+                </c:if>
+                <form class="form" action="${request.contextPath}/appLogin" method="POST">
+                    <h:outputLabel value="Usuario:" />
+                    <input type="text" name="app_username"/><br/><br/>
+                    <h:outputLabel value="Contraseña:" />
+                    <input type="password" name="app_password"/> <br/><br/>
+                    <input type="submit" value="Login"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
             </div>
 
             <ul class="bg-bubbles">

@@ -4,9 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+    
+    
     <h:head>
-        <title>Editar cita</title>
         <title>Facelet Title</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -20,9 +20,10 @@
         <link rel="stylesheet" href="../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../Vista/css/style.css"/>
     </h:head>
-
+    
+    
     <h:body>
-
+        
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -36,7 +37,12 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
+                                    <div class="text">
+                                        <form action="${request.contextPath}/appLogout" method="POST">
+                                            <input type="submit" value="Logout"/>
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,72 +55,61 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-                   <h:form>
+                <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="crearCitas.xhtml" value="Nueva Cita" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="crearRecetas.xhtml" value="Nueva Receta" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
                     </ul>
                 </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </h:form>
             </div>
         </nav>
-
-        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
-            <h:form>
-                <div class=" heading-section text-center">
-                    <h1>Editar Citas</h1>
+        
+        <h:form>
+            
+            <div class=" heading-section text-center">
+                <h:outputLabel style="font-size: 30px;" value="Citas perdidas por los pacientes"/>
                 </div>
-
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Area" for="areas"/>
-                    <h:inputText value="#{citasBean.area.idArea}" disabled="true"/>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Medico" for="medicos"/>
-                    <h:inputText id="medico" required="true" requiredMessage="no puede ir vacio los campos" value="#{citasBean.idMedico.idMedico}" disabled="true"/>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Paciente" for="pacientes"/>
-                    <h:inputText value="#{citasBean.idPaciente.idPaciente}" disabled="true"/>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Fecha" for="fecha"/>
-                    <h:inputText value="#{citasBean.fechaCita}" required="true" requiredMessage="no puede ir vacio los campos" id="fecha" styleClass="form-control">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:inputText>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Hora" for="hora"/>
-                    <h:selectOneMenu id="hora" value="#{citasBean.hora}" styleClass="form-control">
-                        #{medicosBean.getHoraMedico(citasBean.idMedico.idMedico)}
-                        <f:selectItems value="#{medicosBean.horario}" var="h" itemLabel="#{h}" itemValue="#{h}"/>
-                    </h:selectOneMenu>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:selectOneRadio id="ifexamen" value="#{citasBean.examenes}">
-                        <f:selectItem itemLabel="No requiere examen" itemValue="No"/>
-                        <f:selectItem itemLabel="Requiere examen" itemValue="Si"/>
-                    </h:selectOneRadio>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:outputLabel value="Tipo de Examen" for="tipoExamen"/>
-                    <h:selectOneMenu id="tipoExamen" value="#{citasBean.tipoExamen}" styleClass="form-control" >
-                        <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                        <f:selectItems value="#{examenesBean.tipos}" var="e" itemLabel="#{e.tipo}" itemValue="#{e.tipo}"/>
-                        <f:ajax disabled="true"/>
-                    </h:selectOneMenu>
-                </div>
-                <div class="form-group" style="margin-left: 30%">
-                    <h:commandButton value="Actualizar Cita" action="#{citasBean.updateCita()}"/>
-                </div>
-            </h:form>
-        </div>
-
-
-
+            
+            
+            <h:dataTable class="table table-sm table-dark" value="#{citasBean.getCitasPerdidas(userInfoMB.userName)}" var="cm">
+                <h:column>
+                    <f:facet name="header">
+                        Paciente
+                    </f:facet>
+                    #{cm.paciente.nombre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha
+                    </f:facet>
+                    #{cm.fecha}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Hora
+                    </f:facet>
+                    #{cm.hora}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operations
+                    </f:facet>
+                    <h:commandLink value="Abrir Cita" action="#{citasBean.obtenerCitaById(cm.idCita)}">
+                        <f:ajax execute="@form"
+                                render="prediag :tablePrediag"
+                                resetValues="true"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </h:form>
+        
+        
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
                 <div class="row mb-5">
@@ -182,8 +177,7 @@
                 </div>
             </div>
         </footer>
-
-
+        
         <script src="../Vista/js/jquery.min.js"></script>
         <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../Vista/js/popper.min.js"></script>
@@ -199,7 +193,7 @@
         <script src="../Vista/js/scrollax.min.js"></script>
         <script src="../Vista/js/google-map.js"></script>
         <script src="../Vista/js/main.js"></script>
-
+        
     </h:body>
 </html>
 

@@ -37,7 +37,12 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
+                                    <div class="text">
+                                        <form action="${request.contextPath}/appLogout" method="POST">
+                                            <input type="submit" value="Logout"/>
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,11 +59,12 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="crearCitas.xhtml" value="Nueva Cita" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Nueva Cita" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="crearRecetas.xhtml" value="Nueva Receta" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
                     </ul>
                 </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </h:form>
             </div>
         </nav>
@@ -66,11 +72,11 @@
         <h:form>
             
             <div class=" heading-section text-center">
-                <h:outputLabel style="font-size: 30px;" value="Bienvenido: #{loginBean.usuario} estas son sus Citas"/>
+                <h:outputLabel style="font-size: 30px;" value="Bienvenido: #{userInfoMB.userName} estas son sus Citas"/>
                 </div>
             
             
-            <h:dataTable class="table table-sm table-dark" value="#{citasBean.getCitasByMedicos(loginBean.usuario)}" var="cm">
+            <h:dataTable class="table table-sm table-dark" value="#{citasBean.getCitasByMedicos(userInfoMB.userName)}" var="cm">
                 <h:column>
                     <f:facet name="header">
                         Paciente
@@ -93,13 +99,14 @@
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandLink value="Editar" action="#{citasBean.obtenerCitaById(cm.idCita)}">
+                    <h:commandLink value="Abrir Cita" action="#{citasBean.obtenerCitaById(cm.idCita)}">
                         <f:ajax execute="@form"
                                 render="prediag :tablePrediag"
                                 resetValues="true"/>
                     </h:commandLink>
                 </h:column>
             </h:dataTable>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </h:form>
         
         

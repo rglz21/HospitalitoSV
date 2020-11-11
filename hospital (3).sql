@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 27-10-2020 a las 20:52:39
+-- Tiempo de generación: 11-11-2020 a las 07:15:40
 -- Versión del servidor: 10.4.10-MariaDB
--- Versión de PHP: 7.4.0
+-- Versión de PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,7 +45,8 @@ INSERT INTO `areas` (`idArea`, `nombre`, `idClinic`) VALUES
 (1, 'General', 1),
 (2, 'Odontologia', 1),
 (3, 'Pediatriaaaa', 1),
-(5, 'Ginecologia', 1);
+(5, 'Ginecologia', 1),
+(6, 'Ortopedia', 1);
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `citas` (
   `idPaciente` varchar(11) NOT NULL,
   `Fecha` date NOT NULL,
   `hora` varchar(10) NOT NULL,
+  `estado` varchar(15) NOT NULL,
   PRIMARY KEY (`idCita`),
   KEY `fk_idMedico` (`idMedico`),
   KEY `fk_idPaciente` (`idPaciente`)
@@ -69,14 +71,15 @@ CREATE TABLE IF NOT EXISTS `citas` (
 -- Volcado de datos para la tabla `citas`
 --
 
-INSERT INTO `citas` (`idCita`, `idMedico`, `idPaciente`, `Fecha`, `hora`) VALUES
-(0, 'MED-3', 'PR-1', '2020-10-05', '9:00'),
-(1, 'MED-1', 'RG-1', '2020-10-18', '8:00'),
-(3, 'MED-3', 'RG-1', '2020-12-09', '8:00'),
-(4, 'MED-3', 'PR-1', '2020-12-09', '10:00'),
-(5, 'MED-3', 'PR-1', '2020-12-09', '10:00'),
-(6, 'MED-3', 'PR-1', '2020-12-09', '10:00'),
-(7, 'MED-3', 'RG-1', '2020-12-09', '10:00');
+INSERT INTO `citas` (`idCita`, `idMedico`, `idPaciente`, `Fecha`, `hora`, `estado`) VALUES
+(0, 'MED-3', 'PR-1', '2020-10-05', '9:00', 'No abierta'),
+(1, 'MED-1', 'RG-1', '2020-11-11', '8:00', 'No abierta'),
+(3, 'MED-3', 'RG-1', '2020-12-09', '8:00', 'No abierta'),
+(4, 'MED-3', 'PR-1', '2020-12-09', '10:00', 'No abierta'),
+(5, 'MED-3', 'PR-1', '2020-12-09', '10:00', 'No abierta'),
+(6, 'MED-3', 'PR-1', '2020-12-09', '10:00', 'No abierta'),
+(7, 'MED-3', 'RG-1', '2020-12-09', '10:00', 'No abierta'),
+(8, 'MED-1', 'PR-1', '2020-11-09', '10:00', 'No abierta');
 
 -- --------------------------------------------------------
 
@@ -108,12 +111,13 @@ INSERT INTO `clinica` (`idClinic`, `nombre`, `direccion`, `telefono`) VALUES
 
 DROP TABLE IF EXISTS `consulta`;
 CREATE TABLE IF NOT EXISTS `consulta` (
-  `idConsulta` varchar(11) NOT NULL,
+  `idConsulta` int(11) NOT NULL,
   `idExpe` varchar(11) NOT NULL,
   `descripcion` varchar(1000) NOT NULL,
   `fecha` date NOT NULL,
-  `diagnostico` text NOT NULL,
+  `diagnostico` varchar(25) NOT NULL,
   `idMedico` varchar(11) NOT NULL,
+  `idCita` int(11) NOT NULL,
   PRIMARY KEY (`idConsulta`),
   KEY `idExpe` (`idExpe`),
   KEY `idMedico` (`idMedico`)
@@ -123,9 +127,11 @@ CREATE TABLE IF NOT EXISTS `consulta` (
 -- Volcado de datos para la tabla `consulta`
 --
 
-INSERT INTO `consulta` (`idConsulta`, `idExpe`, `descripcion`, `fecha`, `diagnostico`, `idMedico`) VALUES
-('1', 'EXP-2020', 'Sele hicieron muchas pruebas y todo arroja que va morir', '2020-09-03', 'Covid', ''),
-('2', 'EXP-2021', 'paso consulta por un dolor de garganta', '2020-10-03', 'amigdalitis', '');
+INSERT INTO `consulta` (`idConsulta`, `idExpe`, `descripcion`, `fecha`, `diagnostico`, `idMedico`, `idCita`) VALUES
+(1, 'EXP-2020', 'Sele hicieron muchas pruebas y todo arroja que va morir', '2020-09-03', 'Covid', '', 0),
+(2, 'EXP-2021', 'paso consulta por un dolor de garganta', '2020-10-03', 'amigdalitis', '', 0),
+(3, 'EXP-2020', 'Roberto asistio a la consulta por problemas de respiracion', '2020-11-11', 'Asma', 'MED-1', 0),
+(4, 'EXP-2021', 'Perla asistio por tristeza ', '2020-11-11', 'Depresion', 'MED-1', 8);
 
 -- --------------------------------------------------------
 
@@ -174,9 +180,10 @@ CREATE TABLE IF NOT EXISTS `examenes` (
 --
 
 INSERT INTO `examenes` (`idExam`, `idTipo`, `descripcion`, `fechaRealizado`, `idLab`, `idCita`) VALUES
-('EXAM-1', 1, 'nivel de plaquetas', '2020-09-02', 1, 0),
+('EXAM-1', 1, 'nivel de plaquetas', '2020-10-31', 1, 0),
 ('EXAM-2', 2, 'Infeccion de vias urinarias', '2020-10-02', 1, 0),
-('EXAM-3', 1, 'Examen para ver si tiene anemia', '2020-10-03', 1, 0);
+('EXAM-3', 1, 'Examen para ver si tiene anemia', '2020-10-03', 1, 0),
+('EXAM-4', 1, 'algo', '2020-10-31', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -308,6 +315,7 @@ CREATE TABLE IF NOT EXISTS `medicina` (
   `dosis` varchar(100) NOT NULL,
   `mg` varchar(25) NOT NULL,
   `idReceta` int(11) NOT NULL,
+  `estado` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`idMedicina`),
   KEY `fk_idRecetaa` (`idReceta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -316,11 +324,11 @@ CREATE TABLE IF NOT EXISTS `medicina` (
 -- Volcado de datos para la tabla `medicina`
 --
 
-INSERT INTO `medicina` (`idMedicina`, `nombre`, `cantidad`, `dosis`, `mg`, `idReceta`) VALUES
-('1', 'Acetaminofen', 1, '1 cada 8 horas', '500', 1),
-('2', 'Amoxicilina', 20, '1 cada 8 horas', '500 mg', 3),
-('3', 'Metformina', 15, '1 cada 12 horas', '250 mg', 4),
-('4', 'Aspirina', 15, '1 cada 12 horas', '250 mg', 5);
+INSERT INTO `medicina` (`idMedicina`, `nombre`, `cantidad`, `dosis`, `mg`, `idReceta`, `estado`) VALUES
+('1', 'Acetaminofen', 1, '1 cada 8 horas', '500', 1, ''),
+('2', 'Amoxicilina', 20, '1 cada 8 horas', '500 mg', 3, ''),
+('3', 'Metformina', 15, '1 cada 12 horas', '250 mg', 4, ''),
+('4', 'Aspirina', 15, '1 cada 12 horas', '250 mg', 5, '');
 
 -- --------------------------------------------------------
 
@@ -491,10 +499,12 @@ CREATE TABLE IF NOT EXISTS `tipousuario` (
 --
 
 INSERT INTO `tipousuario` (`idTipo`, `Tipo`) VALUES
-(1, 'Paciente'),
-(2, 'Medico'),
-(3, 'Farmacia'),
-(4, 'Laboratorio');
+(1, 'ROLE_Paciente'),
+(2, 'ROLE_Medico'),
+(3, 'ROLE_Farmacia'),
+(4, 'ROLE_Laboratorio'),
+(5, 'ROLE_Admin'),
+(6, 'ROLE_Secretaria');
 
 -- --------------------------------------------------------
 
@@ -518,6 +528,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`usuario`, `Contrasena`, `correo`, `idTipo`, `Verificar`) VALUES
+('alguien', 'holi', 'alguien@algo.com', 3, 'no'),
 ('DOC-1', '123', 'zabdiel.hernandez203@gmail.com', 2, 'Verificado'),
 ('DOC-2', '123', 'zabdiel.hernandez203@gmail.com', 2, 'Verificado'),
 ('javierbryancito', '123', 'jonathan.hernandez203@yahoo.com', 4, 'Verificado'),
