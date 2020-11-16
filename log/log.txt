@@ -25,3 +25,6 @@
 [28/10/2020 20:34:13][INFO] Nueva persona Registrado
 [28/10/2020 20:42:8][INFO] Nueva persona Registrado
 [28/10/2020 20:49:56][INFO] Nueva persona Registrado
+[16/11/2020 10:58:47][INFO] Nueva persona Registrado
+[16/11/2020 11:2:23][INFO] Nueva persona Registrado
+[16/11/2020 11:5:46][INFO] Nueva persona Registrado

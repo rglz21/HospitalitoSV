@@ -39,7 +39,6 @@ public class SintomasBean {
 
     public String addSintomas(String idPacient) throws IOException, ParseException {
         PrediagBean metodo = new PrediagBean();
-        metodo.addPrediagnostico(idPacient);
         SintomasDAO sintomaDao = new SintomasDAO();
         Prediagnostico predia = new Prediagnostico();
         predia.setIdPrediag(getPredi());

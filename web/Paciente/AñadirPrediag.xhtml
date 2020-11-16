@@ -36,7 +36,12 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
+                                    <div class="text">
+                                        <form action="${request.contextPath}/appLogout" method="POST">
+                                            <input type="submit" value="Logout"/>
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -50,23 +55,24 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
-              <h:form>
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item "><h:commandLink action="indexPaciente.xhtml" value="Index" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
-                        <li class="nav-item active"><h:commandLink action="AñadirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
-                    </ul>
-                </div>
-                    </h:form>
+                <h:form>
+                    <div class="collapse navbar-collapse" id="ftco-nav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item "><h:commandLink action="indexPaciente.xhtml" value="Index" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
+                            <li class="nav-item active"><h:commandLink action="AñadirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </ul>
+                    </div>
+                </h:form>
             </div>
         </nav>
 
         <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
             <h:form>
                 <h1 style="text-align: center">Añadir un Prediagrama</h1>
-                <h1 style="text-align: center">Hola #{loginBean.usuario}</h1>
+                <h1 style="text-align: center">Hola #{userInfoMB.userName}</h1>
                 <div class="form-group" style="margin-left: 30%">
                     <h:outputLabel for="idSintoma" value="ID Sintoma: " />
                     <h:inputText id="idSintoma" value="#{sintomasBean.idSintoma}" style="margin-left: 30px; border-style: solid; border-color: black; border-radius: 5px;"/>
@@ -89,8 +95,9 @@
                 </div>
                 <!--Cambiar el loginBean y crear el metodo-->
                 <div class="form-group" style="margin-left: 35%">
-                    <h:commandButton class="btn btn-primary" value="Ingresar sintomas" action="#{sintomasBean.addSintomas(loginBean.usuario)}" />
+                    <h:commandButton class="btn btn-primary" value="Ingresar sintomas" action="#{sintomasBean.addSintomas(userInfoMB.userName)}" />
                 </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </h:form>
         </div>
 
