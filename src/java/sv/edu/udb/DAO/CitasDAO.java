@@ -175,6 +175,7 @@ public class CitasDAO {
         return cita;
     }
 
+
      public List<Citas> obtenerDoctorByCitas(String idMedico) {
          List<Citas> cita = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -198,6 +199,7 @@ public class CitasDAO {
         }
         return cita;
     }
+
     
     public void updateCita(int idCita, Citas cita) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -225,5 +227,28 @@ public class CitasDAO {
             ses.close();
         }
     }
-
+public List<Citas> getCitasByPacientes(String idPacientes) {
+        List<Citas> citas = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Citas where idPaciente = :idPaciente";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idPaciente", idPacientes);
+            citas = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return citas;
+    }
 }
+
+//p

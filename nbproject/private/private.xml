@@ -12,7 +12,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/rgonz/Documents/HospitalitoSV/src/java/sv/edu/udb/entites/Medicina.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/javie/Documents/HospitalitoSV/web/Medicos/citasPerdidas.xhtml</file>
+            <file>file:/C:/Users/javie/Documents/HospitalitoSV/src/java/sv/edu/udb/DAO/PacienteDAO.java</file>
+            <file>file:/C:/Users/javie/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/MedicosBean.java</file>
+            <file>file:/C:/Users/javie/Documents/HospitalitoSV/web/Medicos/Expediente.xhtml</file>
+=======
+            <file>file:/C:/Users/jonat/OneDrive/Documentos/Tecnico%20UDB/CICLO%202%202020/DWF%2002T/ProyectoDWF/HospitalitoSV/web/Paciente/indexPaciente.xhtml</file>
+>>>>>>> 834ed591ff80d5c3a65a24c4227830d50598295f
+>>>>>>> 6cca32f57ddb16bfc2990ee54f7d37473472d454
         </group>
     </open-files>
 </project-private>

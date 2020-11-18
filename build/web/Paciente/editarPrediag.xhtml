@@ -20,7 +20,7 @@
 
 
     <h:body>
-
+ 
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -55,6 +55,7 @@
                         <li class="nav-item "><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
                         <li class="nav-item "><h:commandLink action="AñadirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </ul>
                 </div>
                     </h:form>
@@ -88,6 +89,7 @@
                 <div class="form-group" style="margin-left: 40%">
                     <h:commandButton class="btn btn-primary" value="Actualizar" action="#{sintomasBean.updateSintomas(sintomasBean.idSintoma)}" />
                 </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </h:form>
         </div>
 

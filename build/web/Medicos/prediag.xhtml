@@ -59,6 +59,7 @@
                             <li class="nav-item active"><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
                         </ul>
                     </div>
+                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </h:form>
             </div>
         </nav>
@@ -97,6 +98,7 @@
                 <h:commandButton class="btn btn-secondary" action="#{expedienteBean.verExpediente(prediagBean.paciente.idPaciente)}" value="Mostrar expediente" style="margin: 10px;"/>
                 <h:commandButton class="btn btn-warning" action="crearCitas" value="Agendar cita" style="margin: 10px;"/>
             </div>
+             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </h:form>
 
         <h:form id="tablePrediag">
@@ -130,6 +132,7 @@
                     </h:commandButton>
                 </h:column>
             </h:dataTable>
+             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </h:form>
 
         <footer class="footer ftco-section ftco-no-pt">

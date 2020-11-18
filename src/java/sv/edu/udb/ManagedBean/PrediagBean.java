@@ -92,19 +92,18 @@ public class PrediagBean {
         return "crearCitas";
     }
 
-   public void addPrediagnostico(String idpacient) throws IOException, ParseException {
-        UtilDAO utilDao=new UtilDAO();
+    public void addPrediagnostico(String idpacient) throws IOException, ParseException {
+        UtilDAO utilDao = new UtilDAO();
         PrediagDAO prediagDao = new PrediagDAO();
         Estadopre estado = new Estadopre();
         Paciente pacien = new Paciente();
-        int num = utilDao.contarString("Prediagnostico","idPrediag");
+        int num = utilDao.contarString("Prediagnostico", "idPrediag");
         int num2 = ++num;
-        
+
         setIdPrediag(num2);
         estado.setIdEstado(1);
         pacien.setIdPaciente(idpacient);
-        
-        
+
         Prediagnostico predia = new Prediagnostico(idPrediag, estado, pacien, fechaPre);
         prediagDao.addPrediagnostico(predia);
     }
@@ -129,7 +128,6 @@ public class PrediagBean {
 //        }
 //        return "editarPrediag";
 //    }
-    
 //    public void updatePrediag(int id) {
 //        PrediagDAO prediaDao = new PrediagDAO();
 //        Prediagnostico predia = prediaDao.getPrediag1(id);
@@ -151,7 +149,6 @@ public class PrediagBean {
 //                    new FacesMessage("Medico con ID " + id + " NO encontrado"));
 //        }
 //    }
-
     public void deletePrediag(int id) {
         PrediagDAO prediaDao = new PrediagDAO();
         Prediagnostico predia = prediaDao.getPrediag1(id);
@@ -168,6 +165,12 @@ public class PrediagBean {
             FacesContext.getCurrentInstance().addMessage("successMessage",
                     new FacesMessage("medico con ID " + id + " NO encontrado"));
         }
+    }
+
+    public List<Prediagnostico> getPrediagByPacientes(String idPaciente) {
+        PrediagDAO citasDao = new PrediagDAO();
+        List<Prediagnostico> lista = citasDao.getPrediagByPaciente(idPaciente);
+        return lista;
     }
 
     public int getIdPrediag() {
@@ -271,7 +274,7 @@ public class PrediagBean {
     public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
-    
+
     public int getEstado() {
         return estado;
     }
@@ -287,5 +290,5 @@ public class PrediagBean {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
+
 }

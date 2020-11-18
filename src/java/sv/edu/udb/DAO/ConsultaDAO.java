@@ -5,6 +5,8 @@
  */
 package sv.edu.udb.DAO;
 
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -41,5 +43,27 @@ public class ConsultaDAO {
             ses.flush();
             ses.close();
         }
+    }
+     public List<Consulta> ObtenerConsulta(int idCita) {
+        List<Consulta> citas = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Consulta where idCita = :idCita";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idCita", idCita);
+            citas = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return citas;
     }
 }

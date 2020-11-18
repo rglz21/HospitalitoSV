@@ -13,10 +13,17 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.AreasDAO;
 import sv.edu.udb.DAO.CitasDAO;
+import sv.edu.udb.DAO.ConsultaDAO;
+import sv.edu.udb.DAO.ExamenesDAO;
 import sv.edu.udb.DAO.MedicosDAO;
+import sv.edu.udb.DAO.PacienteDAO;
 import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Citas;
+import sv.edu.udb.entites.Consulta;
+import sv.edu.udb.entites.Examenes;
+import sv.edu.udb.entites.Medicina;
 import sv.edu.udb.entites.Medicos;
+import sv.edu.udb.entites.Paciente;
 
 /**
  *
@@ -38,6 +45,18 @@ public class MedicosBean {
     private List horario;
     private List<Citas> medicoCita;
 
+    //pacientes
+    private String idPaciente;
+    private String nombre1;
+    private String apellido1;
+    private String dui;
+    private String telefono;
+    private String direccion;
+    private List<Paciente> paciente;
+    private List<Citas> citasEx;
+     private List<Consulta> consultaEx;
+     private List<Examenes> examenesEx;
+
     /**
      * Creates a new instance of MedicosBean
      */
@@ -51,10 +70,11 @@ public class MedicosBean {
         MedicosDAO medicosDao = new MedicosDAO();
         medicoArea = medicosDao.getMedicosByArea(idArea);
     }
-    public void getMedicoById(String idMedic){
+
+    public void getMedicoById(String idMedic) {
         MedicosDAO medicosDao = new MedicosDAO();
-        Medicos medico=medicosDao.getMedicos1(idMedic);
-        if(medico!=null){
+        Medicos medico = medicosDao.getMedicos1(idMedic);
+        if (medico != null) {
             setIdMedico(medico.getIdMedico());
             setNombre(medico.getNombre());
             setApellido(medico.getApellido());
@@ -64,8 +84,10 @@ public class MedicosBean {
             setHoraOut(medico.getHoraOut());
         }
     }
-    public String getHoraMedico(String idMedico) {
-        medicoCita = null;
+
+   
+    public void getHoraMedico(String idMedico) {
+
         System.out.println(idMedico);
         MedicosDAO medicosDao = new MedicosDAO();
         setHorario(new ArrayList());
@@ -87,7 +109,7 @@ public class MedicosBean {
             medicoCita = citasDao.obtenerDoctorByCitas(medico.getIdMedico());
             }
         }
-        return "CrearCitas";
+        
     }
 
     public String addMedico() {
@@ -186,10 +208,127 @@ public class MedicosBean {
     }
 
     
-    
-    
     public List<Citas> getMedicoCita() {
         return medicoCita;
+    }
+    //paciente expe
+    public String BuscarPaciente(String id) {
+        CitasDAO citasDao = new CitasDAO();
+        PacienteDAO pacienteDao = new PacienteDAO();
+        Paciente paciente = pacienteDao.obtenerPacienteById(id);
+         citasEx = citasDao.getCitasByPacientes(id);
+        if (paciente != null) {
+            setIdPaciente(paciente.getIdPaciente());
+            setNombre1(paciente.getNombre());
+            setApellido1(paciente.getApellido());
+            setDireccion(paciente.getDireccion());
+            setDui(paciente.getDui());
+            setTelefono(paciente.getTelefono());
+
+        } else {
+            setIdPaciente("");
+            setNombre1("");
+            setApellido("");
+            setDireccion("");
+            setDui("");
+            setTelefono("");
+
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Paciente NO especificado"));
+        }
+        return "EditarMedico";
+
+    }
+    public void VerExpediente(int id) {
+        ExamenesDAO examenesDao = new ExamenesDAO();
+        ConsultaDAO consultaDao = new ConsultaDAO();
+        consultaEx = consultaDao.ObtenerConsulta(id);
+        examenesEx = examenesDao.ObtenerExamenes(id);
+}
+    
+    
+
+    public List<Consulta> getConsultaEx() {
+        return consultaEx;
+    }
+
+    public void setConsultaEx(List<Consulta> consultaEx) {
+        this.consultaEx = consultaEx;
+    }
+
+   
+
+    public List<Examenes> getExamenesEx() {
+        return examenesEx;
+    }
+
+
+    public void setExamenesEx(List<Examenes> examenesEx) {   
+        this.examenesEx = examenesEx;
+    }
+
+    public List<Citas> getCitasEx() {
+        return citasEx;
+    }
+
+    public void setCitasEx(List<Citas> citasEx) {
+        this.citasEx = citasEx;
+    }
+
+    public String getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(String idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public String getNombre1() {
+        return nombre1;
+    }
+
+    public void setNombre1(String nombre1) {
+        this.nombre1 = nombre1;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getDui() {
+        return dui;
+    }
+
+    public void setDui(String dui) {
+        this.dui = dui;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<Paciente> getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(List<Paciente> paciente) {
+        this.paciente = paciente;
     }
 
     /**

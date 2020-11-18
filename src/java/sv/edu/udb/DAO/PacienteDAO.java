@@ -43,6 +43,54 @@ public class PacienteDAO {
         }
         return paciente;
     }
+    //EXPEDIENTE 
+    
+  public List<Paciente> ObtenerCitas( String idPaciente) {
+        List<Paciente> paciente = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Paciente where idPaciente=:idPac";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idPac", idPaciente);
+            paciente = query.list();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return paciente;
+    }
+  public List<Paciente> ObtenerExamenes( String idCita) {
+        List<Paciente> paciente = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Examenes where idCita=:idPac";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idPac", idCita);
+            paciente = query.list();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return paciente;
+    }
 
     public Paciente obtenerPacienteById(String idPaciente) {
         Paciente paciente = null;
