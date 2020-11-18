@@ -25,6 +25,29 @@ import sv.edu.udb.entites.Paciente;
  */
 public class CitasDAO {
 
+      public List<Citas> getCitasB(String estado) {
+        List<Citas> citas = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Citas where estado = :estado";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("estado", estado);
+            citas = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return citas;
+    }
+      
     public List<Citas> getCitasByMedico(String idMedico) {
         List<Citas> citas = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -79,7 +102,7 @@ public class CitasDAO {
         return citas;
     }
 
-    public List<Citas> getCitasByPaciente(String idPaciente) {
+    public List<Citas> getCitasByPaciente1(String idPaciente) {
         List<Citas> citas = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -114,6 +137,7 @@ public class CitasDAO {
             datos.setPaciente(cita.getPaciente());
             datos.setFecha(cita.getFecha());
             datos.setHora(cita.getHora());
+            datos.setEstado(cita.getEstado());
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -151,16 +175,45 @@ public class CitasDAO {
         return cita;
     }
 
+     public List<Citas> obtenerDoctorByCitas(String idMedico) {
+         List<Citas> cita = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Citas where idMedico= :idMedico";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idMedico", idMedico);
+            cita =  query.list();
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return cita;
+    }
+    
     public void updateCita(int idCita, Citas cita) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
-            Citas editCita = (Citas) ses.load(Citas.class, idCita);
-            editCita.setMedicos(cita.getMedicos());
-            editCita.setFecha(cita.getFecha());
-            editCita.setHora(cita.getHora());
-            ses.update(editCita);
+            tra = ses.beginTransaction();
+            Citas datos = (Citas) ses.load(Citas.class, idCita);
+            datos.setIdCita(cita.getIdCita());
+            datos.setMedicos(cita.getMedicos());
+            datos.setPaciente(cita.getPaciente());
+            datos.setFecha(cita.getFecha());
+            datos.setHora(cita.getHora());
+            datos.setEstado(cita.getEstado()); 
+            
+            ses.update(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -46,8 +46,10 @@ public class LoginBean {
     }
     public void contarUsuario(String usuario){
      if (loginDao.findByuser(usuario) > 0) {
-            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted ya posee un expediente en esta clinica", "Paciente"));
-        }
+            FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Existente", "Paciente"));
+        } else{
+       FacesContext.getCurrentInstance().addMessage("errorMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario no existente", "Paciente"));
+     }
     }
 
     public String sesionUser() throws IOException {

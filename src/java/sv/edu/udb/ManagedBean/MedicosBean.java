@@ -12,8 +12,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.AreasDAO;
+import sv.edu.udb.DAO.CitasDAO;
 import sv.edu.udb.DAO.MedicosDAO;
 import sv.edu.udb.entites.Areas;
+import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Medicos;
 
 /**
@@ -34,10 +36,14 @@ public class MedicosBean {
     private int area;
     private List<Medicos> medicoArea;
     private List horario;
+    private List<Citas> medicoCita;
 
     /**
      * Creates a new instance of MedicosBean
      */
+    
+    
+    
     public MedicosBean() {
     }
 
@@ -58,7 +64,8 @@ public class MedicosBean {
             setHoraOut(medico.getHoraOut());
         }
     }
-    public void getHoraMedico(String idMedico) {
+    public String getHoraMedico(String idMedico) {
+        medicoCita = null;
         System.out.println(idMedico);
         MedicosDAO medicosDao = new MedicosDAO();
         setHorario(new ArrayList());
@@ -75,8 +82,12 @@ public class MedicosBean {
                 for (int i = horaIn; i <= horaOut; i++) {
                     getHorario().add(i + ":00");
                 }
+                
+            CitasDAO citasDao = new CitasDAO();
+            medicoCita = citasDao.obtenerDoctorByCitas(medico.getIdMedico());
             }
         }
+        return "CrearCitas";
     }
 
     public String addMedico() {
@@ -174,9 +185,20 @@ public class MedicosBean {
         return "VerMedicos";
     }
 
+    
+    
+    
+    public List<Citas> getMedicoCita() {
+        return medicoCita;
+    }
+
     /**
      * @return the idMedico
      */
+    public void setMedicoCita(List<Citas> medicoCita) {
+        this.medicoCita = medicoCita;
+    }
+
     public String getIdMedico() {
         return idMedico;
     }

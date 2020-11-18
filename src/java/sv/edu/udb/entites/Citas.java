@@ -33,6 +33,15 @@ public class Citas  implements java.io.Serializable {
         this.hora = hora;
         this.estado = estado;
     }
+    
+     public Citas(int idCita, Medicos medicos, Date fecha, String hora, String estado) {
+        this.idCita = idCita;
+        this.medicos = medicos;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = estado;
+    }
+    
     public Citas(int idCita, Medicos medicos, Paciente paciente, Date fecha, String hora, String estado, Set<Examenes> exameneses, Set<Recetas> recetases) {
        this.idCita = idCita;
        this.medicos = medicos;

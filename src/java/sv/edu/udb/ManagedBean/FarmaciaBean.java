@@ -116,13 +116,7 @@ public class FarmaciaBean {
             Medicamentos farmacia = new Medicamentos(idMedicamento, far, nuevo, nombre,descripcion, mg,cantidadDisp);
 
             farmaciaDao.updateMedicamento(getIdMedicamento(), farmacia);
-//            obtfarmacia = farmaciaDao.getMedicamentoID(getIdMedicamento());
-//            setIdMedicamento(obtfarmacia.getIdMedicamento());
-//            setLab(obtfarmacia.getLabmedicinas().getIdLabMed());
-//            setNombre(obtfarmacia.getNombre());
-//            setDescripcion(obtfarmacia.getDescripcion());
-//            setMg(obtfarmacia.getMg());
-//            setCantidadDisp(obtfarmacia.getCantidadDisp());
+            
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Medicamento con ID " + getIdMedicamento() + " Actualizado"));
         } else {

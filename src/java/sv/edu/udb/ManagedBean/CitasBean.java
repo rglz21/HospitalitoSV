@@ -39,6 +39,7 @@ public class CitasBean {
     private Areas area;
     private int idArea;
     private String estado;
+    private List<Citas> listCita;
     private Consulta con=new Consulta();
     @ManagedProperty(value="#{consultaBean}")
     private ConsultaBean conBean;
@@ -66,42 +67,34 @@ public class CitasBean {
             MedicosDAO medicosDao=new MedicosDAO();
             Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
             area=medico.getAreas();
-            return "citaOpen";
+            return "editarCita";
         }else{
             setIdCita(0);
             setIdMedico(null);
             setIdPaciente(null);
             setFechaCita(new java.util.Date());
             setHora("");
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
-            return "editar1";
+            return "indexSecretaria";
         }
     }
     public String updateCita(){
         CitasDAO citasDao=new CitasDAO();
         Citas cita=citasDao.obtenerCita(getIdCita());
-        Medicos medic=new Medicos();
-        Paciente pacient=new Paciente();
-        medic.setIdMedico(medico);
-        pacient.setIdPaciente(paciente);
+         Medicos medic=new Medicos();
+        Paciente pacient= new Paciente();
+        medic.setIdMedico(getMedico());
+        pacient.setIdPaciente(getPaciente());
+        
         if(cita != null){
-            Citas editCita=new Citas(idCita,medic,pacient,fechaCita,hora,estado);
+            Citas editCita=new Citas(idCita, medic, pacient,fechaCita,hora,"No abierta");
             citasDao.updateCita(getIdCita(), editCita);
-            cita=citasDao.obtenerCita(getIdCita());
-            setIdCita(cita.getIdCita());
-            setIdMedico(cita.getMedicos());
-            setIdPaciente(cita.getPaciente());
-            setFechaCita(cita.getFecha());
-            setHora(cita.getHora());
-            return "indexMedicos";
+             
+            return "indexSecretaria";
         }else{
-            setIdCita(0);
-            setIdMedico(null);
-            setIdPaciente(null);
-            setFechaCita(new java.util.Date());
-            setHora("");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
-            return null;
+            return "editarCita";
         }
     }
     public String addCita(){
@@ -112,14 +105,14 @@ public class CitasBean {
         medic.setIdMedico(getMedico());
         pacient.setIdPaciente(getPaciente());
         
-        int ccitas=utilDao.contarString("Citas","idCita");
+        int ccitas=utilDao.contar("Citas","idCita");
         int ncita=++ccitas;
         setIdCita(ncita);
         
-        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,estado);
+        Citas cita=new Citas(idCita, medic, pacient,fechaCita,hora,"No abierta");
         citasDao.addCita(cita);
         
-        return "indexMedicos";
+        return "indexSecretaria";
     }
     
     public List<Citas>getCitasByMedicos(String idMedico){
@@ -135,13 +128,29 @@ public class CitasBean {
     
     public List<Citas>getCitasByPacientes(String idPaciente){
         CitasDAO citasDao=new CitasDAO();
-        List<Citas> lista=citasDao.getCitasByPaciente(idPaciente);
+        List<Citas> lista=citasDao.getCitasByPaciente1(idPaciente);
         return lista;
+    }
+
+     public void getCitas(String estado){
+        CitasDAO citasDao=new CitasDAO();
+       listCita = citasDao.getCitasB(estado);
+       
+    }
+
+     
+     
+    public List<Citas> getListCita() {
+        return listCita;
     }
 
     /**
      * @return the idCita
      */
+    public void setListCita(List<Citas> listCita) {
+        this.listCita = listCita;
+    }
+
     public int getIdCita() {
         return idCita;
     }

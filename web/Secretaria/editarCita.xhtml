@@ -2,11 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
-        <title>Inventario</title>
+        <title>Editar Citas</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -20,8 +19,8 @@
         <link rel="stylesheet" href="../Vista/css/style.css"/>
     </h:head>
 
-
     <h:body>
+
 
         <div class="wrap">
             <div class="container">
@@ -36,12 +35,7 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text">
-                                        <form action="${request.contextPath}/appLogout" method="POST">
-                                            <input type="submit" value="Logout"/>
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        </form>
-                                    </div>
+                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
                                 </div>
                             </div>
                         </div>
@@ -65,56 +59,80 @@
                     </h:form>
             </div>
         </nav>
-        
-        <div class=" heading-section text-center">
-            <h:outputLabel style="font-size: 30px; color: #000; margin-top: 15px;" value="Bienvenido: #{loginBean.usuario}"/>
-        </div>
         <h:form>
-            
-             <div class="form-group" style="margin-left: 0%">
-                    <h:outputLabel value="Seleccione por estado" for="medicos"/>
-                    <h:selectOneMenu id="medicos" value="#{citasBean.estado}" styleClass="form-control">
-                        <f:selectItem itemLabel="Selecciones un estado " itemValue="" />
-                        <f:selectItem itemLabel="No Abierta " itemValue="No abierta" />
-                        <f:selectItem itemLabel="Abierta" itemValue="abierta" />
-                        <f:selectItem itemLabel="Finalizada" itemValue="finalizada" />
-                        <f:ajax render="estados" execute="@this" listener="#{citasBean.getCitas(citasBean.estado)}"/>
+            <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
+
+                <div class=" heading-section text-center">
+                    <h1>Crear Citas</h1>
+                </div>
+                <div class="form-group" style="margin-left: 0%">
+                    <h:outputLabel value="Area" for="areas"/>
+                    <h:selectOneMenu id="areas" value="#{citasBean.idArea}" styleClass="form-control">
+                        <f:selectItem itemLabel="Seleccione Area" itemValue="0" />
+                        <f:selectItems value="#{areasBean.area}" var="a" itemLabel="#{a.nombre}" itemValue="#{a.idArea}"/>
+                        <f:ajax render="medicos" execute="@this" listener="#{medicosBean.getMedicos(citasBean.idArea)}" />
                     </h:selectOneMenu>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </div>
+                </div>
             
-            <h:dataTable var="list" id="estados" value="#{citasBean.listCita}" class="table table-sm table-dark">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Paciente"/>
-                    </f:facet>
-                    <h:outputText value="#{list.paciente.idPaciente} - #{list.paciente.nombre} #{list.paciente.apellido}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombres"/>
-                    </f:facet>
-                    <h:outputText value="Dr/a.#{list.medicos.nombre} #{list.medicos.apellido}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha y hora"/>
-                    </f:facet>
-                    <h:outputText value="#{list.fecha} - #{list.hora} "/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Estado"/>
-                    </f:facet>
-                    <h:outputText value="#{list.estado}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>
-                    <h:commandButton class="btn btn-success" value="Editar" action="#{citasBean.obtenerCitaById(list.idCita)}"/>
-                </h:column>
-            </h:dataTable>
+                <div class="form-group" style="margin-left: 0%">
+                    <h:outputLabel value="Medico" for="medicos"/>
+                    <h:selectOneMenu id="medicos" value="#{citasBean.medico}" styleClass="form-control">
+                        <f:selectItem itemLabel="Seleccione Medico" itemValue="" />
+                        <f:selectItems value="#{medicosBean.medicoArea}" var="m" itemLabel="#{m.nombre}" itemValue="#{m.idMedico}"/>
+                        <f:ajax render="hora lista" execute="@this" listener="#{medicosBean.getHoraMedico(citasBean.medico)}"/>
+                    </h:selectOneMenu>
+                </div>
+                
+                <h:outputLabel value="Horario del doctor seleccionado" for="medicos"/>
+                        <h:dataTable var="list" id="lista" value="#{medicosBean.medicoCita}" class="table table-sm table-dark">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Medico"/>
+                            </f:facet>
+                            <h:outputText value="#{list.medicos.nombre} #{list.medicos.apellido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{list.fecha}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Hora"/>
+                            </f:facet>
+                            <h:outputText value="#{list.hora}"/>
+                        </h:column>
+                      
+                    </h:dataTable>
+               
+                <div class="form-group" style="margin-left: 0%">
+                    <h:outputLabel value="Paciente" for="pacientes"/>
+                    <h:selectOneMenu id="pacientes" value="#{citasBean.paciente}" styleClass="form-control">
+                        <f:selectItem itemLabel="Seleccione Paciente" itemValue="0" />
+                        <f:selectItems value="#{pacienteBean.paciente}" var="p" itemLabel="#{p.nombre} #{p.apellido}" itemValue="#{p.idPaciente}"/>
+                        <f:ajax disabled="true"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group" style="margin-left: 0%">
+                    <h:outputLabel value="Fecha" for="fecha"/>
+                    <h:inputText value="#{citasBean.fechaCita}" required="true" requiredMessage="no puede ir vacio los campos" id="fecha" styleClass="form-control">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:inputText>
+                </div>
+                <div class="form-group" style="margin-left: 0%">
+                    <h:outputLabel value="Hora" for="hora"/>
+                    <h:selectOneMenu id="hora" value="#{citasBean.hora}" styleClass="form-control">
+                        <f:selectItems value="#{medicosBean.horario}" var="h" itemLabel="#{h}" itemValue="#{h}"/>
+                    </h:selectOneMenu>
+                </div>
+           
+                <div class="form-group" style="text-align: center">
+                    <h:commandButton class="btn btn-primary" value="Actualizar Cita" action="#{citasBean.updateCita()}"/>
+                    <h:commandButton class="btn btn-primary" value="Atras" action="indexSecretaria.xhtml"/>
+                </div>
+
+            </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </h:form>
 
@@ -186,7 +204,7 @@
                 </div>
             </div>
         </footer>
-         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
         <script src="../Vista/js/jquery.min.js"></script>
         <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../Vista/js/popper.min.js"></script>
@@ -203,6 +221,8 @@
         <script src="../Vista/js/google-map.js"></script>
         <script src="../Vista/js/main.js"></script>
 
+
     </h:body>
 </html>
+
 
