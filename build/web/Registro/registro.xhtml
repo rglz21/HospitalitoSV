@@ -95,6 +95,7 @@
                 </div>
                  <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred"/>
                 <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </h:form>
         </div>
 

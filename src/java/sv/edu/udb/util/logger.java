@@ -24,10 +24,10 @@ public class logger {
 
  //C:\Users\boris\OneDrive\Documentos\HospitalitoSV       
 //Pregunta el archivo existe, caso contrario crea uno con el nombre log.txt
-        if (new File("C://Users//rgonz//Documents//HospitalitoSV//log" + "//" + "log.txt").exists() == false) {
-            archivo = new FileWriter(new File("C://Users//rgonz//Documents//HospitalitoSV//log" + "//" + "log.txt"), false);
+        if (new File("C://Users//jonat//OneDrive//Documentos//Tecnico UDB//CICLO 2 2020//DWF 02T//ProyectoDWF//HospitalitoSV//log" + "//" + "log.txt").exists() == false) {
+            archivo = new FileWriter(new File("C://Users//jonat//OneDrive//Documentos//Tecnico UDB//CICLO 2 2020//DWF 02T//ProyectoDWF//HospitalitoSV//log" + "//" + "log.txt"), false);
         }
-        archivo = new FileWriter(new File("C://Users//rgonz//Documents//HospitalitoSV//log" + "//" + "log.txt"), true);
+        archivo = new FileWriter(new File("C://Users//jonat//OneDrive//Documentos//Tecnico UDB//CICLO 2 2020//DWF 02T//ProyectoDWF//HospitalitoSV//log" + "//" + "log.txt"), true);
         Calendar fechaActual = Calendar.getInstance(); //Para poder utilizar el paquete calendar
 //Empieza a escribir en el archivo C:\Users\rgonz\Documents\HospitalitoSV\log
         archivo.write("[" + (String.valueOf(fechaActual.get(Calendar.DAY_OF_MONTH))

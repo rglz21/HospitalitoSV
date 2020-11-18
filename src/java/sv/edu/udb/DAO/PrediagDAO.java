@@ -206,4 +206,27 @@ public class PrediagDAO {
         }
         return predia;
     }
+    
+    public List<Prediagnostico> getPrediagByPaciente(String idPaciente) {
+        List<Prediagnostico> predia = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Prediagnostico where idPaciente = :idPaciente";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idPaciente", idPaciente);
+            predia = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return predia;
+    }
 }
