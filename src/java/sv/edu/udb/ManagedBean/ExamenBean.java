@@ -228,8 +228,7 @@ public class ExamenBean {
         return lista;
     }
            
-
-           
+  
     public String getIdExam() {
         return idExam;
     }

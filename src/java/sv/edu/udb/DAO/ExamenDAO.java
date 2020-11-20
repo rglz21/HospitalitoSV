@@ -30,7 +30,7 @@ public class ExamenDAO {
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Examenes ";
+            String queryString = "from Examenes ORDER BY fechaRealizado ASC ";
             Query query = ses.createQuery(queryString);
             examanes = query.list();
 
