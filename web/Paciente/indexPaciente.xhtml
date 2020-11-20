@@ -91,16 +91,6 @@
                     </f:facet>
                     #{cm.hora}
                 </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>
-                    <h:commandLink value="Editar" action="#{citasBean.obtenerCitaById(cm.idCita)}">
-                        <f:ajax execute="@form"
-                                render="prediag :tablePrediag"
-                                resetValues="true"/>
-                    </h:commandLink>
-                </h:column>
             </h:dataTable>
         </h:form>
 

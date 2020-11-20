@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 
     <h:head>
-        <title>Facelet Title</title>
+        <title>Expediente</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -18,7 +18,13 @@
         <link rel="stylesheet" href="../Vista/css/jquery.timepicker.css"/>
         <link rel="stylesheet" href="../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../Vista/css/style.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"></link>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     </h:head>
+
 
     <h:body>
 
@@ -48,7 +54,6 @@
                 </div>
             </div>
         </div>
-
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,96 +62,153 @@
                 <h:form>
                     <div class="collapse navbar-collapse" id="ftco-nav">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item "><h:commandLink action="indexPaciente.xhtml" value="Index" class="nav-link"/></li>
-                            <li class="nav-item active"><h:commandLink action="VerExpediente.xhtml" value="Expedientes" class="nav-link"/></li>
-                            <li class="nav-item "><h:commandLink action="VerExamenes.xhtml" value="Examenes" class="nav-link"/></li>
-                            <li class="nav-item "><h:commandLink action="AñadirPrediag.xhtml" value="NuevoPrediagnostico" class="nav-link"/></li>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Citas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="seguimiento.xhtml" value="Seguimiento de Citas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Citas Perdidas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="Expediente.xhtml" value="Ver expediente" class="nav-link"/></li>
                         </ul>
                     </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </h:form>
             </div>
         </nav>
 
 
-        <h:form id="prediag">
-            <div class=" heading-section text-center">
-                <h1>Prediagnostico</h1>
-                <h:outputLabel value="#{prediagBean.fechaPre}"/>
-                <br></br>
-                <h:outputLabel value="#{prediagBean.paciente.nombre} "/>
-                <h:outputLabel value="#{prediagBean.paciente.apellido}"/>
-            </div>
-            <h:dataTable class="table table-striped table-dark" value="#{prediagBean.getSintomasByPrediag(prediagBean.idPrediag)}" var="s">
-                <h:column>
-                    <f:facet name="header">
-                        Sintoma
-                    </f:facet>
-                    #{s.sintoma}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Descripcion
-                    </f:facet>
-                    #{s.descripcion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Duracion
-                    </f:facet>
-                    #{s.duracion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>  
-                    <h:commandButton value="editar" action="#{sintomasBean.returnSintomas(s.idSintoma)}"/>
-                    <h:commandButton value="eliminar" action="#{sintomasBean.deleteSintomas(s.idSintoma)}"/>
-                </h:column>
-            </h:dataTable>
+        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
+            <h:form>
+                <h1 style="text-align: center">Expediente</h1>
+                <h:panelGrid columns="2" style="margin-left: 30%">
+                    <h:commandButton class="btn btn-light" value="Mostrar" action="#{medicosBean.BuscarPaciente(userInfoMB.userName)}"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:panelGrid>
+            </h:form>
+            <h:form>  
+                Id Paciente: <h:outputLabel value="#{medicosBean.idPaciente}"/><br/>
+                Nombre: <h:outputLabel value="#{medicosBean.nombre1}"/><br/>   
+                Apellido: <h:outputLabel value="#{medicosBean.apellido1}"/><br/>               
+                DUI : <h:outputLabel value="#{medicosBean.dui}"/><br/>
+                Telefono: <h:outputLabel value="#{medicosBean.telefono}"/><br/>            
+                Direccion :<h:outputLabel value="#{medicosBean.direccion}"/><br/>
 
-            <div class="form-group" style="text-align: center">
-                <h:commandButton style="margin: 5px;" class="btn btn-secondary" action="crearPrediagnostico" value="Crear Prediagnostico"/>
-            </div>
+                <h:dataTable class="table table-sm table-dark"  value="#{medicosBean.citasEx}" var="cm">
+                    <h:column>
+                        <f:facet name="header">
+                            ID de la Cita 
+                        </f:facet>
+                        #{cm.paciente.idPaciente}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            ID Medico
+                        </f:facet>
+                        #{cm.medicos.nombre} #{cm.medicos.apellido}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Nombre del Paciente  
+                        </f:facet>
+                        #{cm.paciente.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Fecha
+                        </f:facet>
+                        #{cm.fecha}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Hora
+                        </f:facet>
+                        #{cm.hora}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Operations
+                        </f:facet>
+                        <h:commandLink value="Abrir Expediente" action="#{medicosBean.VerExpediente(cm.idCita)}">
+                            <f:ajax execute="@this"
+                                    render="Examen consulta"
+                                    />
 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Examenes</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Consultas</a>
 
-        </h:form>
+                </div>
+                <div class="tab-content"  id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                        <h:dataTable class="table table-sm table-dark" id="Examen" value="#{medicosBean.examenesEx}" var="cm">
+                            <h:column>
+                                <f:facet name="header">
+                                    ID del Examen 
+                                </f:facet>
+                                #{cm.idExam}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Tipo
+                                </f:facet>
+                                #{cm.tipoexamenes.tipo} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Descripcion 
+                                </f:facet>
+                                #{cm.descripcion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Fecha
+                                </f:facet>
+                                #{cm.fechaRealizado}
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <h:dataTable class="table table-sm table-dark" id="consulta" value="#{medicosBean.consultaEx}" var="cm">
+                            <h:column>
+                                <f:facet name="header">
+                                    ID de Consulta 
+                                </f:facet>
+                                #{cm.idConsulta}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Descripcion
+                                </f:facet>
+                                #{cm.descripcion} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Diagnostico 
+                                </f:facet>
+                                #{cm.diagnostico}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Fecha
+                                </f:facet>
+                                #{cm.fecha}
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
+
+                </div>             
+
+            </h:form>
 
 
-        <h:form id="tablePrediag">
-            <h:dataTable class="table table-striped table-dark" id="prediags" value="#{prediagBean.getPrediagByPacientes(userInfoMB.userName)}" var="d">
-                <h:column>
-                    <f:facet name="header">
-                        ID Prediagnostico
-                    </f:facet>
-                    #{d.idPrediag}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Fecha
-                    </f:facet>
-                    #{d.fechaPre}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Paciente
-                    </f:facet>
-                    #{d.paciente.idPaciente}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>
-                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.idPrediag)}">
-                        <f:ajax execute="@form"
-                                render="prediag :tablePrediag"
-                                resetValues="true"/>
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </h:form>
+
+
+
+        </div>
 
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
@@ -216,6 +278,7 @@
             </div>
         </footer>
 
+
         <script src="../Vista/js/jquery.min.js"></script>
         <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../Vista/js/popper.min.js"></script>
@@ -231,7 +294,6 @@
         <script src="../Vista/js/scrollax.min.js"></script>
         <script src="../Vista/js/google-map.js"></script>
         <script src="../Vista/js/main.js"></script>
-
 
     </h:body>
 </html>
