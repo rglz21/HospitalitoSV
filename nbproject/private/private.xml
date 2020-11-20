@@ -12,8 +12,20 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rgonz/Documents/HospitalitoSV/src/java/sv/edu/udb/security/config/CUAuthenticationSuccessHandler.java</file>
-            <file>file:/C:/Users/rgonz/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/ExpedienteBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/FarmaciaBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Medicos/Expediente.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/RecetasBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/ConsultaBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/DAO/CitasDAO.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Medicos/seguimiento.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Medicos/citasPerdidas.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/DAO/RecetasDAO.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/CitasBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Medicos/indexMedicos.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/DAO/ConsultaDAO.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/src/java/sv/edu/udb/ManagedBean/MedicosBean.java</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Medicos/citaOpen.xhtml</file>
+            <file>file:/C:/Users/HP%20Probook/Documents/HospitalitoSV/web/Farmacia/buscarReceta.xhtml</file>
         </group>
     </open-files>
 </project-private>

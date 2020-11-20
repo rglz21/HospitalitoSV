@@ -58,7 +58,7 @@ public class CitasDAO {
             LocalDateTime fecha1 = LocalDateTime.now().withHour(0);
             LocalDateTime fecha2 = LocalDateTime.now().withHour(23);
             DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
-            String queryString = "from Citas where idMedico = :idMedico and Fecha between :fecha1 and :fecha2";
+            String queryString = "from Citas where idMedico = :idMedico and Fecha between :fecha1 and :fecha2 and estado='No abierta'";
             Query query = ses.createQuery(queryString);
             query.setParameter("idMedico", idMedico);
             query.setParameter("fecha1", fecha1.format(isoFecha));
@@ -89,6 +89,29 @@ public class CitasDAO {
             query.setParameter("idMedico", idMedico);
             query.setParameter("fecha1", fecha1.format(isoFecha));
             query.setParameter("estado", "No abierta");
+            citas = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return citas;
+    }
+    public List<Citas> getCitasAbiertas(String idMedico) {
+        List<Citas> citas = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Citas where idMedico = :idMedico and estado=:estado";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idMedico", idMedico);
+            query.setParameter("estado", "Abierta");
             citas = query.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,6 +272,24 @@ public List<Citas> getCitasByPacientes(String idPacientes) {
         }
         return citas;
     }
+    public void updateEstadoCita(int idCita, String estado) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Citas datos = (Citas) ses.load(Citas.class, idCita);
+            datos.setEstado(estado);
+            ses.update(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 }
-
-//p

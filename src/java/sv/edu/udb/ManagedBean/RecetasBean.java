@@ -7,8 +7,10 @@ package sv.edu.udb.ManagedBean;
 
 import java.io.IOException;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.MedicinaDAO;
 import sv.edu.udb.DAO.RecetasDAO;
 import sv.edu.udb.DAO.UtilDAO;
@@ -39,61 +41,88 @@ public class RecetasBean {
      */
     public RecetasBean() {
     }
-    public List<Recetas> getRecetasByMedic(String idMedico)throws IOException{
-        RecetasDAO recetasDao=new RecetasDAO();
-        List<Recetas> recetas=recetasDao.getRecetasByMedico(idMedico);
-        return recetas;
-    }
-    public void obtenerReceta(int idReceta) throws IOException{
-        RecetasDAO recetasDao=new RecetasDAO();
-        Recetas receta=recetasDao.obtenerReceta(idReceta);
+    public List<Medicina> getMedicinaByReceta(int idReceta)throws IOException{
         MedicinaDAO medicinaDao=new MedicinaDAO();
-        
-        setIdRecetas(receta.getIdReceta());
-        
-        Medicina medicin=medicinaDao.getMedicinasByReceta1(idReceta);
-        medicina.setIdMedicina(medicin.getIdMedicina());
-        medicina.setRecetas(medicin.getRecetas());
-        setNombreM(medicin.getNombre());
-        setMgM(medicin.getMg());
-        setCantM(medicin.getCantidad());
-        setDosisM(medicin.getDosis());
+        List<Medicina> medicina=medicinaDao.getMedicinasByReceta(idReceta);
+        return medicina;
+    }
+    public void obtenerReceta(int idCita) throws IOException{
+        RecetasDAO recetasDao=new RecetasDAO();
+        Recetas receta=recetasDao.getRecetaByCita(idCita);
+        if(receta!=null){
+            setIdRecetas(receta.getIdReceta());
+            setCita(receta.getCitas());
+        }
         //logger log = new logger();
         //log.InfoLog("Nueva Receta insertada","INFO");
     }
-    public void updateReceta() throws IOException{
-        RecetasDAO recetasDao=new RecetasDAO();
+    public void obtenerMedicina(String idMedicina) throws IOException{
+        MedicinaDAO medicinaDao=new MedicinaDAO();
+        Medicina medi= medicinaDao.getMedicina(idMedicina);
+        if(medi!=null){
+            medicina.setIdMedicina(medi.getIdMedicina());
+            setNombreM(medi.getNombre());
+            setCantM(medi.getCantidad());
+            setMgM(medi.getMg());
+            setDosisM(medi.getDosis());
+        }
+        //logger log = new logger();
+        //log.InfoLog("Nueva Receta insertada","INFO");
+    }
+    public void updateMedicina() throws IOException{
         MedicinaDAO medicinaDao=new MedicinaDAO();
         Citas ncita=new Citas();
         ncita.setIdCita(idCita);
         Recetas receta=new Recetas(idRecetas,ncita);
-        recetasDao.updateReceta(idRecetas,receta);
-        
         medicina.setRecetas(receta);
         medicina.setNombre(getNombreM());
         medicina.setMg(getMgM());
         medicina.setCantidad(getCantM());
         medicina.setDosis(getDosisM());
-        System.out.println(medicina.getIdMedicina());
         medicinaDao.updateMedicamento(medicina.getIdMedicina(),medicina);
-        
         //logger log = new logger();
         //log.InfoLog("Nueva Receta insertada","INFO");
+    }
+    public void guardarReceta() throws IOException{
+        RecetasDAO recetasDao=new RecetasDAO();
+        Recetas rec=recetasDao.getRecetaByCita(idCita);
+        MedicinaDAO medicinaDao=new MedicinaDAO();
+        
+        if(rec==null){
+            insertReceta();
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Medicina agregada"));
+        }
+        Medicina medi=medicinaDao.getMedicinaByNombre(nombreM, idRecetas);
+        if(medi!=null){
+            updateMedicina();
+        }else{
+            insertMedicina();
+        } 
     }
     
     public void insertReceta() throws IOException{
         UtilDAO utilDao=new UtilDAO();
         RecetasDAO recetasDao=new RecetasDAO();
-        MedicinaDAO medicinaDao=new MedicinaDAO();
+        
         Citas ncita=new Citas();
         ncita.setIdCita(idCita);
-        int count=utilDao.contarString("Recetas","idReceta");
+        int count=utilDao.contar("Recetas","idReceta");
         int newidR=++count;
         setIdRecetas(newidR);
         Recetas receta=new Recetas(idRecetas,ncita);
-        recetasDao.insertReceta(receta);
+        recetasDao.insertReceta(receta); 
+        //logger log = new logger();
+        //log.InfoLog("Nueva Receta insertada","INFO");
+    }
+    public void insertMedicina(){
+        UtilDAO utilDao=new UtilDAO();
+        Citas ncita=new Citas();
+        ncita.setIdCita(idCita);
+        Recetas receta=new Recetas(idRecetas,ncita);
+        MedicinaDAO medicinaDao=new MedicinaDAO();
         
-        int count2=utilDao.contarString("Medicina","idMedicina");
+        int count2=utilDao.contarString1("Medicina","idMedicina");
         int id=++count2;
         String newidM= String.valueOf(id);
         System.out.println(newidM);
@@ -104,9 +133,25 @@ public class RecetasBean {
         medicina.setCantidad(getCantM());
         medicina.setDosis(getDosisM());
         medicinaDao.insertMedicina(medicina);
+    }
+    public void deleteMedicina(String id) {
+        MedicinaDAO medicinaDao = new MedicinaDAO();
+        Medicina medi=medicinaDao.getMedicina(id);
         
-        //logger log = new logger();
-        //log.InfoLog("Nueva Receta insertada","INFO");
+        if (medi != null) {
+            medicinaDao.deleteMedicina(id);
+            medicina.setIdMedicina("");
+            setNombreM("");
+            setCantM(0);
+            setMgM("");
+            setDosisM("");
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Medicina Eliminada"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage("successMessage",
+                    new FacesMessage("Medicina NO encontrada"));
+        }
+
     }
     /**
      * @return the idRecetas

@@ -44,7 +44,7 @@ public class ConsultaDAO {
             ses.close();
         }
     }
-     public List<Consulta> ObtenerConsulta(int idCita) {
+    public List<Consulta> ObtenerConsulta(int idCita) {
         List<Consulta> citas = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
@@ -65,5 +65,27 @@ public class ConsultaDAO {
             ses.close();
         }
         return citas;
+    }
+    public Consulta ObtenerConsultaByCita (int idCita) {
+        Consulta con = null;
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Consulta where idCita = :idCita";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idCita", idCita);
+            con = (Consulta)query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return con;
     }
 }

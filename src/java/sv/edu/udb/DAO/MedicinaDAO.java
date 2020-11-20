@@ -69,6 +69,51 @@ public class MedicinaDAO {
         }
         return medicinas;
     }
+    public Medicina getMedicina(String idMedicina) {
+        Medicina medicinas = new Medicina();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Medicina where idMedicina= :idMedicina";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("idMedicina", idMedicina);
+            medicinas = (Medicina) query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return medicinas;
+    }
+    public Medicina getMedicinaByNombre(String Nombre, int idReceta) {
+        Medicina medicinas = new Medicina();
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            String queryString = "from Medicina where nombre= :nombre and idReceta=:idReceta";
+            Query query = ses.createQuery(queryString);
+            query.setParameter("nombre", Nombre);
+            query.setParameter("idReceta", idReceta);
+            medicinas = (Medicina) query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+        return medicinas;
+    }
 
     public void insertMedicina(Medicina medicina) {
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
@@ -83,7 +128,7 @@ public class MedicinaDAO {
             datos.setCantidad(medicina.getCantidad());
             datos.setDosis(medicina.getDosis());
             datos.setMg(medicina.getMg());
-
+            datos.setEstado("Recetada");
             ses.save(datos);
             ses.getTransaction().commit();
         } catch (Exception e) {
@@ -166,5 +211,24 @@ public class MedicinaDAO {
             ses.close();
         }
         return medicinas;
+    }
+    public void deleteMedicina(String idMedicina) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Medicina med = (Medicina) ses.get(Medicina.class, idMedicina);
+            ses.delete(med);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
     }
 }

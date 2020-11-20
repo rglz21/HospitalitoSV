@@ -24,20 +24,20 @@ public class RecetasDAO {
 
     logger log = new logger();
 
-    public List<Recetas> getRecetasByMedico(String idMedico) throws IOException {
-        List<Recetas> recetas = new ArrayList<Recetas>();
+    public Recetas getRecetaByCita(int idCita) throws IOException {
+        Recetas receta = new Recetas();
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
         Session ses = sesFact.openSession();
         Transaction tra = null;
         try {
             tra = ses.beginTransaction();
-            String queryString = "from Recetas where idMedico=:idMedico";
+            String queryString = "from Recetas where idCita=:idCita";
             Query query = ses.createQuery(queryString);
-            query.setParameter("idMedico", idMedico);
-            recetas = query.list();
+            query.setParameter("idCita", idCita);
+            receta = (Recetas)query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
-            log.InfoLog(e + "", "ERROR");
+            //log.InfoLog(e + "", "ERROR");
             if (tra != null) {
                 tra.rollback();
             }
@@ -45,7 +45,7 @@ public class RecetasDAO {
             ses.flush();
             ses.close();
         }
-        return recetas;
+        return receta;
     }
 
     public void insertReceta(Recetas receta) throws IOException {

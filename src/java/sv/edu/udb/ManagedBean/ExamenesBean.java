@@ -49,9 +49,9 @@ public class ExamenesBean {
     }
     
      
-    public List<Examenes> getExamenesByPaciente(String idExam) {
+    public List<Examenes> getExamenesByCita(int idCita) {
         ExamenesDAO examenDao = new ExamenesDAO();
-        List<Examenes> lista = (List<Examenes>) examenDao.getExamenPaciente(idExam);
+        List<Examenes> lista = (List<Examenes>) examenDao.ObtenerExamenes(idCita);
         return lista;
     }
     

@@ -60,6 +60,7 @@
                         <li class="nav-item active"><h:commandLink action="IngresarExamen.xhtml" value="Ingresar" class="nav-link"/></li>
                     </ul>
                 </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                </h:form>
             </div>
         </nav>
@@ -69,7 +70,7 @@
 
         <h:form id="datatableauthors" style="margin-left: 30%">
 
-
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <h:panelGrid columns="2" >
             Tipo de examen: <h:selectOneMenu id="gen"
                                              value="#{examenBean.tipo}" styleClass="form-control">

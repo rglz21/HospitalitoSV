@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.ManagedBean;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -21,6 +22,7 @@ import sv.edu.udb.entites.Consulta;
 import sv.edu.udb.entites.Examenes;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
+import sv.edu.udb.entites.Recetas;
 
 /**
  *
@@ -43,6 +45,8 @@ public class CitasBean {
     private Consulta con=new Consulta();
     @ManagedProperty(value="#{consultaBean}")
     private ConsultaBean conBean;
+    @ManagedProperty(value="#{recetasBean}")
+    private RecetasBean recBean;
 
     /**
      * Creates a new instance of CitasBean
@@ -52,10 +56,15 @@ public class CitasBean {
     public String guardarCita(){
         CitasDAO citasDao=new CitasDAO();
         Citas cita=citasDao.obtenerCita(idCita);
-        conBean.addConsulta(cita, con);
+        conBean.addConsulta(cita);
         return "indexMedicos";
     }
-    public String obtenerCitaById(int idCita){
+    public String finalizarCita(){
+        CitasDAO citasDao=new CitasDAO();
+        citasDao.updateEstadoCita(idCita,"Finalizada");
+        return "indexMedicos";
+    }
+    public String obtenerCitaId(int idCita) throws IOException{
         CitasDAO citasDao=new CitasDAO();
         Citas cita=citasDao.obtenerCita(idCita);
         if(cita != null){
@@ -67,7 +76,36 @@ public class CitasBean {
             MedicosDAO medicosDao=new MedicosDAO();
             Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
             area=medico.getAreas();
-            return "editarCita";
+            conBean.obtenerConsulta(idCita);
+            recBean.obtenerReceta(idCita);
+            recBean.setIdCita(idCita);
+            return "citaOpen";
+        }else{
+            setIdCita(0);
+            setIdMedico(null);
+            setIdPaciente(null);
+            setFechaCita(new java.util.Date());
+            setHora("");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
+            return "";
+        }
+    }
+    public String obtenerCitaById(int idCita){
+        CitasDAO citasDao=new CitasDAO();
+        Citas cita=citasDao.obtenerCita(idCita);
+        
+        if(cita != null){
+            setIdCita(cita.getIdCita());
+            setIdMedico(cita.getMedicos());
+            setIdPaciente(cita.getPaciente());
+            setFechaCita(cita.getFecha());
+            setHora(cita.getHora());
+            MedicosDAO medicosDao=new MedicosDAO();
+            Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
+            area=medico.getAreas();
+            recBean.setIdCita(idCita);
+            citasDao.updateEstadoCita(idCita,"Abierta");
+            return "citaOpen";
         }else{
             setIdCita(0);
             setIdMedico(null);
@@ -118,6 +156,11 @@ public class CitasBean {
     public List<Citas>getCitasByMedicos(String idMedico){
         CitasDAO citasDao=new CitasDAO();
         List<Citas> lista=citasDao.getCitasByMedico(idMedico);
+        return lista;
+    }
+    public List<Citas>getCitasAbiertas(String idMedico){
+        CitasDAO citasDao=new CitasDAO();
+        List<Citas> lista=citasDao.getCitasAbiertas(idMedico);
         return lista;
     }
     public List<Citas>getCitasPerdidas(String idMedico){
@@ -313,6 +356,20 @@ public class CitasBean {
      */
     public void setCon(Consulta con) {
         this.con = con;
+    }
+
+    /**
+     * @return the recBean
+     */
+    public RecetasBean getRecBean() {
+        return recBean;
+    }
+
+    /**
+     * @param recBean the recBean to set
+     */
+    public void setRecBean(RecetasBean recBean) {
+        this.recBean = recBean;
     }
 
     

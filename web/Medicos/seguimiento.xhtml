@@ -1,11 +1,9 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-
+    
+    
     <h:head>
         <title>Facelet Title</title>
         <meta charset="utf-8"/>
@@ -20,10 +18,10 @@
         <link rel="stylesheet" href="../Vista/css/flaticon.css"/>
         <link rel="stylesheet" href="../Vista/css/style.css"/>
     </h:head>
-
-
+    
+    
     <h:body>
-
+        
         <div class="wrap">
             <div class="container">
                 <div class="row justify-content-between">
@@ -37,7 +35,12 @@
                             <div class="col">
                                 <div class="top-wrap d-flex">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-play"></span></div>
-                                    <div class="text"><span>Cerrar Sesión</span><span><a href="../index.xhtml">Salir</a></span></div>
+                                    <div class="text">
+                                        <form action="${request.contextPath}/appLogout" method="POST">
+                                            <input type="submit" value="Logout"/>
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,90 +54,60 @@
                     <span class="fa fa-bars"></span> Menu
                 </button>
                 <h:form>
-                    <div class="collapse navbar-collapse" id="ftco-nav">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item "><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
-                            <li class="nav-item "><h:commandLink action="crearCitas.xhtml" value="Nueva Cita" class="nav-link"/></li>
-                            <li class="nav-item "><h:commandLink action="crearRecetas.xhtml" value="Nueva Receta" class="nav-link"/></li>
-                            <li class="nav-item active"><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
-                        </ul>
-                    </div>
-                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Citas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="seguimiento.xhtml" value="Seguimiento de Citas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Citas Perdidas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="Expediente.xhtml" value="Ver expediente" class="nav-link"/></li>
+                    </ul>
+                </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </h:form>
             </div>
         </nav>
-
-        <h:form id="prediag">
-
+        
+        <h:form>
+            
             <div class=" heading-section text-center">
-                <h1>Prediagnostico</h1>
-                <h:outputLabel value="#{prediagBean.fechaPre}"/>
-                <br></br>
-                <h:outputLabel value="#{prediagBean.paciente.nombre} "/>
-                <h:outputLabel value="#{prediagBean.paciente.apellido}"/>
-            </div>
-
-            <h:dataTable class="table table-striped table-dark"  value="#{prediagBean.getSintomasByPrediag(prediagBean.idPrediag)}" var="s">
+                <h:outputLabel style="font-size: 30px;" value="Seguimiento de citas"/>
+                </div>
+            
+            
+            <h:dataTable class="table table-sm table-dark" value="#{citasBean.getCitasAbiertas(userInfoMB.userName)}" var="cm">
                 <h:column>
                     <f:facet name="header">
-                        Sintoma
+                        Paciente
                     </f:facet>
-                    #{s.sintoma}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Descripcion
-                    </f:facet>
-                    #{s.descripcion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Duracion
-                    </f:facet>
-                    #{s.duracion}
-                </h:column>
-            </h:dataTable>
-            <div class="form-group" style="text-align: center;">
-                <h:commandButton class="btn btn-secondary" action="#{expedienteBean.verExpediente(prediagBean.paciente.idPaciente)}" value="Mostrar expediente" style="margin: 10px;"/>
-                <h:commandButton class="btn btn-warning" action="crearCitas" value="Agendar cita" style="margin: 10px;"/>
-            </div>
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </h:form>
-
-        <h:form id="tablePrediag">
-            <h:dataTable class="table table-striped table-dark" id="prediags" value="#{prediagBean.prediagActivo}" var="d">
-                <h:column>
-                    <f:facet name="header">
-                        ID Prediagnostico
-                    </f:facet>
-                    #{d.idPrediag}
+                    #{cm.paciente.nombre}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         Fecha
                     </f:facet>
-                    #{d.fechaPre}
+                    #{cm.fecha}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Paciente
+                        Hora
                     </f:facet>
-                    #{d.paciente.idPaciente}
+                    #{cm.hora}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandButton value="ver" action="#{prediagBean.getPrediagPaciente(d.idPrediag)}">
+                    <h:commandLink value="Dar seguimiento" action="#{citasBean.obtenerCitaId(cm.idCita)}">
                         <f:ajax execute="@form"
                                 render="prediag :tablePrediag"
                                 resetValues="true"/>
-                    </h:commandButton>
+                    </h:commandLink>
                 </h:column>
             </h:dataTable>
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </h:form>
-
+        
+        
         <footer class="footer ftco-section ftco-no-pt">
             <div class="container">
                 <div class="row mb-5">
@@ -202,8 +175,7 @@
                 </div>
             </div>
         </footer>
-
-
+        
         <script src="../Vista/js/jquery.min.js"></script>
         <script src="../Vista/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="../Vista/js/popper.min.js"></script>
@@ -219,7 +191,9 @@
         <script src="../Vista/js/scrollax.min.js"></script>
         <script src="../Vista/js/google-map.js"></script>
         <script src="../Vista/js/main.js"></script>
-
+        
     </h:body>
 </html>
+
+
 

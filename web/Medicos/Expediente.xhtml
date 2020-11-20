@@ -62,14 +62,14 @@
                  <h:form>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Medicos" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Nueva Cita" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="crearRecetas.xhtml" value="Nueva Receta" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="prediag.xhtml" value="Prediagnostico" class="nav-link"/></li>
+                        <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Citas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="seguimiento.xhtml" value="Seguimiento de Citas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Citas Perdidas" class="nav-link"/></li>
+                        <li class="nav-item "><h:commandLink action="Expediente.xhtml" value="Ver expediente" class="nav-link"/></li>
                     </ul>
                 </div>
-                    
-                    </h:form>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:form>
             </div>
         </nav>
 
@@ -83,66 +83,58 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </h:panelGrid>
              </h:form>
-             <h:form>
-                
-                    
-             Id Paciente:<h:inputText id="fcha" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.idPaciente}"></h:inputText><br/>
-             Nombre:<h:inputText id="nm" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.nombre1}"></h:inputText><br/>   
-             Apellido:<h:inputText id="ap" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.apellido1}"></h:inputText><br/>               
-             DUI :<h:inputText id="dui" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.dui}"></h:inputText><br/>
-             Telefono:<h:inputText id="tele" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.telefono}"></h:inputText><br/>            
-            Direccion :<h:inputText id="dire" size="40" maxlength="60"
-                           required="true" requiredMessage="no puede ir vacio los campos"    value="#{medicosBean.direccion}"></h:inputText><br/>
+             <h:form>  
+                Id Paciente: <h:outputLabel value="#{medicosBean.idPaciente}"/><br/>
+                Nombre: <h:outputLabel value="#{medicosBean.nombre1}"/><br/>   
+                Apellido: <h:outputLabel value="#{medicosBean.apellido1}"/><br/>               
+                DUI : <h:outputLabel value="#{medicosBean.dui}"/><br/>
+                Telefono: <h:outputLabel value="#{medicosBean.telefono}"/><br/>            
+                Direccion :<h:outputLabel value="#{medicosBean.direccion}"/><br/>
          
-                           <h:dataTable class="table table-sm table-dark"  value="#{medicosBean.citasEx}" var="cm">
-                <h:column>
-                    <f:facet name="header">
-                        ID de la Cita 
-                    </f:facet>
-                    #{cm.paciente.idPaciente}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        ID Medico
-                    </f:facet>
-                    #{cm.medicos.nombre} #{cm.medicos.apellido}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Nombre del Paciente  
-                    </f:facet>
-                    #{cm.paciente.nombre}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Fecha
-                    </f:facet>
-                    #{cm.fecha}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Hora
-                    </f:facet>
-                    #{cm.hora}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Operations
-                    </f:facet>
-                    <h:commandLink value="Abrir Expediente" action="#{medicosBean.VerExpediente(cm.idCita)}">
-                        <f:ajax execute="@this"
-                                render="Examen consulta"
-                                />
-                        
-                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </h:commandLink>
-                </h:column>
-            </h:dataTable>
+                <h:dataTable class="table table-sm table-dark"  value="#{medicosBean.citasEx}" var="cm">
+                    <h:column>
+                        <f:facet name="header">
+                            ID de la Cita 
+                        </f:facet>
+                        #{cm.paciente.idPaciente}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            ID Medico
+                        </f:facet>
+                        #{cm.medicos.nombre} #{cm.medicos.apellido}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Nombre del Paciente  
+                        </f:facet>
+                        #{cm.paciente.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Fecha
+                        </f:facet>
+                        #{cm.fecha}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Hora
+                        </f:facet>
+                        #{cm.hora}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Operations
+                        </f:facet>
+                        <h:commandLink value="Abrir Expediente" action="#{medicosBean.VerExpediente(cm.idCita)}">
+                            <f:ajax execute="@this"
+                                    render="Examen consulta"
+                                    />
+
+                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
   <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Examenes</a>
   <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Consultas</a>

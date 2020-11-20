@@ -60,6 +60,7 @@
                         <li class="nav-item "><h:commandLink action="IngresarExamen.xhtml" value="Ingresar" class="nav-link"/></li>
                     </ul>
                 </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                </h:form>
             </div>
         </nav>
@@ -67,6 +68,7 @@
 
 
         <h:form> 
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class=" heading-section text-center">
                 <h1>Vista de los datos</h1>
             </div>

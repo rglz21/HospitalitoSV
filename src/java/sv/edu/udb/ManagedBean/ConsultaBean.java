@@ -36,7 +36,7 @@ public class ConsultaBean {
      */
     public ConsultaBean() {
     }
-    public void addConsulta(Citas citaO, Consulta consulta){
+    public void addConsulta(Citas citaO){
         UtilDAO utilDao=new UtilDAO();
         ConsultaDAO conDao=new ConsultaDAO();
         MedicosDAO medDao=new MedicosDAO();
@@ -47,8 +47,23 @@ public class ConsultaBean {
         idMedico=medDao.getMedicos1(citaO.getMedicos().getIdMedico());
         int ccon=utilDao.contar("Consulta","idConsulta");
         int ncon=++ccon;
-        Consulta con=new Consulta(ncon, idExpe, consulta.getDescripcion(), fecha, consulta.getDiagnostico(), idMedico.getIdMedico(), citaO.getIdCita());
+        Consulta con=new Consulta(ncon, idExpe, getDescripcion(), fecha, getDiagnostico(), idMedico.getIdMedico(), citaO.getIdCita());
         conDao.addConsulta(con);
+    }
+    public void obtenerConsulta(int idCita){
+        ConsultaDAO conDao=new ConsultaDAO();
+        Consulta con=conDao.ObtenerConsultaByCita(idCita);
+        Medicos medi=new Medicos();
+        if(con!=null){
+            medi.setIdMedico(con.getIdMedico());
+            setIdConsulta(con.getIdConsulta());
+            setIdExpe(con.getExpediente());
+            setDescripcion(con.getDescripcion());
+            setFecha(con.getFecha());
+            setDiagnostico(con.getDiagnostico());
+            setIdMedico(medi);
+            setCita(con.getIdCita());
+        }
     }
     /**
      * @return the idConsulta
@@ -132,6 +147,20 @@ public class ConsultaBean {
      */
     public void setIdMedico(Medicos idMedico) {
         this.idMedico = idMedico;
+    }
+
+    /**
+     * @return the cita
+     */
+    public int getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(int cita) {
+        this.cita = cita;
     }
     
 }
