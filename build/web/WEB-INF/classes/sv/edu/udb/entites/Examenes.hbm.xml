@@ -18,10 +18,10 @@
             <column name="idTipo" not-null="true" />
         </many-to-one>
         <property name="descripcion" type="string">
-            <column name="descripcion" length="1000" not-null="true" />
+            <column name="descripcion" length="1000" not-null="false" />
         </property>
         <property name="fechaRealizado" type="date">
-            <column name="fechaRealizado" length="10" not-null="true" />
+            <column name="fechaRealizado" length="10" not-null="false" />
         </property>
     </class>
 </hibernate-mapping>

@@ -50,6 +50,17 @@ public class ConsultaBean {
         Consulta con=new Consulta(ncon, idExpe, getDescripcion(), fecha, getDiagnostico(), idMedico.getIdMedico(), citaO.getIdCita());
         conDao.addConsulta(con);
     }
+    public void updateConsulta(Citas citaO){
+        ConsultaDAO conDao=new ConsultaDAO();
+        MedicosDAO medDao=new MedicosDAO();
+        ExpedienteDAO expDao=new ExpedienteDAO();
+        String idPac=citaO.getPaciente().getIdPaciente();
+        System.out.println(idPac);
+        idExpe=expDao.obtenerExpdiente(citaO.getPaciente().getIdPaciente());
+        idMedico=medDao.getMedicos1(citaO.getMedicos().getIdMedico());
+        Consulta con=new Consulta(idConsulta, idExpe, getDescripcion(), fecha, getDiagnostico(), idMedico.getIdMedico(), citaO.getIdCita());
+        conDao.updateConsulta(con);
+    }
     public void obtenerConsulta(int idCita){
         ConsultaDAO conDao=new ConsultaDAO();
         Consulta con=conDao.ObtenerConsultaByCita(idCita);

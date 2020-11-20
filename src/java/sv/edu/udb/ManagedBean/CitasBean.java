@@ -6,6 +6,7 @@
 package sv.edu.udb.ManagedBean;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -14,15 +15,17 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sv.edu.udb.DAO.CitasDAO;
+import sv.edu.udb.DAO.ExamenesDAO;
 import sv.edu.udb.DAO.MedicosDAO;
 import sv.edu.udb.DAO.UtilDAO;
 import sv.edu.udb.entites.Areas;
 import sv.edu.udb.entites.Citas;
 import sv.edu.udb.entites.Consulta;
 import sv.edu.udb.entites.Examenes;
+import sv.edu.udb.entites.Laboratorio;
 import sv.edu.udb.entites.Medicos;
 import sv.edu.udb.entites.Paciente;
-import sv.edu.udb.entites.Recetas;
+import sv.edu.udb.entites.Tipoexamenes;
 
 /**
  *
@@ -42,6 +45,9 @@ public class CitasBean {
     private int idArea;
     private String estado;
     private List<Citas> listCita;
+    private List<Examenes> exams=new ArrayList<Examenes>();
+    private int[] exs;
+    private Tipoexamenes tipo=new Tipoexamenes();
     private Consulta con=new Consulta();
     @ManagedProperty(value="#{consultaBean}")
     private ConsultaBean conBean;
@@ -55,9 +61,32 @@ public class CitasBean {
     }
     public String guardarCita(){
         CitasDAO citasDao=new CitasDAO();
+        UtilDAO utilDao=new UtilDAO();
         Citas cita=citasDao.obtenerCita(idCita);
-        conBean.addConsulta(cita);
-        return "indexMedicos";
+        conBean.obtenerConsulta(idCita);
+        Examenes ex=new Examenes();
+        ExamenesDAO examDao=new ExamenesDAO();
+        Laboratorio lab=new Laboratorio();
+        lab.setIdLab(1);
+        
+        int cexam=utilDao.contarString("Examenes","idExam");
+        int nexam=++cexam;
+         for(int tip: exs){
+            ex.setIdExam("EXAM-"+nexam);
+            ex.setCitas(cita);
+            tipo.setIdTipo(tip);
+            ex.setTipoexamenes(tipo);
+            ex.setLaboratorio(lab);
+            exams.add(ex);
+            ++cexam;
+         }
+        examDao.addExamenes(exams);
+        if(conBean.getDescripcion()==null){
+            conBean.addConsulta(cita);
+        }else{
+            conBean.updateConsulta(cita);
+        }
+        return "seguimiento";
     }
     public String finalizarCita(){
         CitasDAO citasDao=new CitasDAO();
@@ -370,6 +399,48 @@ public class CitasBean {
      */
     public void setRecBean(RecetasBean recBean) {
         this.recBean = recBean;
+    }
+
+    /**
+     * @return the exams
+     */
+    public List<Examenes> getExams() {
+        return exams;
+    }
+
+    /**
+     * @param exams the exams to set
+     */
+    public void setExams(List<Examenes> exams) {
+        this.exams = exams;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public Tipoexamenes getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(Tipoexamenes tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the exs
+     */
+    public int[] getExs() {
+        return exs;
+    }
+
+    /**
+     * @param exs the exs to set
+     */
+    public void setExs(int[] exs) {
+        this.exs = exs;
     }
 
     

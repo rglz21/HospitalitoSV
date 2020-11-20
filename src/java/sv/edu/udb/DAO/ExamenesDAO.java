@@ -20,6 +20,33 @@ import sv.edu.udb.entites.Tipoexamenes;
  * @author jonat
  */
 public class ExamenesDAO {
+    public void addExamenes(List<Examenes> exams) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            for(Examenes exam: exams){
+                Examenes datos = new Examenes();
+                datos.setCitas(exam.getCitas());
+                datos.setTipoexamenes(exam.getTipoexamenes());
+                datos.setIdExam(exam.getIdExam());
+                datos.setFechaRealizado(exam.getFechaRealizado());
+                datos.setDescripcion(exam.getDescripcion());
+                datos.setLaboratorio(exam.getLaboratorio());
+                ses.save(datos);
+            }
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
 
     public List<Examenes> obtenerExamen() {
         List<Examenes> examen = null;

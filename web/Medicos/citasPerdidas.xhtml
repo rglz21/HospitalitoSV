@@ -99,11 +99,7 @@
                     <f:facet name="header">
                         Operations
                     </f:facet>
-                    <h:commandLink value="Abrir Cita" action="#{citasBean.obtenerCitaById(cm.idCita)}">
-                        <f:ajax execute="@form"
-                                render="prediag :tablePrediag"
-                                resetValues="true"/>
-                    </h:commandLink>
+                    <h:commandLink value="Abrir Cita" action="#{citasBean.obtenerCitaId(cm.idCita)}"/>
                 </h:column>
             </h:dataTable>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -44,6 +44,27 @@ public class ConsultaDAO {
             ses.close();
         }
     }
+     public void updateConsulta(Consulta con) {
+        SessionFactory sesFact = HibernateUtil.getSessionFactory();
+        Session ses = sesFact.openSession();
+        Transaction tra = null;
+        try {
+            tra = ses.beginTransaction();
+            Consulta datos = (Consulta)ses.load(Consulta.class, con.getIdConsulta());
+            datos.setDescripcion(con.getDescripcion());
+            datos.setDiagnostico(con.getDiagnostico());
+            ses.update(datos);
+            ses.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tra != null) {
+                tra.rollback();
+            }
+        } finally {
+            ses.flush();
+            ses.close();
+        }
+    }
     public List<Consulta> ObtenerConsulta(int idCita) {
         List<Consulta> citas = null;
         SessionFactory sesFact = HibernateUtil.getSessionFactory();
