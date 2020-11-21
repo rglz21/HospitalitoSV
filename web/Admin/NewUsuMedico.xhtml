@@ -10,17 +10,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
     </h:head>
+    
     <h:body>
 
 
         <header style="background-color: #3b89ac;">
             <div class="contenedor" style="display: flex; justify-content: space-between; align-items: center;">
                 <h1 class="mb-4" id="empresa" style="margin-left: 20px;"><a href="index.html" style="color: black">Hospital SV</a></h1>             
-                <div class="order-lg-last" style="margin-right: 20px;">
-                    <a href="login.xhtml" class="btn btn-light">Iniciar sesion</a>
-                </div>
+                <form action="${request.contextPath}/appLogout" method="POST">
+                    <input type="submit" value="Cerrar Session" class="btn btn-dark"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
             </div>
-
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bfd2d9;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
@@ -42,22 +43,25 @@
 
 
         <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">    
-            <h:form>
+            <h:form class="needs-validation">
 
                 <div class=" heading-section text-center">
                     <h1>Nuevo Usuario Medico</h1>
                 </div>
-                <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese correo electronico: " /> 
-                    <h:inputText id="correo" value="#{registroBean.correo}"/>
+                <div class="alert alert-dark">
+                    <h:messages errorStyle="color:black" infoStyle="color:green"/>
                 </div>
-                <div class="form-group" style="margin-left: 20%">
-                    <h:outputLabel for="id" value="ingrese un usuario: " />
-                    <h:inputText id="id" value="#{registroBean.usuario}"/>
+                <div class="form-group">
+                    <h:outputLabel for="correo" value="ingrese correo electronico: " /> 
+                    <h:inputText id="correo" value="#{registroBean.correo}" class="form-control" required="true" requiredMessage="Correo Requerido"/>
                 </div>
-                <div class="form-group" style="margin-left: 20%">
+                <div class="form-group">
+                    <h:outputLabel for="usuario" value="ingrese un usuario: " />
+                    <h:inputText id="usuario" class="form-control" value="#{registroBean.usuario}" required="true" requiredMessage="Usuario Requerido"/>
+                </div>
+                <div class="form-group">
                     <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
-                    <h:inputText id="nombres" value="#{registroBean.contrasena}"/>
+                    <h:inputText class="form-control" id="nombres" value="#{registroBean.contrasena}" required="true" requiredMessage="Nombre Requerido"/>
                 </div>
 
 
@@ -67,12 +71,13 @@
 
                 <div class="form-group" style="text-align: center">
                     <h:commandButton class="btn btn-primary" value="Siguiente" action="#{registroBean.addUsuarioMedico()}" />
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
 
             </h:form>
         </div>
 
-        <footer style="background-color: #3b89ac; border-top-style: solid; border-width: 10px; border-color:#bfd2d9; position: absolute; bottom: 0; width: 100%;">
+        <footer style="background-color: #3b89ac; border-top-style: solid; border-width: 10px; border-color:#bfd2d9;">
             <div class="contenedorF" style="display: flex; justify-content: space-between; align-items: center;">
                 <h5 style="margin-left: 20px;">Universidad Don Bosco 2020 | Proyecto de DFW | Grupo 5</h5>
                 <div class="ColumnaD" style="margin-right: 5px;">

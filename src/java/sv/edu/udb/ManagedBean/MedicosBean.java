@@ -212,7 +212,7 @@ public class MedicosBean {
         return medicoCita;
     }
     //paciente expe
-    public String BuscarPaciente(String id) {
+    public void BuscarPaciente(String id) {
         CitasDAO citasDao = new CitasDAO();
         PacienteDAO pacienteDao = new PacienteDAO();
         Paciente paciente = pacienteDao.obtenerPacienteById(id);
@@ -236,7 +236,7 @@ public class MedicosBean {
             FacesContext.getCurrentInstance().addMessage("successMessage",
                     new FacesMessage("Paciente NO especificado"));
         }
-        return "EditarMedico";
+
 
     }
     public void VerExpediente(int id) {

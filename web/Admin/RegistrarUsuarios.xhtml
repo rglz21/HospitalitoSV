@@ -18,9 +18,10 @@
         <header style="background-color: #3b89ac;">
             <div class="contenedor" style="display: flex; justify-content: space-between; align-items: center;">
                 <h1 class="mb-4" id="empresa" style="margin-left: 20px;"><a href="index.html" style="color: black">Hospital SV</a></h1>             
-                <div class="order-lg-last" style="margin-right: 20px;">
-                    <a href="login.xhtml" class="btn btn-light">Iniciar sesion</a>
-                </div>
+                <form action="${request.contextPath}/appLogout" method="POST">
+                    <input type="submit" value="Cerrar Session" class="btn btn-dark"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
             </div>
 
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bfd2d9;">
@@ -53,27 +54,22 @@
                 </div>
                 <div class="form-group">
                     <h:outputLabel for="correo" value="ingrese su correo electronico:" />
-                    <h:inputText id="correo" value="#{registroBean.correo}" class="form-control" required="true" requiredMessage="Correo requerido"/>
-                    <div class="invalid-feedback">
-                    </div>
+                    <h:inputText id="correo" value="#{registroBean.correo}" class="form-control" required="true" requiredMessage="Correo Requerido"/>
                 </div>
                 <div class="form-group">
                     <h:outputLabel for="usuario" value="ingrese un usuario: " />
                     <h:inputText id="usuario" value="#{registroBean.usuario}" class="form-control" required="true" requiredMessage="Usuario Requerido"/>
-                    <div class="invalid-feedback">
-                        Please enter a message in the textarea.
-                    </div>
                 </div>
                 <div class="form-group" >
-                    <h:outputLabel  value="Tipo Usuario: " /> 
-                    <h:selectOneMenu  id="hola" value="#{registroBean.tipo}"  class="form-control" required="true" requiredMessage="no puede ir vacio los campos">
+                    <h:outputLabel for="Tipo"  value="Tipo Usuario: " /> 
+                    <h:selectOneMenu  id="Tipo" value="#{registroBean.tipo}"  class="form-control" required="true" requiredMessage="Tipo de usuario Requerido">
                         <f:selectItems value="#{registroBean.tipos}"
                                        var="l" itemLabel="#{l.tipo}" itemValue="#{l.idTipo}" />
                     </h:selectOneMenu>
                 </div>
                 <div class="form-group">
-                    <h:outputLabel for="nombres" value="Ingrese Contraseña: " />
-                    <h:inputText id="nombres" value="#{registroBean.contrasena}" class="form-control"/>
+                    <h:outputLabel for="Contra" value="Ingrese Contraseña: " />
+                    <h:inputText id="Contra" value="#{registroBean.contrasena}" class="form-control" required="true" requiredMessage="Contraseña Requerido"/>
                 </div>
                 <!--Cambiar el loginBean y crear el metodo-->
                 <div class="form-group" style="text-align: center">

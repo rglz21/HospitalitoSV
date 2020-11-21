@@ -11,126 +11,181 @@ and open the template in the editor.
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
     </h:head>
     <h:body>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
+        <header style="background-color: #3b89ac;">
+            <div class="contenedor" style="display: flex; justify-content: space-between; align-items: center;">
+                <h1 class="mb-4" id="empresa" style="margin-left: 20px;"><a href="index.html" style="color: black">Hospital SV</a></h1>             
+                <div class="order-lg-last" style="margin-right: 20px;">
+                    <form action="${request.contextPath}/appLogout" method="POST">
+                        <input type="submit" value="Cerrar Sesion"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </div>
+            </div>
+
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bfd2d9;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
                 </button>
+
                 <h:form>
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active"><h:commandLink action="indexMedicos.xhtml" value="Citas" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="seguimiento.xhtml" value="Seguimiento de Citas" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Citas Perdidas" class="nav-link"/></li>
-                        <li class="nav-item "><h:commandLink action="Expediente.xhtml" value="Ver expediente" class="nav-link"/></li>
-                    </ul>
-                </div>
+                    <div class="collapse navbar-collapse" id="ftco-nav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item "><h:commandLink action="indexMedicos.xhtml" value="Citas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="seguimiento.xhtml" value="Seguimiento de Citas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="citasPerdidas.xhtml" value="Citas Perdidas" class="nav-link"/></li>
+                            <li class="nav-item "><h:commandLink action="Expediente.xhtml" value="Ver expediente" class="nav-link"/></li>
+                        </ul>
+                    </div>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </h:form>
-            </div>
-        </nav>
-        <h:form>
-            <h2>Usted ha iniciado una cita</h2>
-            <h3>Datos generales de la cita</h3>
-            <h:outputLabel value="Paciente: "/>
-            <h:outputLabel value="#{citasBean.idPaciente.nombre}"/><br/>
-            <h:outputLabel value="Fecha: "/>
-            <h:outputLabel value="#{citasBean.fechaCita}"/><br/>
-            <h:outputLabel value="Hora: "/>
-            <h:outputLabel value="#{citasBean.hora}"/><br/>
-        </h:form>
-        <h:form id="medicinas">
-            <h3>Receta medica</h3>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <h:dataTable var="list" value="#{recetasBean.getMedicinaByReceta(recetasBean.idRecetas)}">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"/>
-                    </f:facet>
-                    <h:outputText value="#{list.nombre}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Cantidad"/>
-                    </f:facet>
-                    <h:outputText value="#{list.cantidad}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Mg"/>
-                    </f:facet>
-                    <h:outputText value="#{list.mg}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Dosis"/>
-                    </f:facet>
-                    <h:outputText value="#{list.dosis}"/>
-                </h:column>
-               <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Operaciones"/>
-                    </f:facet>
-                   <h:commandLink value="Editar" action="#{recetasBean.obtenerMedicina(list.idMedicina)}">
-                       <f:ajax execute="@form"
-                                render="medi"/>
-                   </h:commandLink>
-                   <h:commandButton class="btn btn-warning" value="eliminar" action="#{recetasBean.deleteMedicina(list.idMedicina)}">
-                       <f:ajax execute="@form"
-                                render="@this"/>
-                   </h:commandButton>
-                </h:column>
-            </h:dataTable>
-            <br/>
-        </h:form>
-        <h:form id="medi">
-            <h3>Agregar medicina a la receta</h3>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Medicamento: " for="medicina"/>
-                <h:selectOneMenu id="medicina" value="#{recetasBean.nombreM}" styleClass="form-control">
-                    <f:selectItem itemLabel="Seleccione el medicamento" itemValue="0" />
-                    <f:selectItems value="#{farmaciaBean.medicina}" var="a" itemLabel="#{a.nombre}" itemValue="#{a.nombre}"/>
-                </h:selectOneMenu>
-                <h:outputLabel for="cantidad" value="Cantidad: "/><h:inputText id="cantidad" value="#{recetasBean.cantM}"/>
-                <h:outputLabel for="dosis" value="Dosis: "/><h:inputText id="dosis" value="#{recetasBean.dosisM}"/>
-                <h:outputLabel for="mg" value="Mg: "/><h:inputText id="mg" value="#{recetasBean.mgM}"/>
-            </h:panelGrid>
-            <h:panelGrid columns="4">
-                <h:commandButton value="Agregar medicamento" action="#{recetasBean.guardarReceta()}"/>
-            </h:panelGrid>
-            <h:messages infoStyle="color:blue" globalOnly="true"/>
-        </h:form>
-        <h:form>
-            <h3>Examenes necesarios</h3>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <h:selectManyCheckbox value="#{citasBean.exs}">
-                <f:selectItems value="#{examenesBean.tipos}" var="t" itemLabel="#{t.tipo}" itemValue="#{t.idTipo}"/>
-            </h:selectManyCheckbox>
-            <br/>
-            <div class="container">
-
-                <div class=" heading-section text-center">
-                    <h2>Consulta</h2>
-                </div>
-                <div class="form-group" style="margin-left: 0%">
-                    <h:outputLabel value="Descripcion de la consulta" for="description"/>
-                    <h:inputTextarea id="description" value="#{consultaBean.descripcion}"/>
-                </div>
-                <div class="form-group" style="margin-left: 0%">
-                    <h:outputLabel value="Diagnostico de la consulta: " for="diagnostico"/>
-                    <h:inputText id="diagnostico" value="#{consultaBean.diagnostico}">
-                        <f:ajax event="blur" execute="@this"/>
-                    </h:inputText>
-                </div>
-                <div class="form-group">
-                    <h:commandButton class="btn btn-primary" value="Guardar y Salir" action="#{citasBean.guardarCita()}"/>
-                    <h:commandButton class="btn btn-primary" value="Finalizar" action="#{citasBean.finalizarCita()}"/>
+            </nav>
+        </header>
+        <div class="container" style="border-style: solid; border-color: black; width: 60%; border-radius: 25px;margin-left: 20%;margin-bottom: 10px; margin-top: 10px;">
+            <h:form>
+                <h2>Usted ha iniciado una cita</h2>
+                <h3>Datos generales de la cita</h3>
+                <h:outputLabel value="Paciente: "/>
+                <h:outputLabel value="#{citasBean.idPaciente.nombre}"/><br/>
+                <h:outputLabel value="Fecha: "/>
+                <h:outputLabel value="#{citasBean.fechaCita}"/><br/>
+                <h:outputLabel value="Hora: "/>
+                <h:outputLabel value="#{citasBean.hora}"/><br/>
+            </h:form>
+            <h:form id="medicinas">
+                <h3>Receta medica</h3>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <h:dataTable  class="table table-striped table-secondary" var="list" value="#{recetasBean.getMedicinaByReceta(recetasBean.idRecetas)}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{list.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad"/>
+                        </f:facet>
+                        <h:outputText value="#{list.cantidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mg"/>
+                        </f:facet>
+                        <h:outputText value="#{list.mg}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dosis"/>
+                        </f:facet>
+                        <h:outputText value="#{list.dosis}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operaciones"/>
+                        </f:facet>
+                        <h:commandLink class="btn btn-info" value="Editar" action="#{recetasBean.obtenerMedicina(list.idMedicina)}">
+                            <f:ajax execute="@form"
+                                    render="medi"/>
+                        </h:commandLink>
+                        <h:commandButton class="btn btn-danger" value="eliminar" action="#{recetasBean.deleteMedicina(list.idMedicina)}">
+                            <f:ajax execute="@form"
+                                    render="@this"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+                <br/>
+            </h:form>
+            <h:form id="medi">
+                <h3>Agregar medicina a la receta</h3>
+                <div class="alert alert-dark">
+                    <h:messages errorStyle="color:black" infoStyle="color:green"/>
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <div class="form-group">
+                        <h:outputLabel value="Medicamento: " for="medicina"/>
+                        <h:selectOneMenu class="form-control" id="medicina" value="#{recetasBean.nombreM}" styleClass="form-control">
+                            <f:selectItem itemLabel="Seleccione el medicamento" itemValue="0" />
+                            <f:selectItems value="#{farmaciaBean.medicina}" var="a" itemLabel="#{a.nombre}" itemValue="#{a.nombre}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="cantidad" value="Cantidad: "/>
+                        <h:inputText class="form-control" id="cantidad" value="#{recetasBean.cantM}" required="true" requiredMessage="Ingrese una cantidad"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="dosis" value="Dosis: "/>
+                        <h:inputText class="form-control" id="dosis" value="#{recetasBean.dosisM}" required="true" requiredMessage="Ingrese una dosis"/> 
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="mg" value="Mg: "/>
+                        <h:inputText class="form-control" id="mg" value="#{recetasBean.mgM}" required="true" requiredMessage="Ingrese mg del medicamento"/>  
+                    </div>
+                <h:panelGrid columns="2">
+                    <h:commandButton class="btn btn-success" value="Agregar medicamento" action="#{recetasBean.guardarReceta()}"/>
+                </h:panelGrid>
+                <h:messages infoStyle="color:blue" globalOnly="true"/>
+            </h:form>
+            <br/>
+            <h:form>
+                <h3>Examenes necesarios</h3>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="form-check">
+                    <h:selectManyCheckbox class="form-check-input" value="#{citasBean.exs}">
+                        <f:selectItems class="form-check-label" value="#{examenesBean.tipos}" var="t" itemLabel="#{t.tipo}" itemValue="#{t.idTipo}"/>
+                    </h:selectManyCheckbox>
+                </div>
+                <br/>
+                <div class="container">
+
+                    <div class=" heading-section text-center">
+                        <h2>Consulta</h2>
+                    </div>
+                    <div class="alert alert-dark">
+                        <h:messages errorStyle="color:black" infoStyle="color:green"/>
+                    </div>
+                    <div class="form-group" style="margin-left: 0%">
+                        <h:outputLabel value="Descripcion de la consulta" for="description"/>
+                        <h:inputTextarea class="form-control" id="description" value="#{consultaBean.descripcion}" required="true" requiredMessage="Ingrese una descripcion"/>
+                    </div>
+                    <div class="form-group" style="margin-left: 0%">
+                        <h:outputLabel value="Diagnostico de la consulta: " for="diagnostico"/>
+                        <h:inputText class="form-control" id="diagnostico" value="#{consultaBean.diagnostico}" required="true" requiredMessage="Ingrese un diagnostico">
+                            <f:ajax event="blur" execute="@this"/>
+                        </h:inputText>
+                    </div>
+                    <div class="form-group">
+                        <h:commandButton class="btn btn-warning" value="Guardar y Salir" action="#{citasBean.guardarCita()}"/>
+                        <h:commandButton class="btn btn-primary" value="Finalizar" action="#{citasBean.finalizarCita()}"/>
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </div>
+            </h:form>
+        </div>
+        <footer style="background-color: #3b89ac; border-top-style: solid; border-width: 10px; border-color:#bfd2d9;">
+            <div class="contenedorF" style="display: flex; justify-content: space-between; align-items: center;">
+                <h5 style="margin-left: 20px;">Universidad Don Bosco 2020 | Proyecto de DFW | Grupo 5</h5>
+                <div class="ColumnaD" style="margin-right: 5px;">
+                    <nav>
+                        <ul style="list-style: none; align-content: center;">
+                            <h6>Contactanos</h6>
+                            <li>
+                                <p> <i class="fas fa-phone-alt"></i> Telefono: 2222-2222</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope"></i> Correo: HospitalSV@gmail.com</p>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </h:form>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/57b8c14ccc.js" crossorigin="anonymous"></script>
+
     </h:body>
 </html>

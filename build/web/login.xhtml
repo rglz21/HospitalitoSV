@@ -24,12 +24,13 @@
                         <h:outputLabel class="col-sm-4 col-form-label" for="nombres" value="Contraseña: " style="font-size: 20px; color: white;"/>
                         <input style="text-align: center; border-radius: 10px; border-style: solid; border-color: #34F2DB; border-bottom-width: 3px;" type="password" name="app_password"/>
                         </div>
-                        <input style="margin-right: 10px; margin-bottom: 20px;" class="btn btn-info" type="submit" value="Login"/>
+                        <input style="margin-bottom: 20px;" class="btn btn-info" type="submit" value="Login"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <h:form>
-                            <h:commandButton style="margin-left: 10px; margin-bottom: 20px;" class="btn btn-secondary" value="Registrate" action="#{loginBean.registro()}" id='regist-button'/>
-                        </h:form>
                     </form>
+                    <h:form>
+                        <h:commandButton style="margin-bottom: 20px;" class="btn btn-secondary" value="Registrate" action="#{loginBean.registro()}" id='regist-button'/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </h:form>
                 </div>
                 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
                     <div class="alert alert-danger" role="alert" style="width: 40%; height: 100%; margin-left: 30%; margin-top: 5%; border-radius: 10px;">

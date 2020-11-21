@@ -146,6 +146,35 @@ public class CitasBean {
             return "indexSecretaria";
         }
     }
+    
+    public String obtenerCitaById2(int idCita){
+        CitasDAO citasDao=new CitasDAO();
+        Citas cita=citasDao.obtenerCita(idCita);
+        
+        if(cita != null){
+            setIdCita(cita.getIdCita());
+            setIdMedico(cita.getMedicos());
+            setIdPaciente(cita.getPaciente());
+            setFechaCita(cita.getFecha());
+            setHora(cita.getHora());
+            MedicosDAO medicosDao=new MedicosDAO();
+            Medicos medico=medicosDao.getMedicos1(idMedico.getIdMedico());
+            area=medico.getAreas();
+            recBean.setIdCita(idCita);
+            citasDao.updateEstadoCita(idCita,"Abierta");
+            return "editarCita";
+        }else{
+            setIdCita(0);
+            setIdMedico(null);
+            setIdPaciente(null);
+            setFechaCita(new java.util.Date());
+            setHora("");
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cita NO especificada"));
+            return "indexSecretaria";
+        }
+    }
+    
     public String updateCita(){
         CitasDAO citasDao=new CitasDAO();
         Citas cita=citasDao.obtenerCita(getIdCita());

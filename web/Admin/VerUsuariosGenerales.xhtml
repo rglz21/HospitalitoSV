@@ -11,16 +11,16 @@
 
 
     <h:body>
-
-
-        <header style="background-color: #3b89ac;">
+        
+        
+                <header style="background-color: #3b89ac;">
             <div class="contenedor" style="display: flex; justify-content: space-between; align-items: center;">
                 <h1 class="mb-4" id="empresa" style="margin-left: 20px;"><a href="index.html" style="color: black">Hospital SV</a></h1>             
-                <div class="order-lg-last" style="margin-right: 20px;">
-                    <a href="login.xhtml" class="btn btn-light">Iniciar sesion</a>
-                </div>
+                <form action="${request.contextPath}/appLogout" method="POST">
+                    <input type="submit" value="Cerrar Session" class="btn btn-dark"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
             </div>
-
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bfd2d9;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-bars"></span> Menu
@@ -33,13 +33,10 @@
                             <li class="nav-item "><h:commandLink action="indexAdnmin.xhtml" value="index" class="nav-link"/></li>
                         </ul>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
                     </div>
-                </h:form>
+                </h:form>   
             </nav>
-
         </header>
-
 
 
         <h:form>
@@ -95,7 +92,7 @@
         </h:form>
 
 
-        <footer style="background-color: #3b89ac; border-top-style: solid; border-width: 10px; border-color:#bfd2d9; position: absolute; bottom: 0; width: 100%;">
+        <footer style="background-color: #3b89ac; border-top-style: solid; border-width: 10px; border-color:#bfd2d9;">
             <div class="contenedorF" style="display: flex; justify-content: space-between; align-items: center;">
                 <h5 style="margin-left: 20px;">Universidad Don Bosco 2020 | Proyecto de DFW | Grupo 5</h5>
                 <div class="ColumnaD" style="margin-right: 5px;">
