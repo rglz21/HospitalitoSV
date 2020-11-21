@@ -57,7 +57,7 @@ and open the template in the editor.
             <h:form id="medicinas">
                 <h3>Receta medica</h3>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <h:dataTable  class="table table-striped table-secondary" var="list" value="#{recetasBean.getMedicinaByReceta(recetasBean.idRecetas)}">
+                <h:dataTable id="tablamedi" class="table table-striped table-secondary" var="list" value="#{recetasBean.getMedicinaByReceta(recetasBean.idRecetas)}">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nombre"/>
@@ -87,12 +87,8 @@ and open the template in the editor.
                             <h:outputText value="Operaciones"/>
                         </f:facet>
                         <h:commandLink class="btn btn-info" value="Editar" action="#{recetasBean.obtenerMedicina(list.idMedicina)}">
-                            <f:ajax execute="@form"
-                                    render="medi"/>
                         </h:commandLink>
                         <h:commandButton class="btn btn-danger" value="eliminar" action="#{recetasBean.deleteMedicina(list.idMedicina)}">
-                            <f:ajax execute="@form"
-                                    render="@this"/>
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>

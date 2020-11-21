@@ -99,6 +99,10 @@ public class RecetasBean {
         }else{
             insertMedicina();
         } 
+        setNombreM("");
+        setMgM("");
+        setCantM(0);
+        setDosisM("");
     }
     
     public void insertReceta() throws IOException{
@@ -137,7 +141,6 @@ public class RecetasBean {
     public void deleteMedicina(String id) {
         MedicinaDAO medicinaDao = new MedicinaDAO();
         Medicina medi=medicinaDao.getMedicina(id);
-        
         if (medi != null) {
             medicinaDao.deleteMedicina(id);
             medicina.setIdMedicina("");

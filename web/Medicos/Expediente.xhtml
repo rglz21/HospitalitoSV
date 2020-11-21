@@ -66,7 +66,7 @@
                 Telefono: <h:outputLabel value="#{medicosBean.telefono}"/><br/>            
                 Direccion :<h:outputLabel value="#{medicosBean.direccion}"/><br/>
 
-                <h:dataTable class="table table-sm table-dark"  value="#{medicosBean.citasEx}" var="cm">
+                <h:dataTable class="table table-sm table-secondary"  value="#{medicosBean.citasEx}" var="cm">
                     <h:column>
                         <f:facet name="header">
                             ID de la Cita 
@@ -102,10 +102,6 @@
                             Operations
                         </f:facet>
                         <h:commandLink value="Abrir Expediente" action="#{medicosBean.VerExpediente(cm.idCita)}">
-                            <f:ajax execute="@this"
-                                    render="Examen consulta"
-                                    />
-
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </h:commandLink>
                     </h:column>
@@ -118,7 +114,7 @@
                 <div class="tab-content"  id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 
-                        <h:dataTable class="table table-sm table-dark" id="Examen" value="#{medicosBean.examenesEx}" var="cm">
+                        <h:dataTable class="table table-sm table-secondary" id="Examen" value="#{medicosBean.examenesEx}" var="cm">
                             <h:column>
                                 <f:facet name="header">
                                     ID del Examen 
